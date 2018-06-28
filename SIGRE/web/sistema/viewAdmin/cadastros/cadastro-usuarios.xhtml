@@ -21,6 +21,18 @@
                         <p:column headerText="Nome">
                             <h:outputText value="#{usuario.nome}"/>
                         </p:column>
+                        
+                        <p:column headerText="Telefone">
+                            <h:outputText value="#{usuario.fone}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Perfil">
+                            <h:outputText value="#{usuario.perfil}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Email">
+                            <h:outputText value="#{usuario.email}"/>
+                        </p:column>
 
                         <p:column headerText="Ações">
                             <p:commandButton value="Alterar" oncomplete="PF('dialogUsuario').show()"
@@ -39,12 +51,27 @@
                     </p:confirmDialog>
                 </h:form>
 
-                <p:dialog header="Cadastro de Usuários" widgetVar="dialogUsuario" modal="true" height="110">
+                <p:dialog header="Cadastro de Usuários" widgetVar="dialogUsuario" modal="true" height="210">
                     <h:form id="formFormularioUsuario">
                         <p:panelGrid columns="2">
-                            <h:outputText value="Nome:"/>
+                            <h:outputText value="Nome: "/>
                             <p:inputText value="#{usuarioMB.usuario.nome}"/>
 
+                            <h:outputText value="Telefone: "/>
+                            <p:inputText value="#{usuarioMB.usuario.fone}"/>
+
+                            <h:outputText value="Email: "/>
+                            <p:inputText value="#{usuarioMB.usuario.email}"/>
+
+                            <h:outputText value="Senha: "/>
+                            <p:password value="#{usuarioMB.usuario.senha}"/>
+
+                            <p:selectOneMenu value="#{usuarioMB.usuario.perfil}">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItem itemLabel="ADMINISTRADOR" itemValue="ADMINISTRADOR" />
+                                <f:selectItem itemLabel="ATENDENTE" itemValue="ATENDENTE"/>
+                            </p:selectOneMenu>
+                            
                             <p:commandButton value="Inserir" actionListener="#{usuarioMB.inserir()}"
                                              oncomplete="PF('dialogUsuario').hide()"
                                              update=":formTabelaUsuario"/>
