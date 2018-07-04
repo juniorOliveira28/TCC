@@ -5,6 +5,8 @@
     <class>fabrica.Fabrica</class>
     <class>modelo.Pessoa</class>
     <class>modelo.Usuario</class>
+    <class>modelo.Categoria</class>
+    <class>controle.CategoriaMB</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bancoSigre?zeroDateTimeBehavior=convertToNull"/>
