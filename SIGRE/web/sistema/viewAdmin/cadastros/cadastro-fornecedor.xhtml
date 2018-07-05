@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template-admin.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formBotaoFornecedor">
+                    <p:commandButton value="Novo Fornecedor" oncomplete="PF('dialogFornecedor').show()"
+                                     update=":formFormularioFornecedor"/>
+                </h:form>
+
+                <h:form id="formTabelaFornecedor">
+                    <p:dataTable value="#{fornecedorMB.listafornecedores}" var="fornecedor">
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{fornecedor.nome}"/>
+                        </p:column>
+
+                       
+                        <p:column headerText="Ações">
+                            <p:commandButton value="Alterar" oncomplete="PF('dialogFornecedor').show()"
+                                             update=":formFormularioFornecedor">
+                                <f:setPropertyActionListener value="#{fornecedor}" target="#{fornecedorMB.fornecedor}"/>
+                            </p:commandButton>
+                            <p:commandButton value="Excluir" icon="ui-icon-trash" update="@form"
+                                             actionListener="#{fornecedorMB.remover(fornecedor.id)}" >
+                                <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </h:form>
+
+                <p:dialog header="Cadastro de Fornecedors" widgetVar="dialogFornecedor" modal="true" height="210">
+                    <h:form id="formFormularioFornecedor">
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Nome: "/>
+                            <p:inputText value="#{fornecedorMB.fornecedor.nome}"/>
+
+                      
+                            <p:commandButton value="Inserir" actionListener="#{fornecedorMB.inserir()}"
+                                             oncomplete="PF('dialogFornecedor').hide()"
+                                             update=":formTabelaFornecedor"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:dialog>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
