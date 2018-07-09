@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -15,20 +16,26 @@
     <h:body>
 
         <div id="top">
-            <ui:insert name="top">Menu
-            <p:menubar>
+            <ui:insert name="top">Menu <br/>
+
+                <p:menubar>
                     <p:submenu label="Usuário">          
                         <p:menuitem value="Cadastrar Usuários" url="/sistema/viewAdmin/cadastros/cadastro-usuarios.jsf" />
                     </p:submenu>  
                     <p:submenu label="Categoria">          
                         <p:menuitem value="Cadastrar Categorias" url="/sistema/viewAdmin/cadastros/cadastro-categoria.jsf" />
                     </p:submenu>  
-                  <p:submenu label="Produto">          
+                    <p:submenu label="Produto">          
                         <p:menuitem value="Cadastrar Produtos" url="/sistema/viewAdmin/cadastros/cadastro-produto.jsf" />
                     </p:submenu>  
-                  <p:submenu label="Fornecedor">          
+                    <p:submenu label="Fornecedor">          
                         <p:menuitem value="Cadastrar Fornecedores" url="/sistema/viewAdmin/cadastros/cadastro-fornecedor.jsf" />
                     </p:submenu>  
+                    <f:facet name="options">
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+                            <p:commandButton type="button" value="Sair" icon="ui-icon-extlink" style=" font-weight : bold" />
+                        </h:outputLink>
+                    </f:facet>
                 </p:menubar></ui:insert>
         </div>
 

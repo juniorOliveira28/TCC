@@ -21,14 +21,6 @@
                         <p:column headerText="Nome">
                             <h:outputText value="#{categoria.nome}"/>
                         </p:column>
-                        
-                        <p:column headerText="Status">
-                            <h:outputText value="#{categoria.status}"/>
-                        </p:column>
-                        
-                        <p:column headerText="Descrição">
-                            <h:outputText value="#{categoria.descricao}"/>
-                        </p:column>
                      
                         <p:column headerText="Ações">
                             <p:commandButton value="Alterar" oncomplete="PF('dialogCategoria').show()"
@@ -47,18 +39,12 @@
                     </p:confirmDialog>
                 </h:form>
 
-                <p:dialog header="Cadastro de Usuários" widgetVar="dialogCategoria" modal="true" height="210">
+                <p:dialog header="Cadastro de Usuários" widgetVar="dialogCategoria" modal="true" height="110">
                     <h:form id="formFormularioCategoria">
                         <p:panelGrid columns="2">
                             <h:outputText value="Nome: "/>
                             <p:inputText value="#{categoriaMB.categoria.nome}"/>
-
-                            <h:outputText value="Status "/>
-                            <p:inputText value="#{categoriaMB.categoria.status}"/>
-
-                            <h:outputText value="Descrição: "/>
-                            <p:inputText value="#{categoriaMB.categoria.descricao}"/>
-
+                            
                             <p:commandButton value="Inserir" actionListener="#{categoriaMB.inserir()}"
                                              oncomplete="PF('dialogCategoria').hide()"
                                              update=":formTabelaCategoria"/>

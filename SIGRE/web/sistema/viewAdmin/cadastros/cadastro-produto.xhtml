@@ -22,6 +22,9 @@
                             <h:outputText value="#{produto.nome}"/>
                         </p:column>
 
+                        <p:column headerText="Categoria">
+                            <h:outputText value="#{produto.categoria.nome}"/>
+                        </p:column>
                        
                         <p:column headerText="Ações">
                             <p:commandButton value="Alterar" oncomplete="PF('dialogProduto').show()"
@@ -40,12 +43,19 @@
                     </p:confirmDialog>
                 </h:form>
 
-                <p:dialog header="Cadastro de Produtos" widgetVar="dialogProduto" modal="true" height="210">
+                <p:dialog header="Cadastro de Produtos" widgetVar="dialogProduto" modal="true" height="120">
                     <h:form id="formFormularioProduto">
                         <p:panelGrid columns="2">
                             <h:outputText value="Nome: "/>
                             <p:inputText value="#{produtoMB.produto.nome}"/>
 
+                            <h:outputText value="Categoria:"/>
+                            <p:selectOneMenu converter="converterCategoria" value="#{modeloMB.modelo.categoria}" requiredMessage="Campo Vazio" required = "true">
+                                <f:selectItems value="#{categoriaMB.listaCategorias}" 
+                                               var ="categoria"
+                                               itemLabel="#{categoria.nome}"
+                                               itemValue="#{categoria}"/>
+                            </p:selectOneMenu>
                       
                             <p:commandButton value="Inserir" actionListener="#{produtoMB.inserir()}"
                                              oncomplete="PF('dialogProduto').hide()"

@@ -21,6 +21,14 @@
                         <p:column headerText="Nome">
                             <h:outputText value="#{fornecedor.nome}"/>
                         </p:column>
+                        
+                        <p:column headerText="Telefone">
+                            <h:outputText value="#{fornecedor.fone}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Email">
+                            <h:outputText value="#{fornecedor.email}"/>
+                        </p:column>
 
                        
                         <p:column headerText="Ações">
@@ -40,11 +48,17 @@
                     </p:confirmDialog>
                 </h:form>
 
-                <p:dialog header="Cadastro de Fornecedors" widgetVar="dialogFornecedor" modal="true" height="210">
+                <p:dialog header="Cadastro de Fornecedors" widgetVar="dialogFornecedor" modal="true" height="140">
                     <h:form id="formFormularioFornecedor">
                         <p:panelGrid columns="2">
                             <h:outputText value="Nome: "/>
                             <p:inputText value="#{fornecedorMB.fornecedor.nome}"/>
+                            
+                            <h:outputText value="Telefone: "/>
+                            
+                            <p:inputText value="#{fornecedorMB.fornecedor.fone}"/>
+                            <h:outputText value="Email: "/>
+                            <p:inputText value="#{fornecedorMB.fornecedor.email}"/>
 
                       
                             <p:commandButton value="Inserir" actionListener="#{fornecedorMB.inserir()}"

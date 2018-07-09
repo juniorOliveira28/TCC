@@ -15,7 +15,6 @@ public class Categoria implements Serializable {
     private Long id;
     private String nome;
     private String descricao;
-    private String status;
 
     public Long getId() {
         return id;
@@ -39,14 +38,6 @@ public class Categoria implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     @Override
