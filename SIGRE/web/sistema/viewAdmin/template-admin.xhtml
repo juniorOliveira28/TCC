@@ -19,17 +19,20 @@
             <ui:insert name="top">Menu <br/>
 
                 <p:menubar>
-                    <p:submenu label="Usuário">          
+                    <p:submenu label="Usuários">          
                         <p:menuitem value="Cadastrar Usuários" url="/sistema/viewAdmin/cadastros/cadastro-usuarios.jsf" />
                     </p:submenu>  
-                    <p:submenu label="Categoria">          
+                    <p:submenu label="Categorias">          
                         <p:menuitem value="Cadastrar Categorias" url="/sistema/viewAdmin/cadastros/cadastro-categoria.jsf" />
                     </p:submenu>  
-                    <p:submenu label="Produto">          
+                    <p:submenu label="Produtos">          
                         <p:menuitem value="Cadastrar Produtos" url="/sistema/viewAdmin/cadastros/cadastro-produto.jsf" />
                     </p:submenu>  
-                    <p:submenu label="Fornecedor">          
+                    <p:submenu label="Fornecedores">          
                         <p:menuitem value="Cadastrar Fornecedores" url="/sistema/viewAdmin/cadastros/cadastro-fornecedor.jsf" />
+                    </p:submenu>  
+                    <p:submenu label="Mesas">          
+                        <p:menuitem value="Cadastrar Mesas" url="/sistema/viewAdmin/cadastros/cadastro-mesa.jsf" />
                     </p:submenu>  
                     <f:facet name="options">
                         <h:outputLink value="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
