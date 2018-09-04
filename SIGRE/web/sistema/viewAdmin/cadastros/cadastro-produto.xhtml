@@ -50,7 +50,7 @@
                             <p:inputText value="#{produtoMB.produto.nome}"/>
 
                             <h:outputText value="Categoria:"/>
-                            <p:selectOneMenu converter="converterCategoria" value="#{modeloMB.modelo.categoria}" requiredMessage="Campo Vazio" required = "true">
+                            <p:selectOneMenu converter="converterCategoria" value="#{produtoMB.produto.categoria}" requiredMessage="Campo Vazio" required = "true">
                                 <f:selectItems value="#{categoriaMB.listaCategorias}" 
                                                var ="categoria"
                                                itemLabel="#{categoria.nome}"
