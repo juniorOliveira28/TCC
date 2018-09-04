@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 @Entity
 public class Pedido implements Serializable {
@@ -16,8 +17,10 @@ public class Pedido implements Serializable {
     private Long id;
     private int quantidade;
     private String status;
-    private Date data;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataPedido = new Date();
     private String observacao;
+    private Double valorUnitario;
     private Double valorTotal;
 
     public Long getId() {
@@ -45,11 +48,11 @@ public class Pedido implements Serializable {
     }
 
     public Date getData() {
-        return data;
+        return dataPedido;
     }
 
     public void setData(Date data) {
-        this.data = data;
+        this.dataPedido = data;
     }
 
     public String getObservacao() {
@@ -68,6 +71,15 @@ public class Pedido implements Serializable {
         this.valorTotal = valorTotal;
     }
 
+    public Double getValorUnitario() {
+        return valorUnitario;
+    }
+
+    public void setValorUnitario(Double valorUnitario) {
+        this.valorUnitario = valorUnitario;
+    }
+
+    
     
     @Override
     public int hashCode() {
