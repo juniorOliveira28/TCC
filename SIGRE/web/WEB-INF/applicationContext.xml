@@ -10,7 +10,7 @@
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/sistema/viewAdmin/**" access="hasRole('ADMINISTRADOR')"/>
         <intercept-url pattern="/sistema/viewAtendente/**" access="hasAnyRole('ADMINISTRADOR', 'ATENDENTE')"/>
-        <form-login login-page="/login.jsf" authentication-failure-url="/login.xhtml?erro=true"/>
+        <form-login login-page="/login.jsf" authentication-failure-url="/login.JSF?erro=true"/>
         <access-denied-handler error-page="/403.jsf"/>
     </http>
     
