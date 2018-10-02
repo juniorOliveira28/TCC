@@ -15,9 +15,9 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    private Double valor;
+    private Double valorVenda;
     private String descricao;
-    private int quantidade;
+    private Double quantidadeEstoque;
     @ManyToOne
     private Categoria categoria;
 
@@ -37,12 +37,12 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
-    public Double getValor() {
-        return valor;
+    public Double getValorVenda() {
+        return valorVenda;
     }
 
-    public void setValor(Double valor) {
-        this.valor = valor;
+    public void setValorVenda(Double valorVenda) {
+        this.valorVenda = valorVenda;
     }
 
     public String getDescricao() {
@@ -53,12 +53,12 @@ public class Produto implements Serializable {
         this.descricao = descricao;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public Double getQuantidadeEstoque() {
+        return quantidadeEstoque;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidadeEstoque(Double quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
     }
 
     public Categoria getCategoria() {
@@ -68,7 +68,7 @@ public class Produto implements Serializable {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-    
+
     
     @Override
     public int hashCode() {

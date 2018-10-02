@@ -14,7 +14,7 @@ public class Fabrica {
 	private EntityManager em;
 
 	public Fabrica() {
-		em = Persistence.createEntityManagerFactory("SigrePUa").createEntityManager();
+		em = Persistence.createEntityManagerFactory("SigrePU").createEntityManager();
 	}
 
 	public synchronized static Fabrica getFabrica() {

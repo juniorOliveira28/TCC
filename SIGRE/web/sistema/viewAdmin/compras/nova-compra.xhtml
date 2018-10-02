@@ -7,49 +7,48 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head></h:head>
     <body>
-
         <ui:composition template="./../template-admin.xhtml">
-
             <ui:define name="content">
                 <h1>Inserir Compra</h1>
-                <h:form>
-                    <p:commandButton value="Nova Compra" oncomplete="PF('dialogCompra').show()" update=":formFormularioCompra"/>
+                <h:form id="formBotaoCompra">
+                    <p:commandButton value="Novo Item" update=""
+                                     oncomplete="PF('dialogCompra').show()"/>
                 </h:form>
-                <p:growl id="mensagem"/>
-                <p:dialog header="dialogCompra" modal="true" height="200" widgetVar="dialogCompra">
-                    <h:form id="formFormularioCompra">
-                        <p:panelGrid columns="2">
-                            <h:outputText value="Fornecedor"/>
-                            <p:selectOneMenu converter="converterFornecedor" value="#{compraMB.compra.fornecedor}"
-                                             filter="true" filterMatchMode="startsWith">
-                                <f:selectItem itemLabel="Selecione Um Fornecedor"></f:selectItem>
-                                <f:selectItems value="#{fornecedorMB.listafornecedores}"
-                                               var="fornec" itemLabel="#{fornec.nome}" itemValue="#{fornec}"/>
-                            </p:selectOneMenu>
-                            <h:outputText value="Data:"/>
-                            <p:calendar pattern="dd/MM/yyyy" 
-                                        value="#{compraMB.compra.dataCompra}"/>
-                            <h:outputText value="Obervação"/>
-                            <p:inputText value="#{compraMB.compra.observacao}"/>
 
-                            <h:outputText value="Produto"/>
-                            <p:selectOneMenu converter="converterProduto" value="#{compraMB.itensCompra.produto}">
-                                <f:selectItem itemLabel="Selecione Um Produto"></f:selectItem>
-                                <f:selectItems value="#{produtoMB.listaProdutos}"  var="prod" itemLabel="#{prod.nome}" itemValue="#{prod}"/>
-                            </p:selectOneMenu>
+                <h:form>
+                    <p:dialog header="Novo Item" modal="true" height="220" widgetVar="dialogCompra">
+                        <h:form id="formFormularioCompra">
+                            <p:panelGrid columns="2">
+                                <h:outputText value="Produto:" />
+                                <p:selectOneMenu value="#{compraMB.listaItensCompra}">
+                                    <f:selectItem  itemLabel="Selecionar"/>
+                                    <f:selectItems value="#{produtoMB.listaProdutos}" var="prod"
+                                                   itemValue="#{prod.nome}" itemLabel="#{prod.nome}"/>
+                                </p:selectOneMenu>
 
-                            <h:outputText value="Quantidade:" />
-                            <p:inputText id="inputQtd" value="#{compraMB.itensCompra.quantidade}"/>
+                                <h:outputText value="Fornecedor:"/>
+                                <p:selectOneMenu value="#{fornecedorMB.listafornecedores}">
+                                    <f:selectItem itemLabel="Selecionar"/>
+                                    <f:selectItems value="#{fornecedorMB.listafornecedores}" var="forn"
+                                                   itemValue="#{forn.nome}" itemLabel="#{forn.nome}"/>
+                                </p:selectOneMenu>
 
-                            <p:commandButton value="Ok" update="tabelaItensCompra" 
-                                             actionListener="#{compraMB.adicionarItem()}"/>
-
-                        </p:panelGrid> 
-                    </h:form>
-                </p:dialog>
+                                <h:outputText value="Data:" />
+                                <p:calendar pattern="dd/MM/yyyy" value="#{compraMB.compra.dataCompra}"/>
+                                
+                                <p:commandButton value="Inserir" oncomplete="PF('dialogCompra').hide()" 
+                                                 update="@form" actionListener="#{compraMB.adicionarItem()}"/>
+                            </p:panelGrid>
+                            
+                        </h:form>
+                    </p:dialog>
+                    <p:dataTable id="formTabelaItensCompra" value="#{compraMB.listaItensCompra}" var="itens">
+                        <p:column headerText="Produto">
+                            <h:outputText value="#{itens.produto.nome}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

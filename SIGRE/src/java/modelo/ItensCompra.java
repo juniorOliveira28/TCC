@@ -14,13 +14,29 @@ public class ItensCompra implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Double quantidade;
-    private Double valorUnitario;
-    private Double valorTotal;
+    private Double quantidadeItens;
+    private Double valorUnitarioItens;
+    private Double valorTotalItens;
     @ManyToOne
     private Produto produto;
     @ManyToOne
     private Compra compra;
+
+    public Double getValorUnitarioItens() {
+        return valorUnitarioItens;
+    }
+
+    public void setValorUnitarioItens(Double valorUnitarioItens) {
+        this.valorUnitarioItens = valorUnitarioItens;
+    }
+
+    public Double getValorTotalItens() {
+        return valorTotalItens;
+    }
+
+    public void setValorTotalItens(Double valorTotalItens) {
+        this.valorTotalItens = valorTotalItens;
+    }
 
     public Produto getProduto() {
         return produto;
@@ -38,14 +54,16 @@ public class ItensCompra implements Serializable {
         this.compra = compra;
     }
 
+    
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
-        result = prime * result + ((valorUnitario == null) ? 0 : valorUnitario.hashCode());
-        result = prime * result + ((valorTotal == null) ? 0 : valorTotal.hashCode());
+        result = prime * result + ((quantidadeItens == null) ? 0 : quantidadeItens.hashCode());
+        result = prime * result + ((valorUnitarioItens == null) ? 0 : valorUnitarioItens.hashCode());
+        result = prime * result + ((valorTotalItens == null) ? 0 : valorTotalItens.hashCode());
         return result;
     }
 
@@ -68,32 +86,28 @@ public class ItensCompra implements Serializable {
         } else if (!id.equals(other.id)) {
             return false;
         }
-        if (quantidade == null) {
-            if (other.quantidade != null) {
+        if (quantidadeItens == null) {
+            if (other.quantidadeItens != null) {
                 return false;
             }
-        } else if (!quantidade.equals(other.quantidade)) {
+        } else if (!quantidadeItens.equals(other.quantidadeItens)) {
             return false;
         }
-        if (valorUnitario == null) {
-            if (other.valorUnitario != null) {
+        if (valorUnitarioItens == null) {
+            if (other.valorUnitarioItens != null) {
                 return false;
             }
-        } else if (!valorUnitario.equals(other.valorUnitario)) {
+        } else if (!valorUnitarioItens.equals(other.valorUnitarioItens)) {
             return false;
         }
-        if (valorTotal == null) {
-            if (other.valorTotal != null) {
+        if (valorTotalItens == null) {
+            if (other.valorTotalItens != null) {
                 return false;
             }
-        } else if (!valorTotal.equals(other.valorTotal)) {
+        } else if (!valorTotalItens.equals(other.valorTotalItens)) {
             return false;
         }
         return true;
-    }
-
-    public ItensCompra() {
-        super();
     }
 
     public Long getId() {
@@ -104,27 +118,12 @@ public class ItensCompra implements Serializable {
         this.id = id;
     }
 
-    public Double getQuantidade() {
-        return quantidade;
+    public Double getQuantidadeItens() {
+        return quantidadeItens;
     }
 
-    public void setQuantidade(Double quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidadeItens(Double quantidadeItens) {
+        this.quantidadeItens = quantidadeItens;
     }
 
-    public Double getValorUnitario() {
-        return valorUnitario;
-    }
-
-    public void setValorUnitario(Double valorUnitario) {
-        this.valorUnitario = valorUnitario;
-    }
-
-    public Double getValotTotal() {
-        return valorTotal;
-    }
-
-    public void setValotTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
 }

@@ -22,7 +22,7 @@ public class Compra implements Serializable {
     private Date dataCompra = new Date();
     private String observacao;
     private Double valorTotalItensCompra;
-    
+
     public Long getId() {
         return id;
     }
@@ -62,6 +62,8 @@ public class Compra implements Serializable {
     public void setValorTotalItensCompra(Double valorTotalItensCompra) {
         this.valorTotalItensCompra = valorTotalItensCompra;
     }
+    
+   
 
     @Override
     public int hashCode() {

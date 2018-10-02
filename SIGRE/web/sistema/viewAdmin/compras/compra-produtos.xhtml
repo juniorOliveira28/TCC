@@ -11,65 +11,7 @@
         <ui:composition template="./../template-admin.xhtml">
 
             <ui:define name="content">
-                <h:form id="formBotaoProduto">
-                    <p:commandButton value="Nova Compra" oncomplete="PF('dialogProduto').show()"
-                                     update=":formFormularioProduto"/>
-                </h:form>
-
-                <h:form id="formTabelaProduto">
-                    <p:dataTable value="#{produtoMB.listaProdutos}" var="produto">
-                        <p:column headerText="Nome">
-                            <h:outputText value="#{produto.nome}"/>
-                        </p:column>
-
-                        <p:column headerText="Categoria">
-                            <h:outputText value="#{produto.categoria.nome}"/>
-                        </p:column>
-                       
-                        <p:column headerText="Ações">
-                            <p:commandButton value="Alterar" oncomplete="PF('dialogProduto').show()"
-                                             update=":formFormularioProduto">
-                                <f:setPropertyActionListener value="#{produto}" target="#{produtoMB.produto}"/>
-                            </p:commandButton>
-                            <p:commandButton value="Excluir" icon="ui-icon-trash" update="@form"
-                                             actionListener="#{produtoMB.remover(produto.id)}" >
-                                <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable>
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                    </p:confirmDialog>
-                </h:form>
-
-                <p:dialog header="Produtos" widgetVar="dialogProduto" modal="true" height="120">
-                    <h:form id="formFormularioProduto">
-                        <p:panelGrid columns="2">
-                            <h:outputText value="Nome: "/>
-                            <p:inputText value="#{produtoMB.produto.nome}"/>
-
-                            <h:outputText value="Fornecedor"/>
-                            <p:selectOneMenu converter="converterFornecedor" value="#{produtoMB.produto.categoria}" requiredMessage="Campo Vazio" required = "true">
-                                <f:selectItems value="#{categoriaMB.listaCategorias}" 
-                                               var ="categoria"
-                                               itemLabel="#{categoria.nome}"
-                                               itemValue="#{categoria}"/>
-                            </p:selectOneMenu>
-                            <h:outputText value="Categoria:"/>
-                            <p:selectOneMenu converter="converterCategoria" value="#{produtoMB.produto.categoria}" requiredMessage="Campo Vazio" required = "true">
-                                <f:selectItems value="#{categoriaMB.listaCategorias}" 
-                                               var ="categoria"
-                                               itemLabel="#{categoria.nome}"
-                                               itemValue="#{categoria}"/>
-                            </p:selectOneMenu>
-                      
-                            <p:commandButton value="Inserir" actionListener="#{produtoMB.inserir()}"
-                                             oncomplete="PF('dialogProduto').hide()"
-                                             update=":formTabelaProduto"/>
-                           </p:panelGrid>
-                    </h:form>
-                </p:dialog>
+                
             </ui:define>
         </ui:composition>
 

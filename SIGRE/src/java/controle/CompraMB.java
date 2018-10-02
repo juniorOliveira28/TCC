@@ -26,11 +26,14 @@ public class CompraMB {
 //        compra = new Compra();
 //        itensCompra = new ItensCompra();
 //        listaItensCompra = new ArrayList<>();
-preencherListaItensCompra();
+//        preencherListaItensCompra();
+        listaCompras = daoCompra.buscarTodos();
     }
-    public void preencherListaItensCompra(){
-        listaItensCompra = daoItensCompra.buscarTodos();
-    }
+
+//    public void preencherListaItensCompra() {
+//        listaItensCompra = daoItensCompra.buscarTodos();
+//        listaCompras = daoCompra.buscarTodos();
+//    }
 //    public void inserirItensCompra() {
 //        System.out.println("Quantidade" + itensCompra.getQuantidade());
 //        listaItensCompra.add(itensCompra);
@@ -50,36 +53,39 @@ preencherListaItensCompra();
 //            daoCompra.alterar(compra);
 //        }
 //    }
-    
     public void adicionarItem() {
-		System.out.println("DEntro do Método");
-		if (itensCompra.getProduto() != null) {			
-			itensCompra.setValorUnitario(itensCompra.getProduto().getValor());
-			itensCompra.setValotTotal(itensCompra.getQuantidade() * itensCompra.getValorUnitario());
-			listaItensCompra.add(itensCompra);
-			itensCompra = new ItensCompra();
-			System.out.println("QTDLista: "+listaItensCompra.size());
-		}
-	}
-    	public void finalizarCompra() {
-		daoCompra.salvar(compra);
-		for (ItensCompra it : listaItensCompra) {
-			it.setCompra(compra);
-			daoItensCompra.salvar(it);
-		}
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Compra Realizada Com Sucesso!!", ""));
-	}
+        System.out.println("Dentro do Método");
+        if (itensCompra.getProduto() != null) {
+//            itensCompra.setValorUnitarioItens(itensCompra.getValorUnitarioItens());
+//            itensCompra.setQuantidadeItens(itensCompra.getQuantidadeItens());
+            itensCompra.setProduto(itensCompra.getProduto());
+            
+//            itensCompra.setValorTotalItens(itensCompra.getQuantidadeItens() * itensCompra.getValorUnitarioItens());
+            listaItensCompra.add(itensCompra);
+            itensCompra = new ItensCompra();
+//			System.out.println("QTDLista: "+listaItensCompra.size());
+        }
+    }
 
-	public void removerItem(ItensCompra itemRemover) {
-		listaItensCompra.remove(itemRemover);
-	}
+    public void finalizarCompra() {
+        daoCompra.salvar(compra);
+        for (ItensCompra it : listaItensCompra) {
+            it.setCompra(compra);
+            daoItensCompra.salvar(it);
+        }
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Compra Realizada Com Sucesso!!", ""));
+    }
 
-	public void novaCompra() {
-		compra = new Compra();
-		listaItensCompra = new ArrayList<>();
-		itensCompra = new ItensCompra();
-	}
+    public void removerItem(ItensCompra itemRemover) {
+        listaItensCompra.remove(itemRemover);
+    }
+
+    public void novaCompra() {
+        compra = new Compra();
+        listaItensCompra = new ArrayList<>();
+        itensCompra = new ItensCompra();
+    }
 
     public Compra getCompra() {
         return compra;
