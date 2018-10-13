@@ -22,6 +22,22 @@ public class ItensCompra implements Serializable {
     @ManyToOne
     private Compra compra;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getQuantidadeItens() {
+        return quantidadeItens;
+    }
+
+    public void setQuantidadeItens(Double quantidadeItens) {
+        this.quantidadeItens = quantidadeItens;
+    }
+
     public Double getValorUnitarioItens() {
         return valorUnitarioItens;
     }
@@ -55,8 +71,7 @@ public class ItensCompra implements Serializable {
     }
 
     
-
-    @Override
+        @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -109,21 +124,4 @@ public class ItensCompra implements Serializable {
         }
         return true;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Double getQuantidadeItens() {
-        return quantidadeItens;
-    }
-
-    public void setQuantidadeItens(Double quantidadeItens) {
-        this.quantidadeItens = quantidadeItens;
-    }
-
 }

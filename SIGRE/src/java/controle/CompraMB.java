@@ -54,27 +54,31 @@ public class CompraMB {
 //        }
 //    }
     public void adicionarItem() {
-        System.out.println("Dentro do Método");
+        System.out.println("Dentro do Método Adicionar Item");
         if (itensCompra.getProduto() != null) {
+              itensCompra.setProduto(itensCompra.getProduto());
+              itensCompra.setCompra(compra);
 //            itensCompra.setValorUnitarioItens(itensCompra.getValorUnitarioItens());
-//            itensCompra.setQuantidadeItens(itensCompra.getQuantidadeItens());
-            itensCompra.setProduto(itensCompra.getProduto());
-            
-//            itensCompra.setValorTotalItens(itensCompra.getQuantidadeItens() * itensCompra.getValorUnitarioItens());
+            itensCompra.setQuantidadeItens(itensCompra.getQuantidadeItens());
+            itensCompra.setValorTotalItens(itensCompra.getQuantidadeItens() * itensCompra.getValorUnitarioItens());
             listaItensCompra.add(itensCompra);
             itensCompra = new ItensCompra();
 //			System.out.println("QTDLista: "+listaItensCompra.size());
+        System.out.println("Fim do Método Adicionar Item");
         }
     }
 
     public void finalizarCompra() {
+        System.out.println("Dentro do Método Finalizar Compra");
         daoCompra.salvar(compra);
         for (ItensCompra it : listaItensCompra) {
+        System.out.println("FIM do Método Finalizar Compra");
             it.setCompra(compra);
             daoItensCompra.salvar(it);
         }
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Compra Realizada Com Sucesso!!", ""));
+        
     }
 
     public void removerItem(ItensCompra itemRemover) {

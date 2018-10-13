@@ -2,18 +2,126 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+    <h:head></h:head>
     <body>
-
+        <!----------------------------------------------------------------------------------------------------->
+                    <!--Versão nova compra funcionando parcialmente-->
+        <!----------------------------------------------------------------------------------------------------->
+                    
         <ui:composition template="./../template-admin.xhtml">
 
-            <ui:define name="content">
-                
+             <ui:define name="content">
+                <h1>Inserir Compra</h1>
+                <!-- 	<p:messages id="mensagem"/>  -->
+                <p:growl id="mensagem" />
+
+                <!-- botao dialog -->
+                <p:commandButton value="Pesquisar"
+                                 onclick="PF('dlgPesquisar').show();" update="tabelaDialog" />
+                <!-- fim botão dialog -->
+
+
+                <h:form id="formularioCabecalhoCompra">
+
+                    <h:panelGrid columns="4">
+                        <h:outputText value="Fornecedor" />
+                        <p:selectOneMenu value="#{compraMB.compra.fornecedor}"
+                                         converter="converterFornecedor" filter="true"
+                                         filterMatchMode="startsWith">
+                            <f:selectItems value="#{fornecedorMB.listafornecedores}" var="fornec"
+                                           itemLabel="#{fornec.nome}" itemValue="#{fornec}" />
+                        </p:selectOneMenu>
+                        <h:outputText value="Data:" />
+                        <p:calendar pattern="dd/MM/yyyy" value="#{compraMB.compra.dataCompra}" />
+                    </h:panelGrid>
+
+
+                    <h:outputText value="Observação" />
+                    <p:inputText value="#{compraMB.compra.observacao}" />
+                   
+
+                    <!-- 		INÍCIO ITENS DE VENDA -->
+                    <h:panelGrid columns="5">
+                        <h:outputText value="Produto" />
+                        <p:selectOneMenu value="#{compraMB.itensCompra.produto}"
+                                         converter="converterProduto" filter="true"
+                                         filterMatchMode="startsWith">
+                            <f:selectItems value="#{produtoMB.listaProdutos}" var="prod"
+                                           itemLabel="#{prod.nome}" itemValue="#{prod}" />
+                        </p:selectOneMenu>
+                        <h:outputText value="Quantidade:" />
+                        <p:inputText id="inputQtd" value="#{compraMB.itensCompra.quantidadeItens}"/>
+                        
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="5">
+                          <h:outputText value="Valor Unitario:" />
+                        <p:inputText value="#{compraMB.itensCompra.valorUnitarioItens}"/>
+                        
+                        <p:commandButton value="OK" update="tabelaItensCompra,inputQtd"
+                                         actionListener="#{compraMB.adicionarItem()}"/>
+                    </h:panelGrid>
+
+
+                    <!-- 		FIM DO ITENS DE VENDA -->
+                    <p:dataTable id="tabelaItensCompra" value="#{compraMB.listaItensCompra}"
+                                 var="itens">
+                        <p:column headerText="Fornecedor">
+                            <h:outputText value="#{itens.compra.fornecedor.nome}" />
+                        </p:column>
+                        <p:column headerText="Produto">
+                            <h:outputText value="#{itens.produto.nome}" />
+                        </p:column>
+                        <p:column headerText="Quantidade">
+                            <h:outputText value="#{itens.quantidadeItens}" />
+                        </p:column>
+                        <p:column headerText="Valor Unitário">
+                            <h:outputText value="#{itens.valorUnitarioItens}" />
+                        </p:column>
+                        <p:column headerText="Valor Total">
+                            <h:outputText value="#{itens.valorTotalItens}" />
+                        </p:column>
+                    </p:dataTable>
+
+
+                    <p:commandButton value="Finalizar Compra"
+                                     actionListener="#{compraMB.finalizarCompra()}"
+                                     update="mensagem, @form"/>
+
+                </h:form>
+
+
+                 <!--dialog-->  
+                <p:dialog header="Histórico de Compras" widgetVar="dlgPesquisar"
+                          modal="true" height="50%">
+                    <p:dataTable id="tabelaDialog" var="com"
+                                 value="#{compraMB.listaCompras}">
+
+                        <p:column headerText="Fornecedor">
+                            <h:outputText value="#{com.fornecedor.nome}" />
+                        </p:column>
+
+                        <p:column headerText="Valor Compra">
+                            <h:outputText value="#{com.valorTotalItensCompra}" >
+                                <f:convertNumber pattern="¤#,##0.00" currencySymbol="R$" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Data">
+                            <h:outputText value="#{com.dataCompra}">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:dialog>
+                <!-- fim dialog -->
+
             </ui:define>
         </ui:composition>
-
     </body>
 </html>
