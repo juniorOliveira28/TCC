@@ -35,14 +35,13 @@
                             <h:outputText value="Data:" />
                             <p:calendar pattern="dd/MM/yyyy" value="#{compraMB.compra.dataCompra}" />
                         </h:panelGrid>
-
-
+                        
                         <h:outputText value="Observação" />
                         <p:inputText value="#{compraMB.compra.observacao}" />
 
 
                         <!-- 		INÍCIO ITENS DE VENDA -->
-                        <h:panelGrid columns="5">
+                        <h:panelGrid columns="4">
                             <h:outputText value="Produto" />
                             <p:selectOneMenu value="#{compraMB.itensCompra.produto}"
                                              converter="converterProduto" filter="true"
@@ -55,7 +54,7 @@
 
                         </h:panelGrid>
 
-                        <h:panelGrid columns="5">
+                        <h:panelGrid columns="4">
                             <h:outputText value="Valor Unitário:" />
                             <p:inputText value="#{compraMB.itensCompra.valorUnitarioItens}"/>
 
@@ -104,9 +103,10 @@
                         <p:column headerText="Observacao">
                             <h:outputText value="#{com.observacao}" />
                         </p:column>
+                      
 
                         <p:column headerText="Valor Compra">
-                            <h:outputText value="#{com.valorTotalItensCompra}" >
+                            <h:outputText value="#{com.valorTotalCompra}">
                                 <f:convertNumber pattern="¤#,##0.00" currencySymbol="R$" />
                             </h:outputText>
                         </p:column>

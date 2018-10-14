@@ -21,7 +21,7 @@ public class Compra implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataCompra = new Date();
     private String observacao;
-    private Double valorTotalItensCompra;
+    private Double valorTotalCompra;
 
     public Long getId() {
         return id;
@@ -55,15 +55,15 @@ public class Compra implements Serializable {
         this.observacao = observacao;
     }
 
-    public Double getValorTotalItensCompra() {
-        return valorTotalItensCompra;
+    public Double getValorTotalCompra() {
+        return valorTotalCompra;
     }
 
-    public void setValorTotalItensCompra(Double valorTotalItensCompra) {
-        this.valorTotalItensCompra = valorTotalItensCompra;
+    public void setValorTotalCompra(Double valorTotalCompra) {
+        this.valorTotalCompra = valorTotalCompra;
     }
+
     
-   
 
     @Override
     public int hashCode() {

@@ -56,29 +56,40 @@ public class CompraMB {
     public void adicionarItem() {
         System.out.println("Dentro do Método Adicionar Item");
         if (itensCompra.getProduto() != null) {
-              itensCompra.setProduto(itensCompra.getProduto());
-              itensCompra.setCompra(compra);
-//            itensCompra.setValorUnitarioItens(itensCompra.getValorUnitarioItens());
+            itensCompra.setProduto(itensCompra.getProduto());
+            itensCompra.setCompra(compra);
             itensCompra.setQuantidadeItens(itensCompra.getQuantidadeItens());
             itensCompra.setValorTotalItens(itensCompra.getQuantidadeItens() * itensCompra.getValorUnitarioItens());
             listaItensCompra.add(itensCompra);
             itensCompra = new ItensCompra();
+//            itensCompra.setValorUnitarioItens(itensCompra.getValorUnitarioItens());
 //			System.out.println("QTDLista: "+listaItensCompra.size());
-        System.out.println("Fim do Método Adicionar Item");
+            System.out.println("Fim do Método Adicionar Item");
         }
     }
 
     public void finalizarCompra() {
         System.out.println("Dentro do Método Finalizar Compra");
+        Double valorFinalCompra = 0.0;
         daoCompra.salvar(compra);
+
         for (ItensCompra it : listaItensCompra) {
-        System.out.println("FIM do Método Finalizar Compra");
+            valorFinalCompra += it.getValorTotalItens();
             it.setCompra(compra);
             daoItensCompra.salvar(it);
+//            compra.setValorTotalCompra(itensCompra.getValorTotalItens());
+//            compra.setValorTotalCompra(itensCompra.getValorTotalItens());
+//            it.setValorTotalItens(itensCompra.getValorTotalItens());
         }
+        compra.setValorTotalCompra(valorFinalCompra);
+        daoCompra.alterar(compra);
+        listaCompras = daoCompra.buscarTodos();
+
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Compra Realizada Com Sucesso!!", ""));
-        
+        novaCompra();
+        System.out.println("FIM do Método Finalizar Compra");
+
     }
 
     public void removerItem(ItensCompra itemRemover) {

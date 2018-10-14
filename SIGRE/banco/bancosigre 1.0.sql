@@ -34,7 +34,7 @@ INSERT INTO `categoria` (`id`, `descricao`, `nome`) VALUES
 -- Extraindo dados da tabela `compra`
 --
 
-INSERT INTO `compra` (`id`, `dataCompra`, `observacao`, `valorTotalItensCompra`, `fornecedor_id`) VALUES
+INSERT INTO `compra` (`id`, `dataCompra`, `observacao`, `valorTotalCompra`, `fornecedor_id`) VALUES
 (1, '2018-10-09', 'Compra A vista', NULL, 1);
 
 --
