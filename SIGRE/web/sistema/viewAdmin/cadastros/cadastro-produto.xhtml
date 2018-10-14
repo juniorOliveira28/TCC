@@ -25,6 +25,18 @@
                         <p:column headerText="Categoria">
                             <h:outputText value="#{produto.categoria.nome}"/>
                         </p:column>
+                        
+                        <p:column headerText="Descrição">
+                            <h:outputText value="#{produto.descricao}"/>
+                        </p:column>
+                       
+                        <p:column headerText="Valor Venda">
+                            <h:outputText value="#{produto.valorVenda}"/>
+                        </p:column>
+                       
+                        <p:column headerText="Estoque">
+                            <h:outputText value="#{produto.quantidadeEstoque}"/>
+                        </p:column>
                        
                         <p:column headerText="Ações">
                             <p:commandButton value="Alterar" oncomplete="PF('dialogProduto').show()"
@@ -43,7 +55,7 @@
                     </p:confirmDialog>
                 </h:form>
 
-                <p:dialog header="Cadastro de Produtos" widgetVar="dialogProduto" modal="true" height="120">
+                <p:dialog header="Cadastro de Produtos" widgetVar="dialogProduto" modal="true" height="175">
                     <h:form id="formFormularioProduto">
                         <p:panelGrid columns="2">
                             <h:outputText value="Nome: "/>
@@ -56,6 +68,13 @@
                                                itemLabel="#{categoria.nome}"
                                                itemValue="#{categoria}"/>
                             </p:selectOneMenu>
+                            
+                            <h:outputText value="Valor Venda:"/>
+                            <p:inputText value="#{produtoMB.produto.valorVenda}"/>
+                      
+                            
+                            <h:outputText value="Descrição:"/>
+                            <p:inputText value="#{produtoMB.produto.descricao}"/>
                       
                             <p:commandButton value="Inserir" actionListener="#{produtoMB.inserir()}"
                                              oncomplete="PF('dialogProduto').hide()"

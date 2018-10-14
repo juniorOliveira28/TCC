@@ -9,61 +9,44 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import modelo.Compra;
 import modelo.ItensCompra;
+import modelo.Produto;
 
 @ManagedBean
 @ViewScoped
 public class CompraMB {
 
+    private Produto produto = new Produto();
+
     private Compra compra = new Compra();
     private ItensCompra itensCompra = new ItensCompra();
     private List<ItensCompra> listaItensCompra = new ArrayList<>();
     private List<Compra> listaCompras = new ArrayList<>();
+    private List<Produto> listaProdutos = new ArrayList<>();
 
+    private DAOGenerico<Produto> daoProduto = new DAOGenerico<>(Produto.class);
     private DAOGenerico<Compra> daoCompra = new DAOGenerico<>(Compra.class);
     private DAOGenerico<ItensCompra> daoItensCompra = new DAOGenerico<>(ItensCompra.class);
 
     public CompraMB() {
-//        compra = new Compra();
-//        itensCompra = new ItensCompra();
-//        listaItensCompra = new ArrayList<>();
-//        preencherListaItensCompra();
         listaCompras = daoCompra.buscarTodos();
     }
 
-//    public void preencherListaItensCompra() {
-//        listaItensCompra = daoItensCompra.buscarTodos();
-//        listaCompras = daoCompra.buscarTodos();
-//    }
-//    public void inserirItensCompra() {
-//        System.out.println("Quantidade" + itensCompra.getQuantidade());
-//        listaItensCompra.add(itensCompra);
-//        System.out.println("Tam lista" + listaItensCompra.size());
-//        itensCompra = new ItensCompra();
-//        System.out.println("Quantidade" + itensCompra.getQuantidade());
-//    }
-//
-//    public void inserirCompra() {
-//        if (compra.getId() == null) {
-//            daoCompra.salvar(compra);
-//            for (ItensCompra item : listaItensCompra) {
-//                item.setCompra(compra);
-//                daoItensCompra.salvar(item);
-//            }
-//        }else{
-//            daoCompra.alterar(compra);
-//        }
-//    }
     public void adicionarItem() {
         System.out.println("Dentro do Método Adicionar Item");
         if (itensCompra.getProduto() != null) {
+            
             itensCompra.setProduto(itensCompra.getProduto());
             itensCompra.setCompra(compra);
             itensCompra.setQuantidadeItens(itensCompra.getQuantidadeItens());
             itensCompra.setValorTotalItens(itensCompra.getQuantidadeItens() * itensCompra.getValorUnitarioItens());
+          
+//          Mostrando produto + quantidade no console
+            System.out.println("Produto: " + itensCompra.getProduto().getNome() 
+                    + " Quantidade: " + getItensCompra().getQuantidadeItens());
+            
             listaItensCompra.add(itensCompra);
             itensCompra = new ItensCompra();
-//            itensCompra.setValorUnitarioItens(itensCompra.getValorUnitarioItens());
-//			System.out.println("QTDLista: "+listaItensCompra.size());
+            
             System.out.println("Fim do Método Adicionar Item");
         }
     }
@@ -71,18 +54,26 @@ public class CompraMB {
     public void finalizarCompra() {
         System.out.println("Dentro do Método Finalizar Compra");
         Double valorFinalCompra = 0.0;
+        
         daoCompra.salvar(compra);
+//        daoProduto.alterar(produto);
 
         for (ItensCompra it : listaItensCompra) {
             valorFinalCompra += it.getValorTotalItens();
+//            qtdItens = it.getQuantidadeItens();
+        
+//            it.setProduto(produto);
             it.setCompra(compra);
             daoItensCompra.salvar(it);
 //            compra.setValorTotalCompra(itensCompra.getValorTotalItens());
 //            compra.setValorTotalCompra(itensCompra.getValorTotalItens());
 //            it.setValorTotalItens(itensCompra.getValorTotalItens());
         }
+
         compra.setValorTotalCompra(valorFinalCompra);
+//        produto.setQuantidadeEstoque(qtdItens);
         daoCompra.alterar(compra);
+//        daoProduto.alterar(produto);
         listaCompras = daoCompra.buscarTodos();
 
         FacesContext.getCurrentInstance().addMessage(null,
@@ -132,6 +123,22 @@ public class CompraMB {
 
     public void setListaCompras(List<Compra> listaCompras) {
         this.listaCompras = listaCompras;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public List<Produto> getListaProdutos() {
+        return listaProdutos;
+    }
+
+    public void setListaProdutos(List<Produto> listaProdutos) {
+        this.listaProdutos = listaProdutos;
     }
 
 }

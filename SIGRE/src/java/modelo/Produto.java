@@ -15,9 +15,9 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    private Double valorVenda;
+    private Double valorVenda =0.;
     private String descricao;
-    private Double quantidadeEstoque;
+    private Double quantidadeEstoque = 0.;
     @ManyToOne
     private Categoria categoria;
 
