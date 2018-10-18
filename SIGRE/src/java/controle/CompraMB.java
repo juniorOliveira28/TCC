@@ -11,11 +11,12 @@ import modelo.Compra;
 import modelo.ItensCompra;
 import modelo.Produto;
 
+
 @ManagedBean
 @ViewScoped
 public class CompraMB {
 
-    private Produto produto = new Produto();
+//    private Produto produto = new Produto();
 
     private Compra compra = new Compra();
     private ItensCompra itensCompra = new ItensCompra();
@@ -34,19 +35,20 @@ public class CompraMB {
     public void adicionarItem() {
         System.out.println("Dentro do Método Adicionar Item");
         if (itensCompra.getProduto() != null) {
-            
+
             itensCompra.setProduto(itensCompra.getProduto());
             itensCompra.setCompra(compra);
             itensCompra.setQuantidadeItens(itensCompra.getQuantidadeItens());
             itensCompra.setValorTotalItens(itensCompra.getQuantidadeItens() * itensCompra.getValorUnitarioItens());
-          
+
 //          Mostrando produto + quantidade no console
-            System.out.println("Produto: " + itensCompra.getProduto().getNome() 
+            System.out.println("Produto: " + itensCompra.getProduto().getNome()
                     + " Quantidade: " + getItensCompra().getQuantidadeItens());
-            
+
+//            daoProduto.alterar(produto);
             listaItensCompra.add(itensCompra);
             itensCompra = new ItensCompra();
-            
+
             System.out.println("Fim do Método Adicionar Item");
         }
     }
@@ -54,26 +56,40 @@ public class CompraMB {
     public void finalizarCompra() {
         System.out.println("Dentro do Método Finalizar Compra");
         Double valorFinalCompra = 0.0;
-        
+        Double qtdItens = 0.0;
+
         daoCompra.salvar(compra);
 //        daoProduto.alterar(produto);
 
         for (ItensCompra it : listaItensCompra) {
             valorFinalCompra += it.getValorTotalItens();
-//            qtdItens = it.getQuantidadeItens();
-        
+            qtdItens = it.getQuantidadeItens();
+
 //            it.setProduto(produto);
             it.setCompra(compra);
             daoItensCompra.salvar(it);
+            if (it.getProduto().getId() == null) {
+                System.out.println("Vai gerar criar um novo produto");
+
+            } else {
+//             it.setProduto(produto);
+//                  it.setProduto(produto);
+//                produto.setQuantidadeEstoque(qtd);
+                System.out.println("Setando em um produto ja cadastrado");
+//                produto.setQuantidadeEstoque(qtd);
+                System.out.println("ID do Produto = " + it.getProduto().getId() + it.getProduto().getNome());
+                    Produto produto = itensCompra.getProduto();
+                    produto.setQuantidadeEstoque(qtdItens);
+                    daoProduto.alterar(produto);
+            }
+//            daoItensCompra.salvar(it);
 //            compra.setValorTotalCompra(itensCompra.getValorTotalItens());
 //            compra.setValorTotalCompra(itensCompra.getValorTotalItens());
 //            it.setValorTotalItens(itensCompra.getValorTotalItens());
         }
-
         compra.setValorTotalCompra(valorFinalCompra);
-//        produto.setQuantidadeEstoque(qtdItens);
         daoCompra.alterar(compra);
-//        daoProduto.alterar(produto);
+//        produto.setQuantidadeEstoque(qtdItens);
         listaCompras = daoCompra.buscarTodos();
 
         FacesContext.getCurrentInstance().addMessage(null,
@@ -125,13 +141,13 @@ public class CompraMB {
         this.listaCompras = listaCompras;
     }
 
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
+//    public Produto getProduto() {
+//        return produto;
+//    }
+//
+//    public void setProduto(Produto produto) {
+//        this.produto = produto;
+//    }
 
     public List<Produto> getListaProdutos() {
         return listaProdutos;
