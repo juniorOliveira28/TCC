@@ -54,6 +54,9 @@ public class Produto implements Serializable {
     }
 
     public Double getQuantidadeEstoque() {
+        if(quantidadeEstoque==null){
+            quantidadeEstoque = 0.;
+        }
         return quantidadeEstoque;
     }
 

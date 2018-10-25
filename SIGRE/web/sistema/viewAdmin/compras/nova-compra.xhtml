@@ -21,9 +21,37 @@
                 <!-- fim botão dialog -->
                 <p:commandButton value="Novo Item" oncomplete="PF('dialogItensCompra').show()" update=":formularioCabecalhoCompra"/>
                 
-                <h:form id="formularioCabecalhoCompra">
-                    <p:dialog header="Novo Item" widgetVar="dialogItensCompra" modal="true" height="200">
+                <h:form id="formularioCabecalhoCompra">                  
 
+                    <!-- 		FIM DO ITENS DE VENDA -->
+                    <p:dataTable id="tabelaItensCompra" value="#{compraMB.listaItensCompra}"
+                                 var="itens">
+                        <p:column headerText="Fornecedor">
+                            <h:outputText value="#{itens.compra.fornecedor.nome}" />
+                        </p:column>
+                        <p:column headerText="Produto">
+                            <h:outputText value="#{itens.produto.nome}" />
+                        </p:column>
+                        <p:column headerText="Quantidade">
+                            <h:outputText value="#{itens.quantidadeItens}" />
+                        </p:column>
+                        <p:column headerText="Valor Unitário">
+                            <h:outputText value="#{itens.valorUnitarioItens}" />
+                        </p:column>
+                        <p:column headerText="Valor Total">
+                            <h:outputText value="#{itens.valorTotalItens}" />
+                        </p:column>
+                    </p:dataTable>
+
+
+                    <p:commandButton value="Finalizar Compra"
+                                     actionListener="#{compraMB.finalizarCompra()}"
+                                     update="mensagem, @form"/>
+
+                </h:form>
+                
+                  <p:dialog header="Novo Item" widgetVar="dialogItensCompra" modal="true" height="200">
+                      <h:form id="formdialog">
                         <h:panelGrid columns="4">
                             <h:outputText value="Fornecedor" />
                             <p:selectOneMenu value="#{compraMB.compra.fornecedor}"
@@ -58,37 +86,11 @@
                             <h:outputText value="Valor Unitário:" />
                             <p:inputText value="#{compraMB.itensCompra.valorUnitarioItens}"/>
 
-                            <p:commandButton value="Adicinar" update="tabelaItensCompra,inputQtd"
+                            <p:commandButton value="Adicinar" update="formularioCabecalhoCompra"
                                              actionListener="#{compraMB.adicionarItem()}" oncomplete="PF('dialogItensCompra').hide()"/>
                         </h:panelGrid>
+                        </h:form>
                     </p:dialog>
-
-                    <!-- 		FIM DO ITENS DE VENDA -->
-                    <p:dataTable id="tabelaItensCompra" value="#{compraMB.listaItensCompra}"
-                                 var="itens">
-                        <p:column headerText="Fornecedor">
-                            <h:outputText value="#{itens.compra.fornecedor.nome}" />
-                        </p:column>
-                        <p:column headerText="Produto">
-                            <h:outputText value="#{itens.produto.nome}" />
-                        </p:column>
-                        <p:column headerText="Quantidade">
-                            <h:outputText value="#{itens.quantidadeItens}" />
-                        </p:column>
-                        <p:column headerText="Valor Unitário">
-                            <h:outputText value="#{itens.valorUnitarioItens}" />
-                        </p:column>
-                        <p:column headerText="Valor Total">
-                            <h:outputText value="#{itens.valorTotalItens}" />
-                        </p:column>
-                    </p:dataTable>
-
-
-                    <p:commandButton value="Finalizar Compra"
-                                     actionListener="#{compraMB.finalizarCompra()}"
-                                     update="mensagem, @form"/>
-
-                </h:form>
 
 
                 <!--dialog-->  

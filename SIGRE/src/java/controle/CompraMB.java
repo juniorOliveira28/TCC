@@ -36,9 +36,9 @@ public class CompraMB {
         System.out.println("Dentro do Método Adicionar Item");
         if (itensCompra.getProduto() != null) {
 
-            itensCompra.setProduto(itensCompra.getProduto());
+          // itensCompra.setProduto(itensCompra.getProduto());
             itensCompra.setCompra(compra);
-            itensCompra.setQuantidadeItens(itensCompra.getQuantidadeItens());
+            //itensCompra.setQuantidadeItens(itensCompra.getQuantidadeItens());
             itensCompra.setValorTotalItens(itensCompra.getQuantidadeItens() * itensCompra.getValorUnitarioItens());
 
 //          Mostrando produto + quantidade no console
@@ -56,14 +56,17 @@ public class CompraMB {
     public void finalizarCompra() {
         System.out.println("Dentro do Método Finalizar Compra");
         Double valorFinalCompra = 0.0;
-        Double qtdItens = 0.0;
+        double qtdItens = 0.0;
 
         daoCompra.salvar(compra);
 //        daoProduto.alterar(produto);
 
         for (ItensCompra it : listaItensCompra) {
+            qtdItens = 0.;
+            
+                    Produto produto = it.getProduto();
             valorFinalCompra += it.getValorTotalItens();
-            qtdItens = it.getQuantidadeItens();
+            qtdItens += it.getQuantidadeItens() ;
 
 //            it.setProduto(produto);
             it.setCompra(compra);
@@ -78,8 +81,7 @@ public class CompraMB {
                 System.out.println("Setando em um produto ja cadastrado");
 //                produto.setQuantidadeEstoque(qtd);
                 System.out.println("ID do Produto = " + it.getProduto().getId() + it.getProduto().getNome());
-                    Produto produto = itensCompra.getProduto();
-                    produto.setQuantidadeEstoque(qtdItens);
+                    produto.setQuantidadeEstoque(qtdItens + produto.getQuantidadeEstoque()) ;
                     daoProduto.alterar(produto);
             }
 //            daoItensCompra.salvar(it);

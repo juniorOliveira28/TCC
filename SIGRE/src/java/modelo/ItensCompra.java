@@ -31,6 +31,9 @@ public class ItensCompra implements Serializable {
     }
 
     public Double getQuantidadeItens() {
+        if(quantidadeItens == null){
+            quantidadeItens = 0.;
+        }
         return quantidadeItens;
     }
 
