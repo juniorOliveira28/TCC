@@ -17,8 +17,15 @@
 
                 <h:form id="formTabelaMesa">
                     <p:dataTable value="#{mesaMB.listaMesas}" var="mesa" >
+                        
                         <p:column headerText="Numero">
                             <h:outputText value="#{mesa.numero}"/>
+                        </p:column>
+                        <p:column headerText="Lugares">
+                            <h:outputText value="#{mesa.qtdLugaress}"/>
+                        </p:column>
+                        <p:column headerText="Status">
+                            <h:outputText value="#{mesa.status}"/>
                         </p:column>
 
                         <p:column headerText="Ações">

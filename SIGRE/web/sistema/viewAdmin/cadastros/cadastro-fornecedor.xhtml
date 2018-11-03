@@ -21,16 +21,16 @@
                         <p:column headerText="Nome">
                             <h:outputText value="#{fornecedor.nome}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Telefone">
                             <h:outputText value="#{fornecedor.fone}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Email">
                             <h:outputText value="#{fornecedor.email}"/>
                         </p:column>
 
-                       
+
                         <p:column headerText="Ações">
                             <p:commandButton value="Alterar" oncomplete="PF('dialogFornecedor').show()"
                                              update=":formFormularioFornecedor">
@@ -53,14 +53,15 @@
                         <p:panelGrid columns="2">
                             <h:outputText value="Nome: "/>
                             <p:inputText value="#{fornecedorMB.fornecedor.nome}"/>
-                            
-                            <h:outputText value="Telefone: "/>
-                            
-                            <p:inputText value="#{fornecedorMB.fornecedor.fone}"/>
+
+                            <p:outputLabel for="phoneWithExt" value="Telefone:" />
+                            <p:inputMask id="phoneWithExt" value="#{fornecedorMB.fornecedor.fone}" mask="(99) 99999-9999?"/>
+
+
                             <h:outputText value="Email: "/>
                             <p:inputText value="#{fornecedorMB.fornecedor.email}"/>
 
-                      
+
                             <p:commandButton value="Inserir" actionListener="#{fornecedorMB.inserir()}"
                                              oncomplete="PF('dialogFornecedor').hide()"
                                              update=":formTabelaFornecedor"/>

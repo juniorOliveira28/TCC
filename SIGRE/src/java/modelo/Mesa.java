@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Mesa implements Serializable {
@@ -16,6 +17,8 @@ public class Mesa implements Serializable {
     private int numero;
     private String status;
     private int qtdLugaress;
+    @ManyToOne
+    private Caixa caixa;
 
 
     public Long getId() {
@@ -50,6 +53,15 @@ public class Mesa implements Serializable {
         this.qtdLugaress = qtdLugaress;
     }
 
+    public Caixa getCaixa() {
+        return caixa;
+    }
+
+    public void setCaixa(Caixa caixa) {
+        this.caixa = caixa;
+    }
+
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
