@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+<!--Junior-->
+        <ui:composition template="./../template-admin.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formBotaoUsuario">
+                    <p:commandButton value="Novo Usuário" oncomplete="PF('dialogUsuario').show()"
+                                     update=":formFormularioUsuario"/>
+                </h:form>
+
+                <h:form id="formTabelaUsuario">
+                    <p:dataTable value="#{usuarioMB.listaUsuarios}" var="usuario">
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{usuario.nome}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Telefone">
+                            <h:outputText value="#{usuario.fone}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Perfil">
+                            <h:outputText value="#{usuario.perfil}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Email">
+                            <h:outputText value="#{usuario.email}"/>
+                        </p:column>
+
+                        <p:column headerText="Ações">
+                            <p:commandButton value="Alterar" oncomplete="PF('dialogUsuario').show()"
+                                             update=":formFormularioUsuario">
+                                <f:setPropertyActionListener value="#{usuario}" target="#{usuarioMB.usuario}"/>
+                            </p:commandButton>
+                            <p:commandButton value="Excluir" icon="ui-icon-trash" update="@form"
+                                             actionListener="#{usuarioMB.remover(usuario.id)}" >
+                                <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </h:form>
+
+                <p:dialog header="Cadastro de Usuários" widgetVar="dialogUsuario" modal="true" height="210">
+                    <h:form id="formFormularioUsuario">
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Nome: "/>
+                            <p:inputText value="#{usuarioMB.usuario.nome}"/>
+
+                            <h:outputText value="Telefone: "/>
+                            <p:inputText value="#{usuarioMB.usuario.fone}"/>
+
+                            <h:outputText value="Email: "/>
+                            <p:inputText value="#{usuarioMB.usuario.email}"/>
+
+                            <h:outputText value="Senha: "/>
+                            <p:password value="#{usuarioMB.usuario.senha}"/>
+
+                            <h:outputText value="Perfil: "/>
+                            <p:selectOneMenu value="#{usuarioMB.usuario.perfil}">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItem itemLabel="ADMINISTRADOR" itemValue="ADMINISTRADOR" />
+                                <f:selectItem itemLabel="ATENDENTE" itemValue="ATENDENTE"/>
+                            </p:selectOneMenu>
+                            
+                            <p:commandButton value="Inserir" actionListener="#{usuarioMB.inserir()}"
+                                             oncomplete="PF('dialogUsuario').hide()"
+                                             update=":formTabelaUsuario"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:dialog>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
