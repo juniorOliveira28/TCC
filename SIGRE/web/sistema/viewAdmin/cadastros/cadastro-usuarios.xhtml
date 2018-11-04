@@ -17,20 +17,23 @@
                 </h:form>
 
                 <h:form id="formTabelaUsuario">
-                    <p:dataTable value="#{usuarioMB.listaUsuarios}" var="usuario">
-                        <p:column headerText="Nome">
+                    <p:dataTable value="#{usuarioMB.listaUsuarios}" var="usuario" reflow="true" rows="5" paginator="true" >
+                        <f:facet name="header">
+                        </f:facet>
+                        <p:ajax event="rowSelect" />
+                        <p:column headerText="Nome" sortBy="#{usuario.nome}">
                             <h:outputText value="#{usuario.nome}"/>
                         </p:column>
 
-                        <p:column headerText="Telefone">
+                        <p:column headerText="Telefone" sortBy="#{usuario.fone}">
                             <h:outputText value="#{usuario.fone}"/>
                         </p:column>
 
-                        <p:column headerText="Perfil">
+                        <p:column headerText="Perfil" sortBy="#{usuario.perfil}">
                             <h:outputText value="#{usuario.perfil}"/>
                         </p:column>
 
-                        <p:column headerText="Email">
+                        <p:column headerText="Email" sortBy="#{usuario.email}">
                             <h:outputText value="#{usuario.email}"/>
                         </p:column>
 

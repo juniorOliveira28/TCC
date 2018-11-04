@@ -1,17 +1,69 @@
+/*#login {
+   background: red;
+   color: red;
+   background-color: red;
+}   */
 
+#inicio{
+    background: red;
+    color: red;
+    background-color: red;
+}
+
+/*Menu*/
 #top {
     position: relative;
-    background-color: #036fab;
+    background-color: #6db0c4;
     color: white;
     padding: 5px;
     margin: 0px 0px 10px 0px;
 }
 
 #bottom {
-    position: relative;
-    background-color: #c2dfef;
+    /*    position: relative;
+        background-color: #6db0c4;
+        padding: 15px;
+        margin: 10px 0px 0px 0px;*/
+    /*position: relative;*/
+    background-color: #6db0c4;
+    height: 50px;
     padding: 5px;
-    margin: 10px 0px 0px 0px;
+    /*margin: 10px 0px 0px 0px;*/
+    color:  #00153d;
+    text-align: center;
+    font-family: Calibri;
+    font-size: 20px;
+    position:fixed;
+    width:100%;
+    bottom:3px;
+    /*Borda do rodapé*/
+    left:0%;
+    right: 0%;
+}
+
+#logo{
+    /*    width:41%;
+        position:relative;
+        margin-top:0.8%;
+        margin-left: 26%;
+        margin-bottom: 0.01%;*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:25%;
+    position:relative;
+    margin-top:0.4%;
+    /*background-size: 3px 2px;*/
+    bottom: 100%;
+}
+
+#menu{
+    position:relative;
+    bottom: 2px;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top: -7px;
+    width: 98.85%;
 }
 
 #left {
@@ -47,15 +99,15 @@
 }
 
 #top a:link, #top a:visited {
-  color: #045491;
-  font-weight : bold;
-  text-decoration: none;
+    color: #045491;
+    font-weight : bold;
+    text-decoration: none;
 }
 
 #top a:link:hover, #top a:visited:hover  {
-  color: black;
-  font-weight : bold;
-  text-decoration : underline;
+    color: black;
+    font-weight : bold;
+    text-decoration : underline;
 }
 
 

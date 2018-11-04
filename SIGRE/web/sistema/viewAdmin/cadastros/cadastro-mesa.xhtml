@@ -16,8 +16,10 @@
                 </h:form>
 
                 <h:form id="formTabelaMesa">
-                    <p:dataTable value="#{mesaMB.listaMesas}" var="mesa" >
-                        
+                    <p:dataTable value="#{mesaMB.listaMesas}" var="mesa" reflow="true" rows="5" paginator="true">
+                        <f:facet name="header">
+                            Lista de Mesas
+                        </f:facet>
                         <p:column headerText="Numero">
                             <h:outputText value="#{mesa.numero}"/>
                         </p:column>
