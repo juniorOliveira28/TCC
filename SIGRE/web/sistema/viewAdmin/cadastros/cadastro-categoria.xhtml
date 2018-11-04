@@ -18,7 +18,10 @@
 
                 <h:form id="formTabelaCategoria">
                     <p:dataTable value="#{categoriaMB.listaCategorias}" var="categoria">
-                        <p:column headerText="Nome">
+                        <f:facet name="header">
+                            Lista de Categorias
+                        </f:facet>
+                        <p:column headerText="Nome" sortBy="#{categoria.nome}" >
                             <h:outputText value="#{categoria.nome}"/>
                         </p:column>
                      

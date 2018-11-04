@@ -18,23 +18,26 @@
 
                 <h:form id="formTabelaProduto">
                     <p:dataTable value="#{produtoMB.listaProdutos}" var="produto">
-                        <p:column headerText="Nome">
+                        <f:facet name="header">
+                            Lista de Produtos
+                        </f:facet>
+                        <p:column headerText="Nome" sortBy="#{produto.nome}">
                             <h:outputText value="#{produto.nome}"/>
                         </p:column>
 
-                        <p:column headerText="Categoria">
+                        <p:column headerText="Categoria" sortBy="#{produto.categoria}">
                             <h:outputText value="#{produto.categoria.nome}"/>
                         </p:column>
                         
-                        <p:column headerText="Descrição">
+                        <p:column headerText="Descrição" sortBy="#{produto.descricao}">
                             <h:outputText value="#{produto.descricao}"/>
                         </p:column>
                        
-                        <p:column headerText="Valor Venda">
+                        <p:column headerText="Valor Venda" sortBy="#{produto.valorVenda}">
                             <h:outputText value="#{produto.valorVenda}"/>
                         </p:column>
                        
-                        <p:column headerText="Estoque">
+                        <p:column headerText="Estoque" sortBy="#{produto.quantidadeEstoque}">
                             <h:outputText value="#{produto.quantidadeEstoque}"/>
                         </p:column>
                        

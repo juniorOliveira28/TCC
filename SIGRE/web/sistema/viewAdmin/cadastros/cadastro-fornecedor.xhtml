@@ -17,12 +17,12 @@
                 </h:form>
 
                 <h:form id="formTabelaFornecedor">
-                    <p:dataTable value="#{fornecedorMB.listafornecedores}" var="fornecedor">
-                        <p:column headerText="Nome">
+                    <p:dataTable value="#{fornecedorMB.listafornecedores}" var="fornecedor" reflow="true" rows="5" paginator="true">
+                        <p:column headerText="Nome" sortBy="#{fornecedor.nome}">
                             <h:outputText value="#{fornecedor.nome}"/>
                         </p:column>
 
-                        <p:column headerText="Telefone">
+                        <p:column headerText="Telefone" sortBy="#{fornecedor.fone}">
                             <h:outputText value="#{fornecedor.fone}"/>
                         </p:column>
 

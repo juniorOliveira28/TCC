@@ -11,47 +11,47 @@
         <ui:composition template="./../template-admin.xhtml">
 
             <ui:define name="content">
-                <h1>Inserir Compra</h1>
-                <!-- 	<p:messages id="mensagem"/>  -->
-                <p:growl id="mensagem" />
+                <!--<h1>Inserir Compra</h1>-->
+                <!--<p:messages id="mensagem"/>-->  
+                <!--<p:growl id="mensagem" />-->
 
                 <!-- botao dialog -->
                 <p:commandButton value="Pesquisar"
                                  onclick="PF('dlgPesquisar').show();" update="tabelaDialog" />
                 <!-- fim botão dialog -->
-                <p:commandButton value="Novo Item" oncomplete="PF('dialogCompra').show()" update=":formularioCabecalhoCompra"/>
+                <p:commandButton value="Novo Item" oncomplete="PF('dialogCompra').show()" update=":formCompra"/>
 
                 <h:form id="formularioCabecalhoCompra">                  
 
                     <!-- 		FIM DO ITENS DE VENDA -->
-                    <p:dataTable id="tabelaItensCompra" value="#{compraMB.listaItensCompra}"
-                                 var="itens">
-                        <p:column headerText="Fornecedor">
+                    <p:dataTable id="tabelaItensCompra" value="#{compraMB.listaItensCompra}" var="itens">
+                        <f:facet name="header">
+                            Lista de Itens
+                        </f:facet>
+                        <p:column headerText="Fornecedor" sortBy="#{itens.compra.fornecedor.nome}">
                             <h:outputText value="#{itens.compra.fornecedor.nome}" />
                         </p:column>
-                        <p:column headerText="Produto">
+                        <p:column headerText="Produto" sortBy="#{itens.produto.nome}">
                             <h:outputText value="#{itens.produto.nome}" />
                         </p:column>
-                        <p:column headerText="Quantidade">
+                        <p:column headerText="Quantidade" sortBy="#{itens.quantidadeItens}">
                             <h:outputText value="#{itens.quantidadeItens}" />
                         </p:column>
-                        <p:column headerText="Valor Unitário">
+                        <p:column headerText="Valor Unitário" sortBy="#{itens.valorUnitarioItens}">
                             <h:outputText value="#{itens.valorUnitarioItens}" />
                         </p:column>
-                        <p:column headerText="Valor Total">
+                        <p:column headerText="Valor Total" sortBy="#{itens.valorTotalItens}">
                             <h:outputText value="#{itens.valorTotalItens}" />
                         </p:column>
                     </p:dataTable>
 
-
                     <p:commandButton value="Finalizar Compra"
                                      actionListener="#{compraMB.finalizarCompra()}"
-                                     update="mensagem, @form"/>
-
+                                     update="@form, :formCompra"/>
                 </h:form>
 
-                <p:dialog widgetVar="dialogCompra" modal="true" height="250" header="teste">
-                    <h:form id="fT">
+                <p:dialog widgetVar="dialogCompra" modal="true" height="250" header="Compra Produtos">
+                    <h:form id="formCompra">
                         <p:panelGrid columns="2">
                             <h:outputText value="Fornecedor" />
                             <p:selectOneMenu value="#{compraMB.compra.fornecedor}"
@@ -82,7 +82,7 @@
                             <p:inputText value="#{compraMB.itensCompra.valorUnitarioItens}"/>
 
                             <p:commandButton value="Adicinar" update="formularioCabecalhoCompra"
-                                             actionListener="#{compraMB.adicionarItem()}" oncomplete="PF('dialogItensCompra').hide()"/>
+                                             actionListener="#{compraMB.adicionarItem()}" oncomplete="PF('dialogCompra').hide()"/>
                         </p:panelGrid>
                     </h:form>
                 </p:dialog>

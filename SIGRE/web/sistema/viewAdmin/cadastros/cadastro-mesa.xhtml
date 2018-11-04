@@ -20,10 +20,10 @@
                         <f:facet name="header">
                             Lista de Mesas
                         </f:facet>
-                        <p:column headerText="Numero">
+                        <p:column headerText="Numero" sortBy="#{mesa.numero}">
                             <h:outputText value="#{mesa.numero}"/>
                         </p:column>
-                        <p:column headerText="Lugares">
+                        <p:column headerText="Lugares" sortBy="#{mesa.qtdLugaress}">
                             <h:outputText value="#{mesa.qtdLugaress}"/>
                         </p:column>
                         <p:column headerText="Status">
