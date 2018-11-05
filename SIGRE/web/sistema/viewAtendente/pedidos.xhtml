@@ -11,36 +11,96 @@
         <ui:composition template="./template-atendente.xhtml">
 
             <ui:define name="content">
-                <h1>Inserir Pedido</h1>
-                <br/>
-                <p:commandButton value="Novo Pedido"/>
-                <br/><br/>
 
-                <h:form>
-                    <p:panelGrid columns="2">
-                        <h:outputText value="Produto"/>
-                        <p:selectOneMenu converter="converterProduto" value="#{pedidoMB.itensPedido.produto}">
-                            <f:selectItems value="#{produtoMB.listaProdutos}" var="prod" itemLabel="#{prod.nome}"
-                                           itemValue="#{prod}"/>
-                            
-                            <h:outputText value="Observação"/>
-                            <p:inputText value="#{pedidoMB.pedido.observacao}"/>
-                            
-                              <h:outputText value="Quantidade"/>
-                              <p:inputText value="#{pedidoMB.itensPedido.quantidade}"/>
-                        <h:outputText value="Valor Unitário"/>
-                        <p:inputText value="#{pedidoMB.itensPedido.valorUnitario}"/>
-                        <h:outputText value=""/>
+                <p:commandButton value="Pesquisar"
+                                 onclick="PF('dlgPesquisar').show();" update="tabelaDialog" />
 
-                        <p:commandButton value="Inserir Item" actionListener="#{pedidoMB.inserirItensPedido()}" update="@form"/>
-                        </p:selectOneMenu>
-                    </p:panelGrid>
+                <p:commandButton value="Novo Item" oncomplete="PF('dialogItensPedido').show()"/>
+                <h:form id="formularioCabecalhoPedido">
+                    <p:dialog header="Novo Pedido" widgetVar="dialogItensPedido" modal="true" height="200">
+
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Produto" />
+                            <p:selectOneMenu value="#{pedidoMB.itensPedido.produto}"
+                                             converter="converterProduto" filter="true"
+                                             filterMatchMode="startsWith">
+                                <f:selectItems value="#{produtoMB.listaProdutos}" var="prod"
+                                               itemLabel="#{prod.nome}" itemValue="#{prod}" />
+                            </p:selectOneMenu>
+                            <h:outputText value="Quantidade:" />
+                            <p:inputText id="inputQtd" value="#{pedidoMB.itensPedido.quantidade}"/>
+                            <h:outputText value="Data:" />
+                            <p:calendar pattern="dd/MM/yyyy" value="#{pedidoMB.pedido.data}" />
+
+                            <h:outputText value="Observação" />
+                            <p:inputText value="#{pedidoMB.pedido.observacao}" />
+
+
+
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="4">
+                            <p:commandButton value="Adicinar" update="tabelaItensPedido,inputQtd"
+                                             actionListener="#{pedidoMB.adicionarItem()}" oncomplete="PF('dialogItensPedido').hide()"/>
+                        </h:panelGrid>
+                    </p:dialog>
+
+                    <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaItensPedidos}" 
+                                 reflow="true" rows="5" paginator="true"    var="itens">
+                        <f:facet name="header">
+                            Lista de Pedidos    
+                        </f:facet>
+                        <p:column headerText="Produto" sortBy="#{itens.produto.nome}">
+                            <h:outputText value="#{itens.produto.nome}"/>
+                        </p:column>
+                        <p:column headerText="Quantidade" sortBy="#{itens.quantidade}">
+                            <h:outputText value="#{itens.quantidade}" />
+                        </p:column>
+                        <p:column headerText="Valor Unitário" sortBy="#{itens.produto.valorVenda}">
+                            <h:outputText value="#{itens.produto.valorVenda}" />
+                        </p:column>
+                        <p:column headerText="Valor Total" sortBy="#{itens.valorTotal}">
+                            <h:outputText value="#{itens.valorTotal}" />
+                        </p:column>
+                        <p:column headerText="Estoque" sortBy="#{itens.produto.quantidadeEstoque    }">
+                            <h:outputText value="#{itens.produto.quantidadeEstoque}" />
+                        </p:column>
+                    </p:dataTable>
+
+
+                    <p:commandButton value="Finalizar Pedido"
+                                     actionListener="#{pedidoMB.finalizarPedido()}"
+                                     update="@form"/>
+
                 </h:form>
 
+                <p:dialog header="Histórico de Pedidos" widgetVar="dlgPesquisar"
+                          modal="true" height="50%">
+                    <p:dataTable id="tabelaDialog" var="com"
+                                 value="#{pedidoMB.listaPedidos}">
+
+                        <p:column headerText="Observação">
+                            <h:outputText value="#{com.observacao}" />
+                        </p:column>
+
+
+                        <p:column headerText="Valor Total Pedido">
+                            <h:outputText value="#{com.valorTotal}">
+                                <f:convertNumber pattern="¤#,##0.00" currencySymbol="R$" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Data">
+                            <h:outputText value="#{com.data}">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:dialog>
 
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

@@ -3,44 +3,95 @@ package controle;
 import dao.DAOGenerico;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import modelo.ItensPedido;
 import modelo.Pedido;
+import modelo.Produto;
 
 @ManagedBean
 @ViewScoped
 public class PedidoMB {
 
-    private Pedido pedido;
-    private ItensPedido itensPedido;
-    private List<ItensPedido> listaItensPedido;
-    
-    private DAOGenerico<Pedido> daoPedido = new DAOGenerico<Pedido>(Pedido.class);
-    private DAOGenerico<ItensPedido> daoItensPedido = new DAOGenerico<ItensPedido>(ItensPedido.class);
+     private Pedido pedido = new Pedido();
+    private ItensPedido itensPedido = new ItensPedido();
+    private List<ItensPedido> listaItensPedidos = new ArrayList<>();
+    private List<Pedido> listaPedidos = new ArrayList<>();
+    private List<Produto> listaProdutos = new ArrayList<>();
+
+    private DAOGenerico<Produto> daoProduto = new DAOGenerico<>(Produto.class);
+    private DAOGenerico<Pedido> daoPedido = new DAOGenerico<>(Pedido.class);
+    private DAOGenerico<ItensPedido> daoItensPedido = new DAOGenerico<>(ItensPedido.class);
     
     public PedidoMB(){
         
        pedido = new Pedido();
        itensPedido = new ItensPedido();
-       listaItensPedido = new ArrayList<>();
+       listaItensPedidos = new ArrayList<>();
     }
     
-    public void InserirItensPedido(){
-        listaItensPedido.add(itensPedido);
-        itensPedido = new ItensPedido();
-    }
-   
-    public void inserirPedido(){
-        if(pedido.getId() == null){
-            daoPedido.salvar(pedido);
-            for(ItensPedido item: listaItensPedido){
-                item.setPedido(pedido);
-                daoItensPedido.salvar(item);
-            }
+     public void adicionarItem() {
+        System.out.println("Dentro do Método Adicionar Item");
+         Produto produto = itensPedido.getProduto();
+        if (itensPedido.getProduto() != null && produto.getQuantidadeEstoque() > 0 
+                && itensPedido.getQuantidade() < produto.getQuantidadeEstoque()) {
+            itensPedido.setProduto(itensPedido.getProduto());
+            itensPedido.setPedido(pedido);
+            itensPedido.setQuantidade(itensPedido.getQuantidade());
+            itensPedido.setValorTotal(itensPedido.getQuantidade() * itensPedido.getProduto().getValorVenda());
+
+//          Mostrando produto + quantidade no console
+            System.out.println("Produto: " + itensPedido.getProduto().getNome()
+                    + " Quantidade: " + getItensPedido().getQuantidade());
+
+            listaItensPedidos.add(itensPedido);
+            itensPedido = new ItensPedido();
+
+            System.out.println("Fim do Método Adicionar Item");
         }else{
-            daoPedido.alterar(pedido);
+             FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Quantidade Indisponivel no estoque!!", ""));
+            System.out.println("Quantidade indisponivel no estoque");
         }
+    }
+
+    public void finalizarPedido() {
+        System.out.println("Dentro do Método Finalizar Compra");
+        Double valorFinalPedido = 0.0;
+        Double qtdItens = 0.0;
+        
+        daoPedido.salvar(pedido);
+        
+        for (ItensPedido it : listaItensPedidos) {
+            valorFinalPedido += it.getValorTotal();
+            it.setPedido(pedido);
+            daoItensPedido.salvar(it);
+
+            Produto produto = itensPedido.getProduto();
+            qtdItens = produto.getQuantidadeEstoque() - it.getQuantidade();
+            it.setProduto(produto);
+            produto.setQuantidadeEstoque(qtdItens);
+            daoProduto.alterar(produto);
+
+        }
+        pedido.setValorTotal(valorFinalPedido);
+        daoPedido.alterar(pedido);
+        listaPedidos = daoPedido.buscarTodos();
+
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Compra Realizada Com Sucesso!!", ""));
+        novoPedido();
+        System.out.println("FIM do Método Finalizar Compra");
+
+//       
+    }
+    
+    public void novoPedido() {
+        pedido = new Pedido();
+        listaItensPedidos = new ArrayList<>();
+        itensPedido = new ItensPedido();
     }
 
     public Pedido getPedido() {
@@ -59,13 +110,29 @@ public class PedidoMB {
         this.itensPedido = itensPedido;
     }
 
-    public List<ItensPedido> getListaItensPedido() {
-        return listaItensPedido;
+    public List<ItensPedido> getListaItensPedidos() {
+        return listaItensPedidos;
     }
 
-    public void setListaItensPedido(List<ItensPedido> listaItensPedido) {
-        this.listaItensPedido = listaItensPedido;
+    public void setListaItensPedidos(List<ItensPedido> listaItensPedidos) {
+        this.listaItensPedidos = listaItensPedidos;
     }
-    
-    
+
+    public List<Pedido> getListaPedidos() {
+        return listaPedidos;
+    }
+
+    public void setListaPedidos(List<Pedido> listaPedidos) {
+        this.listaPedidos = listaPedidos;
+    }
+
+    public List<Produto> getListaProdutos() {
+        return listaProdutos;
+    }
+
+    public void setListaProdutos(List<Produto> listaProdutos) {
+        this.listaProdutos = listaProdutos;
+    }
+
+
 }

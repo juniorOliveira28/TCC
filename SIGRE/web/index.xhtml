@@ -7,10 +7,18 @@
         <title>SIGRE</title>
     </h:head>
     <h:body>
-         <!--<link rel="shortcut icon" href="logo.png" type="resources/imagens/logo.png"/>-->
-             <p:link outcome="/sistema/viewAdmin/template-admin" value="Administrador"/><br/><br/>
-        <p:link outcome="/sistema/viewAtendente/template-atendente" value="Atendente"/><br/><br/>
+<!--        <p:steps activeIndex="1" styleClass="custom" readonly="false">
+                        <p:menuitem value="Administrador" outcome="/sistema/viewAdmin/template-admin"/>
             
+                    </p:steps>-->
+
+                <p:menuitem value="Home" icon="/imagens/loginAdm.jpg" url="#"/>
+                <!--<p:menuitem value="Music" icon="/resources/demo/images/dock/music.png" url="#"/>-->
+                <!-- more menuitems -->
+            <!--<link rel="shortcut icon" href="logo.png" type="resources/imagens/logo.png"/>-->
+            <p:link outcome="/sistema/viewAdmin/template-admin" value="Administrador"/><br/><br/>
+            <p:link outcome="/sistema/viewAtendente/template-atendente" value="Atendente"/><br/><br/>
+
             <img  style="height: 90%; width: 100%" src="resources/imagens/logo.png" alt=""/>
     </h:body>
 </html>
