@@ -27,13 +27,25 @@
                                 <f:selectItems value="#{produtoMB.listaProdutos}" var="prod"
                                                itemLabel="#{prod.nome}" itemValue="#{prod}" />
                             </p:selectOneMenu>
-                            <h:outputText value="Quantidade:" />
-                            <p:inputText id="inputQtd" value="#{pedidoMB.itensPedido.quantidade}"/>
-                            <h:outputText value="Data:" />
-                            <p:calendar pattern="dd/MM/yyyy" value="#{pedidoMB.pedido.data}" />
 
-                            <h:outputText value="Observação" />
-                            <p:inputText value="#{pedidoMB.pedido.observacao}" />
+                            <h:outputText value="Prato"/>
+                                <p:selectOneMenu value="#{pedidoMB.itensPedido.prato}"
+                                                 converter="converterPrato" filter="true"
+                                                 filterMatchMode="startsWith">
+                                    
+                                    <f:selectItems value="#{pratoMB.listaPratos}" var="prato" 
+                                                   itemLabel="#{prato.nome}" itemValue="#{prato}">
+                                    <f:selectItem itemLabel="Selecione"/>
+                                    </f:selectItems>
+                                      
+                                </p:selectOneMenu>
+                                <h:outputText value="Quantidade:" />
+                                <p:inputText id="inputQtd" value="#{pedidoMB.itensPedido.quantidade}"/>
+                                <h:outputText value="Data:" />
+                                <p:calendar pattern="dd/MM/yyyy" value="#{pedidoMB.pedido.data}" />
+
+                                <h:outputText value="Observação" />
+                                <p:inputText value="#{pedidoMB.pedido.observacao}" />
 
 
 

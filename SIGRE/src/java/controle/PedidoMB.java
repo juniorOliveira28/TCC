@@ -15,7 +15,7 @@ import modelo.Produto;
 @ViewScoped
 public class PedidoMB {
 
-     private Pedido pedido = new Pedido();
+    private Pedido pedido = new Pedido();
     private ItensPedido itensPedido = new ItensPedido();
     private List<ItensPedido> listaItensPedidos = new ArrayList<>();
     private List<Pedido> listaPedidos = new ArrayList<>();
@@ -24,18 +24,18 @@ public class PedidoMB {
     private DAOGenerico<Produto> daoProduto = new DAOGenerico<>(Produto.class);
     private DAOGenerico<Pedido> daoPedido = new DAOGenerico<>(Pedido.class);
     private DAOGenerico<ItensPedido> daoItensPedido = new DAOGenerico<>(ItensPedido.class);
-    
-    public PedidoMB(){
-        
-       pedido = new Pedido();
-       itensPedido = new ItensPedido();
-       listaItensPedidos = new ArrayList<>();
+
+    public PedidoMB() {
+
+        pedido = new Pedido();
+        itensPedido = new ItensPedido();
+        listaItensPedidos = new ArrayList<>();
     }
-    
-     public void adicionarItem() {
+
+    public void adicionarItem() {
         System.out.println("Dentro do Método Adicionar Item");
-         Produto produto = itensPedido.getProduto();
-        if (itensPedido.getProduto() != null && produto.getQuantidadeEstoque() > 0 
+        Produto produto = itensPedido.getProduto();
+        if (itensPedido.getProduto() != null && produto.getQuantidadeEstoque() > 0
                 && itensPedido.getQuantidade() < produto.getQuantidadeEstoque()) {
             itensPedido.setProduto(itensPedido.getProduto());
             itensPedido.setPedido(pedido);
@@ -50,9 +50,9 @@ public class PedidoMB {
             itensPedido = new ItensPedido();
 
             System.out.println("Fim do Método Adicionar Item");
-        }else{
-             FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Quantidade Indisponivel no estoque!!", ""));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Quantidade Indisponivel no estoque!!", ""));
             System.out.println("Quantidade indisponivel no estoque");
         }
     }
@@ -61,9 +61,9 @@ public class PedidoMB {
         System.out.println("Dentro do Método Finalizar Compra");
         Double valorFinalPedido = 0.0;
         Double qtdItens = 0.0;
-        
+
         daoPedido.salvar(pedido);
-        
+
         for (ItensPedido it : listaItensPedidos) {
             valorFinalPedido += it.getValorTotal();
             it.setPedido(pedido);
@@ -85,9 +85,8 @@ public class PedidoMB {
         novoPedido();
         System.out.println("FIM do Método Finalizar Compra");
 
-//       
     }
-    
+
     public void novoPedido() {
         pedido = new Pedido();
         listaItensPedidos = new ArrayList<>();
@@ -133,6 +132,5 @@ public class PedidoMB {
     public void setListaProdutos(List<Produto> listaProdutos) {
         this.listaProdutos = listaProdutos;
     }
-
 
 }
