@@ -48,7 +48,7 @@
                     </p:confirmDialog>
                 </h:form>
 
-                <p:dialog header="Cadastro de Fornecedors" widgetVar="dialogFornecedor" modal="true" height="140">
+                <p:dialog header="Cadastro de Fornecedors" widgetVar="dialogFornecedor" modal="true" responsive="true">
                     <h:form id="formFormularioFornecedor">
                         <p:panelGrid columns="2">
                             <h:outputText value="Nome: "/>
@@ -60,7 +60,7 @@
 
                             <h:outputText value="Email: "/>
                             <p:inputText value="#{fornecedorMB.fornecedor.email}"/>
-
+                            
 
                             <p:commandButton value="Inserir" actionListener="#{fornecedorMB.inserir()}"
                                              oncomplete="PF('dialogFornecedor').hide()"

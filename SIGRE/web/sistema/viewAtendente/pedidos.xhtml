@@ -17,26 +17,25 @@
 
                 <p:commandButton value="Novo Item" oncomplete="PF('dialogItensPedido').show()"/>
                 <h:form id="formularioCabecalhoPedido">
-                    <p:dialog header="Novo Pedido" widgetVar="dialogItensPedido" modal="true" height="200">
+                    <p:dialog header="Novo Pedido" widgetVar="dialogItensPedido" modal="true" responsive="true">
 
                         <h:panelGrid columns="2">
                             <h:outputText value="Produto" />
                             <p:selectOneMenu value="#{pedidoMB.itensPedido.produto}"
                                              converter="converterProduto" filter="true"
                                              filterMatchMode="startsWith">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
                                 <f:selectItems value="#{produtoMB.listaProdutos}" var="prod"
                                                itemLabel="#{prod.nome}" itemValue="#{prod}" />
                             </p:selectOneMenu>
 
                             <h:outputText value="Prato"/>
-                                <p:selectOneMenu value="#{pedidoMB.itensPedido.prato}"
+                                <p:selectOneMenu value="#{pedidoMB.itensPedido.prato}" 
                                                  converter="converterPrato" filter="true"
                                                  filterMatchMode="startsWith">
-                                    
+                                    <f:selectItem itemLabel="Selecione" itemValue=""/>
                                     <f:selectItems value="#{pratoMB.listaPratos}" var="prato" 
-                                                   itemLabel="#{prato.nome}" itemValue="#{prato}">
-                                    <f:selectItem itemLabel="Selecione"/>
-                                    </f:selectItems>
+                                                   itemLabel="#{prato.nome}" itemValue="#{prato}"/>
                                       
                                 </p:selectOneMenu>
                                 <h:outputText value="Quantidade:" />
@@ -47,14 +46,12 @@
                                 <h:outputText value="Observação" />
                                 <p:inputText value="#{pedidoMB.pedido.observacao}" />
 
+                                <p:commandButton value="Adicinar" update="tabelaItensPedido,inputQtd"
+                                                 actionListener="#{pedidoMB.adicionarItem()}" oncomplete="PF('dialogItensPedido').hide()"/>
+                        </h:panelGrid>  
 
-
-                        </h:panelGrid>
-
-                        <h:panelGrid columns="4">
-                            <p:commandButton value="Adicinar" update="tabelaItensPedido,inputQtd"
-                                             actionListener="#{pedidoMB.adicionarItem()}" oncomplete="PF('dialogItensPedido').hide()"/>
-                        </h:panelGrid>
+                        <!--<h:panelGrid columns="4">-->
+                        <!--</h:panelGrid>-->
                     </p:dialog>
 
                     <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaItensPedidos}" 

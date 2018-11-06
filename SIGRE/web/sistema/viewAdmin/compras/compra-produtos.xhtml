@@ -16,7 +16,7 @@
                 <!--<p:growl id="mensagem" />-->
 
                 <!-- botao dialog -->
-                <p:commandButton value="Pesquisar"
+                <p:commandButton value="Compras"
                                  onclick="PF('dlgPesquisar').show();" update="tabelaDialog" />
                 <!-- fim botão dialog -->
                 <p:commandButton value="Novo Item" oncomplete="PF('dialogCompra').show()" update=":formCompra"/>
@@ -50,13 +50,14 @@
                                      update="@form, :formCompra"/>
                 </h:form>
 
-                <p:dialog widgetVar="dialogCompra" modal="true" height="250" header="Compra Produtos">
+                <p:dialog widgetVar="dialogCompra" modal="true" header="Compra Produtos" responsive="true">
                     <h:form id="formCompra">
                         <p:panelGrid columns="2">
                             <h:outputText value="Fornecedor" />
                             <p:selectOneMenu value="#{compraMB.compra.fornecedor}"
                                              converter="converterFornecedor" filter="true"
                                              filterMatchMode="startsWith">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
                                 <f:selectItems value="#{fornecedorMB.listafornecedores}" var="fornec"
                                                itemLabel="#{fornec.nome}" itemValue="#{fornec}" />
                             </p:selectOneMenu>
@@ -65,6 +66,7 @@
                             <p:selectOneMenu value="#{compraMB.itensCompra.produto}"
                                              converter="converterProduto" filter="true"
                                              filterMatchMode="startsWith">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
                                 <f:selectItems value="#{produtoMB.listaProdutos}" var="prod"
                                                itemLabel="#{prod.nome}" itemValue="#{prod}" />
                             </p:selectOneMenu>
@@ -88,7 +90,7 @@
                 </p:dialog>
 
                 <p:dialog header="Histórico de Compras" widgetVar="dlgPesquisar"
-                          modal="true" height="50%">
+                          modal="true" height="auto" width="500" responsive="true"> 
                     <p:dataTable id="tabelaDialog" var="com"
                                  value="#{compraMB.listaCompras}">
 

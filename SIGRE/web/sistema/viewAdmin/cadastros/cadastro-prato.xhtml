@@ -26,7 +26,7 @@
                         </p:column>
                         <p:column headerText="Ações">
                             <p:commandButton value="Alterar" oncomplete="PF('dialogPrato').show()"
-                                             update=":formFormularioPratp">
+                                             update=":formFormularioPrato">
                                 <f:setPropertyActionListener value="#{prato}" target="#{pratoMB.prato}"/>
                             </p:commandButton>
                             <p:commandButton value="Excluir" icon="ui-icon-trash" update="@form"
@@ -41,18 +41,18 @@
                     </p:confirmDialog>
                 </h:form>
 
-                <p:dialog widgetVar="dialogPrato" header="Cadastro Pratos" modal="true" height="150">
+                <p:dialog widgetVar="dialogPrato" header="Cadastro Pratos" modal="true" responsive="true">
                     <h:form id="formFormularioPrato">
                         <p:panelGrid columns="2">
                             <h:outputText value="Nome:"/>
                             <p:inputText value="#{pratoMB.prato.nome}"/>
-                            
+
                             <h:outputText value="Descrição:"/>
                             <p:inputText value="#{pratoMB.prato.descricao}"/>
-                            
+
                             <h:outputText value="Valor Prato:"/>
                             <p:inputText value="#{pratoMB.prato.valorVenda}"/>
-                            
+
                             <p:commandButton value="Inserir" oncomplete="PF('dialogPrato').hide()" actionListener="#{pratoMB.inserir()}"
                                              update=":formTabelaPrato"/>
                         </p:panelGrid>
