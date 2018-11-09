@@ -20,6 +20,7 @@ public class Produto implements Serializable {
     private Double quantidadeEstoque = 0.;
     @ManyToOne
     private Categoria categoria;
+    private String estoque;
 
     public Long getId() {
         return id;
@@ -70,6 +71,14 @@ public class Produto implements Serializable {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public String getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(String estoque) {
+        this.estoque = estoque;
     }
 
     

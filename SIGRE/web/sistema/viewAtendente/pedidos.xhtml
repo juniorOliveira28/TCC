@@ -29,15 +29,6 @@
                                                itemLabel="#{prod.nome}" itemValue="#{prod}" />
                             </p:selectOneMenu>
 
-                            <h:outputText value="Prato"/>
-                                <p:selectOneMenu value="#{pedidoMB.itensPedido.prato}" 
-                                                 converter="converterPrato" filter="true"
-                                                 filterMatchMode="startsWith">
-                                    <f:selectItem itemLabel="Selecione" itemValue=""/>
-                                    <f:selectItems value="#{pratoMB.listaPratos}" var="prato" 
-                                                   itemLabel="#{prato.nome}" itemValue="#{prato}"/>
-                                      
-                                </p:selectOneMenu>
                                 <h:outputText value="Quantidade:" />
                                 <p:inputText id="inputQtd" value="#{pedidoMB.itensPedido.quantidade}"/>
                                 <h:outputText value="Data:" />

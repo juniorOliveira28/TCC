@@ -28,19 +28,19 @@
                         <p:column headerText="Categoria" sortBy="#{produto.categoria}">
                             <h:outputText value="#{produto.categoria.nome}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Descrição" sortBy="#{produto.descricao}">
                             <h:outputText value="#{produto.descricao}"/>
                         </p:column>
-                       
+
                         <p:column headerText="Valor Venda" sortBy="#{produto.valorVenda}">
                             <h:outputText value="#{produto.valorVenda}"/>
                         </p:column>
-                       
+
                         <p:column headerText="Estoque" sortBy="#{produto.quantidadeEstoque}">
                             <h:outputText value="#{produto.quantidadeEstoque}"/>
                         </p:column>
-                       
+
                         <p:column headerText="Ações">
                             <p:commandButton value="Alterar" oncomplete="PF('dialogProduto').show()"
                                              update=":formFormularioProduto">
@@ -72,14 +72,21 @@
                                                itemLabel="#{categoria.nome}"
                                                itemValue="#{categoria}"/>
                             </p:selectOneMenu>
-                            
+
                             <h:outputText value="Valor Venda:"/>
                             <p:inputText value="#{produtoMB.produto.valorVenda}"/>
-                      
-                            
+
+
                             <h:outputText value="Descrição:"/>
                             <p:inputText value="#{produtoMB.produto.descricao}"/>
-                      
+
+                            <h:outputText value="Esoque: "/>
+                            <p:selectOneMenu value="#{produtoMB.produto.estoque}">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItem itemLabel="ADMINISTRADOR" itemValue="ADMINISTRADOR" />
+                                <f:selectItem itemLabel="ATENDENTE" itemValue="ATENDENTE"/>
+                            </p:selectOneMenu>
+
                             <p:commandButton value="Inserir" actionListener="#{produtoMB.inserir()}"
                                              oncomplete="PF('dialogProduto').hide()"
                                              update=":formTabelaProduto" icon="ui-icon-disk"/>

@@ -21,9 +21,6 @@ public class ItensPedido implements Serializable{
     private int quantidade;
     private Double valorUnitario;
     private Double valorTotal;
-    @ManyToOne
-    private Prato prato;
-    
 
     public Long getId() {
         return id;
@@ -72,15 +69,6 @@ public class ItensPedido implements Serializable{
     public void setValorUnitario(Double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
-
-    public Prato getPrato() {
-        return prato;
-    }
-
-    public void setPrato(Prato prato) {
-        this.prato = prato;
-    }
-    
 
     @Override
     public int hashCode() {

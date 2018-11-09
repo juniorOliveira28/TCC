@@ -50,6 +50,20 @@ public class PedidoMB {
             itensPedido = new ItensPedido();
 
             System.out.println("Fim do Método Adicionar Item");
+        } else if (itensPedido.getProduto() != null && itensPedido.getProduto().getEstoque().equals("NÃO")) {
+            itensPedido.setProduto(itensPedido.getProduto());
+            itensPedido.setPedido(pedido);
+            itensPedido.setQuantidade(itensPedido.getQuantidade());
+            itensPedido.setValorTotal(itensPedido.getQuantidade() * itensPedido.getProduto().getValorVenda());
+
+//          Mostrando produto + quantidade no console
+            System.out.println("Produto: " + itensPedido.getProduto().getNome()
+                    + " Quantidade: " + getItensPedido().getQuantidade());
+
+            listaItensPedidos.add(itensPedido);
+            itensPedido = new ItensPedido();
+
+            System.out.println("Fim do Método Adicionar Item");
         } else {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Quantidade Indisponivel no estoque!!", ""));
@@ -65,16 +79,22 @@ public class PedidoMB {
         daoPedido.salvar(pedido);
 
         for (ItensPedido it : listaItensPedidos) {
-            valorFinalPedido += it.getValorTotal();
-            it.setPedido(pedido);
-            daoItensPedido.salvar(it);
+            if (itensPedido.getProduto().getEstoque().equals("SIM")) {
+                valorFinalPedido += it.getValorTotal();
+                it.setPedido(pedido);
+                daoItensPedido.salvar(it);
 
-            Produto produto = itensPedido.getProduto();
-            qtdItens = produto.getQuantidadeEstoque() - it.getQuantidade();
-            it.setProduto(produto);
-            produto.setQuantidadeEstoque(qtdItens);
-            daoProduto.alterar(produto);
+                Produto produto = itensPedido.getProduto();
+                qtdItens = produto.getQuantidadeEstoque() - it.getQuantidade();
+                it.setProduto(produto);
+                produto.setQuantidadeEstoque(qtdItens);
+                daoProduto.alterar(produto);
 
+            } else {
+                valorFinalPedido += it.getValorTotal();
+                it.setPedido(pedido);
+                daoItensPedido.salvar(it);
+            }
         }
         pedido.setValorTotal(valorFinalPedido);
         daoPedido.alterar(pedido);

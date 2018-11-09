@@ -73,8 +73,8 @@
                             <h:outputText value="Perfil: "/>
                             <p:selectOneMenu value="#{usuarioMB.usuario.perfil}">
                                 <f:selectItem itemLabel="Selecione"/>
-                                <f:selectItem itemLabel="ADMINISTRADOR" itemValue="ADMINISTRADOR" />
-                                <f:selectItem itemLabel="ATENDENTE" itemValue="ATENDENTE"/>
+                                <f:selectItem itemLabel="SIM" itemValue="SIM" />
+                                <f:selectItem itemLabel="NÃO" itemValue="NÃO"/>
                             </p:selectOneMenu>
 
                             <p:commandButton value="Inserir" actionListener="#{usuarioMB.inserir()}"
