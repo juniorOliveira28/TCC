@@ -72,38 +72,45 @@ public class PedidoMB {
     }
 
     public void finalizarPedido() {
-        System.out.println("Dentro do Método Finalizar Compra");
+        System.out.println("Dentro do Método Finalizar pedido");
         Double valorFinalPedido = 0.0;
-        Double qtdItens = 0.0;
+         double qtdItens = 0.0;
 
         daoPedido.salvar(pedido);
 
         for (ItensPedido it : listaItensPedidos) {
-            if (itensPedido.getProduto().getEstoque().equals("SIM")) {
-                valorFinalPedido += it.getValorTotal();
+            Produto produto = it.getProduto();
+
+            it.setPedido(pedido);
+            daoItensPedido.salvar(it);
+
+            if (it.getProduto().getEstoque().equals("SIM")) {
                 it.setPedido(pedido);
                 daoItensPedido.salvar(it);
-
-                Produto produto = itensPedido.getProduto();
+                System.out.println("Produto Com estoque");
+//
+                System.out.println("Produto: " + it.getProduto().getNome()
+                        + " Quantidade: " + it.getQuantidade());
                 qtdItens = produto.getQuantidadeEstoque() - it.getQuantidade();
                 it.setProduto(produto);
                 produto.setQuantidadeEstoque(qtdItens);
                 daoProduto.alterar(produto);
 
-            } else {
-                valorFinalPedido += it.getValorTotal();
+            } else if (it.getProduto().getEstoque().equals("NÃO")) {
                 it.setPedido(pedido);
                 daoItensPedido.salvar(it);
-            }
+                System.out.println("Este produto não possui estoque");
+            } 
+            valorFinalPedido += it.getValorTotal();
         }
         pedido.setValorTotal(valorFinalPedido);
         daoPedido.alterar(pedido);
         listaPedidos = daoPedido.buscarTodos();
 
         FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Compra Realizada Com Sucesso!!", ""));
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Pedido Realizado Com Sucesso!!", ""));
         novoPedido();
-        System.out.println("FIM do Método Finalizar Compra");
+        System.out.println("FIM do Método Finalizar pedido");
 
     }
 

@@ -18,7 +18,7 @@ public class ItensPedido implements Serializable{
     private Pedido pedido;
     @ManyToOne
     private Produto produto;
-    private int quantidade;
+    private Double quantidade;
     private Double valorUnitario;
     private Double valorTotal;
 
@@ -46,11 +46,11 @@ public class ItensPedido implements Serializable{
         this.produto = produto;
     }
 
-    public int getQuantidade() {
+    public Double getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(Double quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -70,11 +70,15 @@ public class ItensPedido implements Serializable{
         this.valorUnitario = valorUnitario;
     }
 
-    @Override
+           @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 13 * hash + Objects.hashCode(this.id);
-        return hash;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
+        result = prime * result + ((valorUnitario == null) ? 0 : valorUnitario.hashCode());
+        result = prime * result + ((valorTotal == null) ? 0 : valorTotal.hashCode());
+        return result;
     }
 
     @Override
@@ -88,8 +92,33 @@ public class ItensPedido implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ItensPedido other = (ItensPedido) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        ItensPedido other = (ItensPedido) obj;
+        if (id == null) {
+            if (other.id != null) {
+                return false;
+            }
+        } else if (!id.equals(other.id)) {
+            return false;
+        }
+        if (quantidade == null) {
+            if (other.quantidade != null) {
+                return false;
+            }
+        } else if (!quantidade.equals(other.quantidade)) {
+            return false;
+        }
+        if (valorUnitario == null) {
+            if (other.valorUnitario != null) {
+                return false;
+            }
+        } else if (!valorUnitario.equals(other.valorUnitario)) {
+            return false;
+        }
+        if (valorTotal == null) {
+            if (other.valorTotal != null) {
+                return false;
+            }
+        } else if (!valorTotal.equals(other.valorTotal)) {
             return false;
         }
         return true;

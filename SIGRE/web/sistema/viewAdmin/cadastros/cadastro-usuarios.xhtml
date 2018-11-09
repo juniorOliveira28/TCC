@@ -18,7 +18,7 @@
 
                 <h:form id="formTabelaUsuario">
                     <p:dataTable value="#{usuarioMB.listaUsuarios}" var="usuario" reflow="true" rows="5" paginator="true" >
-                       <f:facet name="header">
+                        <f:facet name="header">
                             Lista de Usuários
                         </f:facet>
                         <p:ajax event="rowSelect" />
@@ -68,13 +68,14 @@
                             <p:inputText value="#{usuarioMB.usuario.email}"/>
 
                             <h:outputText value="Senha: "/>
-                            <p:password value="#{usuarioMB.usuario.senha}" feedback="true"/>
+                            <p:password value="#{usuarioMB.usuario.senha}" feedback="true" weakLabel="Força da senha : Fraca" 
+                                        goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"/>
 
                             <h:outputText value="Perfil: "/>
                             <p:selectOneMenu value="#{usuarioMB.usuario.perfil}">
                                 <f:selectItem itemLabel="Selecione"/>
-                                <f:selectItem itemLabel="SIM" itemValue="SIM" />
-                                <f:selectItem itemLabel="NÃO" itemValue="NÃO"/>
+                                <f:selectItem itemLabel="ADMINISTRADOR" itemValue="ADMINISTRADOR" />
+                                <f:selectItem itemLabel="ATENDENTE" itemValue="ATENDENTE"/>
                             </p:selectOneMenu>
 
                             <p:commandButton value="Inserir" actionListener="#{usuarioMB.inserir()}"

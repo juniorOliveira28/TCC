@@ -104,7 +104,7 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Produito[ id=" + id + " ]";
+        return "modelo.Produto[ id=" + id + " ]";
     }
     
 }

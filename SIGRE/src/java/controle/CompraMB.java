@@ -11,13 +11,11 @@ import modelo.Compra;
 import modelo.ItensCompra;
 import modelo.Produto;
 
-
 @ManagedBean
 @ViewScoped
 public class CompraMB {
 
 //    private Produto produto = new Produto();
-
     private Compra compra = new Compra();
     private ItensCompra itensCompra = new ItensCompra();
     private List<ItensCompra> listaItensCompra = new ArrayList<>();
@@ -36,7 +34,7 @@ public class CompraMB {
         System.out.println("Dentro do Método Adicionar Item");
         if (itensCompra.getProduto() != null) {
 
-          // itensCompra.setProduto(itensCompra.getProduto());
+            // itensCompra.setProduto(itensCompra.getProduto());
             itensCompra.setCompra(compra);
             //itensCompra.setQuantidadeItens(itensCompra.getQuantidadeItens());
             itensCompra.setValorTotalItens(itensCompra.getQuantidadeItens() * itensCompra.getValorUnitarioItens());
@@ -63,10 +61,10 @@ public class CompraMB {
 
         for (ItensCompra it : listaItensCompra) {
             qtdItens = 0.;
-            
-                    Produto produto = it.getProduto();
+
+            Produto produto = it.getProduto();
             valorFinalCompra += it.getValorTotalItens();
-            qtdItens += it.getQuantidadeItens() ;
+            qtdItens += it.getQuantidadeItens();
 
 //            it.setProduto(produto);
             it.setCompra(compra);
@@ -81,8 +79,8 @@ public class CompraMB {
                 System.out.println("Setando em um produto ja cadastrado");
 //                produto.setQuantidadeEstoque(qtd);
                 System.out.println("ID do Produto = " + it.getProduto().getId() + it.getProduto().getNome());
-                    produto.setQuantidadeEstoque(qtdItens + produto.getQuantidadeEstoque()) ;
-                    daoProduto.alterar(produto);
+                produto.setQuantidadeEstoque(qtdItens + produto.getQuantidadeEstoque());
+                daoProduto.alterar(produto);
             }
 //            daoItensCompra.salvar(it);
 //            compra.setValorTotalCompra(itensCompra.getValorTotalItens());
@@ -150,7 +148,6 @@ public class CompraMB {
 //    public void setProduto(Produto produto) {
 //        this.produto = produto;
 //    }
-
     public List<Produto> getListaProdutos() {
         return listaProdutos;
     }
