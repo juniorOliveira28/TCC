@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 @Entity
@@ -22,6 +23,8 @@ public class Pedido implements Serializable {
     private String observacao;
     private Double valorUnitario;
     private Double valorTotal;
+    @ManyToOne
+    private Mesa mesa;
 
     public Long getId() {
         return id;
@@ -77,6 +80,22 @@ public class Pedido implements Serializable {
 
     public void setValorUnitario(Double valorUnitario) {
         this.valorUnitario = valorUnitario;
+    }
+
+    public Date getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(Date dataPedido) {
+        this.dataPedido = dataPedido;
+    }
+
+    public Mesa getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
     }
 
     

@@ -7,7 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import modelo.Usuario;
 
-@ManagedBean
+@ManagedBean 
 @ViewScoped
 public class UsuarioMB {
     

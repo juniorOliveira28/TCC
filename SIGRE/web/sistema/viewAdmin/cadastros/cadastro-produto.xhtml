@@ -17,7 +17,9 @@
                 </h:form>
 
                 <h:form id="formTabelaProduto">
-                    <p:dataTable value="#{produtoMB.listaProdutos}" var="produto">
+                    <p:dataTable value="#{produtoMB.listaProdutos}" var="produto" 
+                                 reflow="true" rows="5" paginator="true" class="center-table"
+                                 emptyMessage="Nenhum produto encontrado!">
                         <f:facet name="header">
                             Lista de Produtos
                         </f:facet>

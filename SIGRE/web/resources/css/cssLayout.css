@@ -4,6 +4,49 @@
    background-color: red;
 }   */
 
+/* .dolar-icon {
+    background-image: url("#{facesContext.externalContext.request.contextPath}/resources/imagens/teste.png") !important;}
+*/
+
+/*centralizando tabelas*/
+  .ui-datatable .ui-datatable-header {
+        text-align: left !important;
+    }
+     
+.center-table{
+    text-align: center;
+    background-color: red;
+}
+
+.mesa{
+    border-radius: 10%;
+    border: 1px solid black;
+    background: greenyellow;
+}
+
+                /*status mesa*/
+/*----------------------------------------------*/
+.red{
+    background-color:#FF9582;
+    background-image:none;
+}
+
+.green{
+    background-color:#ABEBC6;
+    background-image:none;
+}
+/*-----------------------------------------------------*/
+
+.tela-inicial{
+
+    background: red;
+    background-color: red;
+    text-align: center;
+    color: red;
+    vertical-align: top;
+    
+}
+
 #inicio{
     background: red;
     color: red;
@@ -115,20 +158,20 @@
 .ui-steps .ui-steps-item {
     width: 24%;
 }
- 
+
 .ui-state-highlight {
     text-shadow: none !important;
 }
- 
+
 .ui-steps.custom {
     margin-bottom: 30px;
 }
- 
+
 .ui-steps.custom .ui-steps-item .ui-menuitem-link {
     height: 10px;
     padding: 0 1em;
 }
- 
+
 .ui-steps.custom .ui-steps-item .ui-steps-number {
     background-color: #0081c2;
     color: #FFFFFF;
@@ -138,7 +181,7 @@
     margin-top: -10px;
     margin-bottom: 10px;
 }
- 
+
 .ui-steps.custom .ui-steps-item.ui-state-highlight .ui-steps-title {
     color: #555;
 }

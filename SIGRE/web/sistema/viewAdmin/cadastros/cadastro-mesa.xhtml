@@ -14,11 +14,14 @@
                 <h:form id="formBotaoMesa">
                     <p:commandButton value="Nova Mesa" update=":formFormularioMesa" oncomplete="PF('dialogMesa').show()"/>
                 </h:form>
-
                 <h:form id="formTabelaMesa">
-                    <p:dataTable value="#{mesaMB.listaMesas}" var="mesa" reflow="true" rows="5" paginator="true">
+                    <p:dataTable class="center-table" 
+                                 value="#{mesaMB.listaMesas}" var="mesa" reflow="true" rows="5" paginator="true"
+                                 rowStyleClass="#{mesa.status eq 'LIVRE' ? 'green' 
+                                                  : mesa.status eq 'OCUPADA' ? 'red': null}"
+                                 emptyMessage="Nenhuma mesa encontrada!">
                         <f:facet name="header">
-                            Lista de Mesas
+                            Lista de Mesas 
                         </f:facet>
                         <p:column headerText="Numero" sortBy="#{mesa.numero}" filterBy="#{mesa.numero}">
                             <h:outputText value="#{mesa.numero}"/>
@@ -57,19 +60,26 @@
                             <h:outputText value="Lugares:"/>
                             <h:inputText value="#{mesaMB.mesa.qtdLugaress}"/>
 
-                            <h:outputText value="Status:"/>
-                            <p:selectOneMenu value="#{mesaMB.mesa.status}">
+                            <p:selectOneMenu value="#{mesaMB.mesa.status}" id="status">
                                 <f:selectItem itemLabel="SELECIONE" itemValue="SELECIONE"/>
                                 <f:selectItem itemLabel="LIVRE" itemValue="LIVRE"/>
                                 <f:selectItem itemLabel="OCUPADA" itemValue="OCUPADA"/>
                             </p:selectOneMenu>
 
                             <p:commandButton value="Inserir" actionListener="#{mesaMB.inserir()}"
-                                             update=":formTabelaMesa" icon="ui-icon-disk"
+                                             update=":formTabelaMesa, status" icon="ui-icon-disk"
                                              oncomplete="PF('dialogMesa').hide()"/>
                         </p:panelGrid>
                     </h:form>
                 </p:dialog>
+                <!--                <script type="text/javascript">
+                                    function handleComplete(xhr, status, args) {
+                                        if (!args.validationFailed) {
+                                            PF('dialogReservas').hide();
+                                        } else {
+                                        }
+                                    }
+                                </script>-->
             </ui:define>
 
         </ui:composition>

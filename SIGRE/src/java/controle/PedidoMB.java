@@ -3,11 +3,13 @@ package controle;
 import dao.DAOGenerico;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.UnaryOperator;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import modelo.ItensPedido;
+import modelo.Mesa;
 import modelo.Pedido;
 import modelo.Produto;
 
@@ -35,46 +37,51 @@ public class PedidoMB {
     public void adicionarItem() {
         System.out.println("Dentro do Método Adicionar Item");
         Produto produto = itensPedido.getProduto();
-        if (itensPedido.getProduto() != null && produto.getQuantidadeEstoque() > 0
-                && itensPedido.getQuantidade() < produto.getQuantidadeEstoque()) {
-            itensPedido.setProduto(itensPedido.getProduto());
-            itensPedido.setPedido(pedido);
-            itensPedido.setQuantidade(itensPedido.getQuantidade());
-            itensPedido.setValorTotal(itensPedido.getQuantidade() * itensPedido.getProduto().getValorVenda());
+        if (itensPedido.getId() == null) {
+
+            if (itensPedido.getProduto() != null && produto.getQuantidadeEstoque() > 0
+                    && itensPedido.getQuantidade() < produto.getQuantidadeEstoque()) {
+                itensPedido.setProduto(itensPedido.getProduto());
+                itensPedido.setPedido(pedido);
+                itensPedido.setQuantidade(itensPedido.getQuantidade());
+                itensPedido.setValorTotal(itensPedido.getQuantidade() * itensPedido.getProduto().getValorVenda());
 
 //          Mostrando produto + quantidade no console
-            System.out.println("Produto: " + itensPedido.getProduto().getNome()
-                    + " Quantidade: " + getItensPedido().getQuantidade());
+                System.out.println("Produto: " + itensPedido.getProduto().getNome()
+                        + " Quantidade: " + getItensPedido().getQuantidade());
 
-            listaItensPedidos.add(itensPedido);
-            itensPedido = new ItensPedido();
+                listaItensPedidos.add(itensPedido);
+                itensPedido = new ItensPedido();
 
-            System.out.println("Fim do Método Adicionar Item");
-        } else if (itensPedido.getProduto() != null && itensPedido.getProduto().getEstoque().equals("NÃO")) {
-            itensPedido.setProduto(itensPedido.getProduto());
-            itensPedido.setPedido(pedido);
-            itensPedido.setQuantidade(itensPedido.getQuantidade());
-            itensPedido.setValorTotal(itensPedido.getQuantidade() * itensPedido.getProduto().getValorVenda());
+                System.out.println("Fim do Método Adicionar Item");
+            } else if (itensPedido.getProduto() != null && itensPedido.getProduto().getEstoque().equals("NÃO")) {
+                itensPedido.setProduto(itensPedido.getProduto());
+                itensPedido.setPedido(pedido);
+                itensPedido.setQuantidade(itensPedido.getQuantidade());
+                itensPedido.setValorTotal(itensPedido.getQuantidade() * itensPedido.getProduto().getValorVenda());
 
 //          Mostrando produto + quantidade no console
-            System.out.println("Produto: " + itensPedido.getProduto().getNome()
-                    + " Quantidade: " + getItensPedido().getQuantidade());
+                System.out.println("Produto: " + itensPedido.getProduto().getNome()
+                        + " Quantidade: " + getItensPedido().getQuantidade());
 
-            listaItensPedidos.add(itensPedido);
-            itensPedido = new ItensPedido();
+                listaItensPedidos.add(itensPedido);
+                itensPedido = new ItensPedido();
 
-            System.out.println("Fim do Método Adicionar Item");
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Quantidade Indisponivel no estoque!!", ""));
-            System.out.println("Quantidade indisponivel no estoque");
+                System.out.println("Fim do Método Adicionar Item");
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Quantidade Indisponivel no estoque!!", ""));
+                System.out.println("Quantidade indisponivel no estoque");
+            }
+        }else{
+//            listaItensPedidos.replaceAll((UnaryOperator<ItensPedido>) itensPedido);
         }
     }
 
     public void finalizarPedido() {
         System.out.println("Dentro do Método Finalizar pedido");
         Double valorFinalPedido = 0.0;
-         double qtdItens = 0.0;
+        double qtdItens = 0.0;
 
         daoPedido.salvar(pedido);
 
@@ -100,7 +107,7 @@ public class PedidoMB {
                 it.setPedido(pedido);
                 daoItensPedido.salvar(it);
                 System.out.println("Este produto não possui estoque");
-            } 
+            }
             valorFinalPedido += it.getValorTotal();
         }
         pedido.setValorTotal(valorFinalPedido);
@@ -118,6 +125,17 @@ public class PedidoMB {
         pedido = new Pedido();
         listaItensPedidos = new ArrayList<>();
         itensPedido = new ItensPedido();
+    }
+
+    public void fecharMesa() {
+
+        for (ItensPedido it : listaItensPedidos) {
+            Mesa mesa = it.getPedido().getMesa();
+            if (it.getPedido().getMesa().getId().equals(mesa.getId())) {
+                itensPedido.setPedido(pedido);
+                System.out.println("Mesa");
+            }
+        }
     }
 
     public Pedido getPedido() {

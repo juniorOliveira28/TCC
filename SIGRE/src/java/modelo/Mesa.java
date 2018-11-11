@@ -15,7 +15,7 @@ public class Mesa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int numero;
-    private String status;
+    private String status = "LIVRE";
     private int qtdLugaress;
     @ManyToOne
     private Caixa caixa;

@@ -17,9 +17,18 @@
                 </h:form>
 
                 <h:form id="formTabelaUsuario">
-                    <p:dataTable value="#{usuarioMB.listaUsuarios}" var="usuario" reflow="true" rows="5" paginator="true" >
+                    <p:dataTable value="#{usuarioMB.listaUsuarios}" var="usuario" widgetVar="tbUsuarios"
+                                 reflow="true" rows="5" paginator="true" class="center-table"
+                                 emptyMessage="Nenhum usuário encontrado!">
+                        <!--                        <f:facet name="header">
+                                                    Lista de Usuários
+                                                </f:facet>-->
+
                         <f:facet name="header">
-                            Lista de Usuários
+                            <p:outputPanel>
+                                <h:outputText value="Lista de Usuários: " />
+                                <p:inputText id="globalFilter" onkeyup="PF('tbUsuarios').filter()" style="width:150px" placeholder="Pesquisar"/>
+                            </p:outputPanel>
                         </f:facet>
                         <p:ajax event="rowSelect" />
                         <p:column headerText="Nome" sortBy="#{usuario.nome}">
@@ -55,11 +64,14 @@
                     </p:confirmDialog>
                 </h:form>
 
-                <p:dialog header="Cadastro de Usuários" widgetVar="dialogUsuario" modal="true" responsive="true">
+                <p:dialog header="Cadastro de Usuários" widgetVar="dialogUsuario" 
+                          modal="true" responsive="true">
                     <h:form id="formFormularioUsuario">
+                        <!--<p:focus context="panel"/>-->
+                        <!--<p:messages />-->
                         <p:panelGrid columns="2">
                             <h:outputText value="Nome: "/>
-                            <p:inputText value="#{usuarioMB.usuario.nome}"/>
+                            <p:inputText value="#{usuarioMB.usuario.nome}" required="true" requiredMessage="s"/>
 
                             <p:outputLabel for="phoneWithExt" value="Telefone:" />
                             <p:inputMask id="phoneWithExt" value="#{usuarioMB.usuario.fone}" mask="(99) 99999-9999?"/>
@@ -68,8 +80,8 @@
                             <p:inputText value="#{usuarioMB.usuario.email}"/>
 
                             <h:outputText value="Senha: "/>
-                            <p:password value="#{usuarioMB.usuario.senha}" feedback="true" weakLabel="Força da senha : Fraca" 
-                                        goodLabel="Força da senha : Média" strongLabel="Força da senha : Forte"/>
+                            <p:password value="#{usuarioMB.usuario.senha}" feedback="true" weakLabel=" Senha Fraca" 
+                                        goodLabel="Senha Fraca : Média" strongLabel="Senha Fraca : Forte"/>
 
                             <h:outputText value="Perfil: "/>
                             <p:selectOneMenu value="#{usuarioMB.usuario.perfil}">

@@ -17,7 +17,12 @@
                 </h:form>
 
                 <h:form id="formTabelaFornecedor">
-                    <p:dataTable value="#{fornecedorMB.listafornecedores}" var="fornecedor" reflow="true" rows="5" paginator="true">
+                    <p:dataTable value="#{fornecedorMB.listafornecedores}" var="fornecedor"
+                                 reflow="true" rows="5" paginator="true" class="center-table"
+                                 emptyMessage="Nenhum fornecedor encontrado!">
+                        <f:facet name="header">
+                            Lista de fornecedores
+                        </f:facet>
                         <p:column headerText="Nome" sortBy="#{fornecedor.nome}">
                             <h:outputText value="#{fornecedor.nome}"/>
                         </p:column>
@@ -60,7 +65,7 @@
 
                             <h:outputText value="Email: "/>
                             <p:inputText value="#{fornecedorMB.fornecedor.email}"/>
-                            
+
 
                             <p:commandButton value="Inserir" actionListener="#{fornecedorMB.inserir()}"
                                              oncomplete="PF('dialogFornecedor').hide()"
