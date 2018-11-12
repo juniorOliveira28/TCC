@@ -17,7 +17,7 @@
                     <h:panelGrid columns="5" cellspacing="15" 
                                  styleClass="#{mesa.status eq 'LIVRE' ? 'green' : mesa.status eq 'OCUPADA' ? 'red': null}">
                         <p:column>
-                            <h:panelGrid columns="1" class="mesa">
+                            <h:panelGrid columns="1" class="mesa" >
                                 <p:commandLink oncomplete="PF('teste').show()">
                                     <h:graphicImage name="imagens/mesas2.png" value="#{mesaMB.mesa.id(1)}" />
                                 </p:commandLink>
