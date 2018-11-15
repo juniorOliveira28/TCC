@@ -17,10 +17,9 @@
 
                 <h:form>
                     <p:commandButton value="Compras"
-                                     onclick="PF('dlgPesquisar').show();" update="tabelaDialog" />
+                                     onclick="PF('dlgPesquisar').show();" update=":tabelaDialog" />
 
                     <p:commandButton value="Novo Item" oncomplete="PF('dialogCompra').show()" update=":formCompra"/>
-                    <p:commandButton value="Relatório" actionListener="#{compraMB.chamarRelatorio()}" ajax="false"/>
                 </h:form>
 
                 <h:form id="formularioCabecalhoCompra">                  
@@ -101,46 +100,48 @@
                     </h:form>
                 </p:dialog>
 
-                <p:dialog header="Histórico de Compras" widgetVar="dlgPesquisar"
+                <p:dialog header="Lista de Compras" widgetVar="dlgPesquisar"
                           modal="true" height="auto" width="500" responsive="true"> 
+                    <h:form id="tabelaDialog">
+                        <p:dataTable  var="com"
+                                     value="#{compraMB.listaCompras}">
 
-                    <p:dataTable id="tabelaDialog" var="com"
-                                 value="#{compraMB.listaCompras}">
-
-                        <p:column headerText="Fornecedor">
-                            <h:outputText value="#{com.fornecedor.nome}" />
-                        </p:column>
-                        <p:column headerText="Observação">
-                            <h:outputText value="#{com.observacao}" />
-                        </p:column>
+                            <p:column headerText="Fornecedor">
+                                <h:outputText value="#{com.fornecedor.nome}" />
+                            </p:column>
+                            <p:column headerText="Observação">
+                                <h:outputText value="#{com.observacao}" />
+                            </p:column>
 
 
-                        <p:column headerText="Valor Total Compra">
-                            <h:outputText value="#{com.valorTotalCompra}">
-                                <f:convertNumber pattern="¤#,##0.00" currencySymbol="R$" />
-                            </h:outputText>
-                        </p:column>
+                            <p:column headerText="Valor Total Compra">
+                                <h:outputText value="#{com.valorTotalCompra}">
+                                    <f:convertNumber pattern="¤#,##0.00" currencySymbol="R$" />
+                                </h:outputText>
+                            </p:column>
 
-                        <p:column headerText="Data">
-                            <h:outputText value="#{com.dataCompra}">
-                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
-                            </h:outputText>
-                        </p:column>
+                            <p:column headerText="Data">
+                                <h:outputText value="#{com.dataCompra}">
+                                    <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </p:column>
 
-                        <!--                        <p:panel header="Imprimir">
-                                                    <p:commandButton value="PDF" ajax="false">
-                                                        <p:dataExporter type="pdf" target="tabela" fileName="usuarios"/>
-                                                    </p:commandButton>
-                        
-                                                    <f:facet name="footer">
-                                                        <p:commandButton value="Relatório"/>
-                                                        <p:commandButton process="checkboxDT"
-                                                                         icon="pi pi-search" value="View"
-                                                                         />
-                                                    </f:facet>
-                                                </p:panel>-->
-                    </p:dataTable>
-
+                            <!--                        <p:panel header="Imprimir">
+                                                        <p:commandButton value="PDF" ajax="false">
+                                                            <p:dataExporter type="pdf" target="tabela" fileName="usuarios"/>
+                                                        </p:commandButton>
+                            
+                                                        <f:facet name="footer">
+                                                            <p:commandButton value="Relatório"/>
+                                                            <p:commandButton process="checkboxDT"
+                                                                             icon="pi pi-search" value="View"
+                                                                             />
+                                                        </f:facet>
+                                                    </p:panel>-->
+                        </p:dataTable>
+                        <p:commandButton onclick="PF('dlgPesquisar').hide()" ajax="false"
+                                         value="Imprimir" actionListener="#{compraMB.chamarRelatorio()}"/>
+                    </h:form>
                 </p:dialog>
 
             </ui:define>
