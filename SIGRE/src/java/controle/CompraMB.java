@@ -99,14 +99,16 @@ public class CompraMB {
         System.out.println("FIM do Método Finalizar Compra");
 
     }
-    
-     public void chamarRelatorio(){
+
+    public void chamarRelatorio() {
         ChamarRelatorio rel = new ChamarRelatorio();
         rel.imprimeRelatorio("relCompra.jasper", null, "Relatório_Compras");
     }
 
     public void removerItem(ItensCompra itemRemover) {
+        System.out.println("Dentro do metodo remover");
         listaItensCompra.remove(itemRemover);
+        System.out.println("Produto: " + itemRemover.getProduto().getNome() +" "+itemRemover.getValorUnitarioItens());
     }
 
     public void novaCompra() {

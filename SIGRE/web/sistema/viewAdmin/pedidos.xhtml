@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head></h:head>
+    <body>
+
+        <ui:composition template="./template-admin.xhtml">
+
+            <ui:define name="content">
+
+                <p:commandButton value="Pesquisar"
+                                 onclick="PF('dlgPesquisar').show();" update="tabelaDialog" />
+
+                <p:commandButton value="Novo Item" oncomplete="PF('dialogItensPedido').show()"/>
+                <h:form id="formFormularioPedidos">
+                    <p:dialog header="Novo Pedido" widgetVar="dialogItensPedido" modal="true" responsive="true">
+
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Produto" />
+                            <p:selectOneMenu value="#{pedidoMB.itensPedido.produto}"
+                                             converter="converterProduto" filter="true"
+                                             filterMatchMode="startsWith">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItems value="#{produtoMB.listaProdutos}" var="prod"
+                                               itemLabel="#{prod.nome}" itemValue="#{prod}" />
+                            </p:selectOneMenu>
+
+
+                            <h:outputText value="Quantidade:" />
+                            <p:inputText id="inputQtd" value="#{pedidoMB.itensPedido.quantidade}"/>
+                            <h:outputText value="Data:" />
+                            <p:calendar pattern="dd/MM/yyyy" value="#{pedidoMB.pedido.data}" />
+
+
+                            <h:outputText value="Observação" />
+                            <p:inputText value="#{pedidoMB.pedido.observacao}" />
+
+                            <h:outputText value="Mesa:" />
+                            <p:selectOneMenu value="#{pedidoMB.pedido.mesa}"
+                                             converter="converterMesa" filter="true"
+                                             filterMatchMode="startsWith">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItems value="#{mesaMB.listaMesas}" var="mesa"
+                                               itemLabel="#{mesa.numero}" itemValue="#{mesa}" />
+                            </p:selectOneMenu>
+                            <p:commandButton value="Adicinar" update="tabelaItensPedido,inputQtd"
+                                             actionListener="#{pedidoMB.adicionarItem()}" oncomplete="PF('dialogItensPedido').hide()"/>
+                        </p:panelGrid>  
+                    </p:dialog>
+
+                    <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaItensPedidos}" 
+                                 reflow="true" rows="5" paginator="true" var="itens">
+                        <f:facet name="header">
+                            Lista de Pedidos    
+                        </f:facet>
+                        <p:column headerText="Produto" sortBy="#{itens.produto.nome}">
+                            <h:outputText value="#{itens.produto.nome}"/>
+                        </p:column>
+                        <p:column headerText="Quantidade" sortBy="#{itens.quantidade}">
+                            <h:outputText value="#{itens.quantidade}" />
+                        </p:column>
+                        <p:column headerText="Valor Unitário" sortBy="#{itens.produto.valorVenda}">
+                            <h:outputText value="#{itens.produto.valorVenda}" />
+                        </p:column>
+                        <p:column headerText="Valor Total" sortBy="#{itens.valorTotal}">
+                            <h:outputText value="#{itens.valorTotal}" />
+                        </p:column>
+                        <p:column headerText="Estoque" sortBy="#{itens.produto.quantidadeEstoque}">
+                            <h:outputText value="#{itens.produto.quantidadeEstoque}" />
+                        </p:column>
+                        <p:column headerText="Ações">
+                            <p:commandButton value="Alterar" oncomplete="PF('dialogPedido').show()"
+                                             update=":formFormularioPedidos">
+                                <f:setPropertyActionListener value="#{itens}" target="#{pedidoMB.pedido}"/>
+                            </p:commandButton>    
+                            <p:commandButton value="Excluir" icon="ui-icon-trash" update="@form"
+                                             actionListener="#{pedidoMB.removerItem(itens)}" >
+                                <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
+                            </p:commandButton>   
+                        </p:column>
+
+                    </p:dataTable>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+
+                    <p:commandButton value="Finalizar Pedido"
+                                     actionListener="#{pedidoMB.finalizarPedido()}"
+                                     update="@form"/>
+
+                </h:form>
+
+                <p:dialog header="Histórico de Pedidos" widgetVar="dlgPesquisar"
+                          modal="true" height="auto" width="500" style="text-align: center;">
+                    <p:dataTable id="tabelaDialog" var="com"
+                                 value="#{pedidoMB.listaPedidos}">
+
+                        <p:column headerText="Observação">
+                            <h:outputText value="#{com.observacao}" />
+                        </p:column>
+
+
+                        <p:column headerText="Valor Total Pedido">
+                            <h:outputText value="#{com.valorTotal}">
+                                <f:convertNumber pattern="¤#,##0.00" currencySymbol="R$" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Data">
+                            <h:outputText value="#{com.data}">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+
+                    </p:dataTable>
+
+                </p:dialog>
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

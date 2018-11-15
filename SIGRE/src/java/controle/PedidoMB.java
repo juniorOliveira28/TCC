@@ -128,6 +128,7 @@ public class PedidoMB {
     }
 
     public void fecharMesa() {
+        System.out.println("Dentro do metodo fechar mesa");
 //        int temp = 0;
 //        for (ItensPedido it : listaItensPedidos) {
 //            Mesa mesa = it.getPedido().getMesa();
@@ -137,11 +138,16 @@ public class PedidoMB {
 //                itensPedido.setPedido(pedido);
 //                System.out.println("Mesa");
 //            }
-        preencherListaPedidos();
+        preencherListaPedidos(pedido.getMesa().getId());
     }
 
-    public void preencherListaPedidos() {
-        daoItensPedido.buscarTodos();
+    public void removerItem(ItensPedido itemRemover) {
+        System.out.println("Dentro do metodo remover");
+        listaItensPedidos.remove(itemRemover);
+    }
+
+    public void preencherListaPedidos(Long id) {
+        daoItensPedido.buscarPorId(id);
     }
 
     public Pedido getPedido() {

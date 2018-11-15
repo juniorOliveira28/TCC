@@ -15,18 +15,16 @@
                 <!--<p:messages id="mensagem"/>-->  
                 <!--<p:growl id="mensagem" />-->
 
-                <!-- botao dialog -->
                 <h:form>
                     <p:commandButton value="Compras"
                                      onclick="PF('dlgPesquisar').show();" update="tabelaDialog" />
-                    <!-- fim botão dialog -->
+
                     <p:commandButton value="Novo Item" oncomplete="PF('dialogCompra').show()" update=":formCompra"/>
                     <p:commandButton value="Relatório" actionListener="#{compraMB.chamarRelatorio()}" ajax="false"/>
                 </h:form>
 
                 <h:form id="formularioCabecalhoCompra">                  
 
-                    <!-- 		FIM DO ITENS DE VENDA -->
                     <p:dataTable id="tabelaItensCompra" value="#{compraMB.listaItensCompra}" var="itens">
                         <f:facet name="header">
                             Lista de Itens
@@ -46,7 +44,18 @@
                         <p:column headerText="Valor Total" sortBy="#{itens.valorTotalItens}">
                             <h:outputText value="#{itens.valorTotalItens}" />
                         </p:column>
+                        <p:column headerText="Ações">
+                            <p:commandButton value="Excluir" icon="ui-icon-trash" update="@form"
+                                             actionListener="#{compraMB.removerItem(itens)}" >
+                                <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
+                            </p:commandButton>   
+                        </p:column>
                     </p:dataTable>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+
 
                     <p:commandButton value="Finalizar Compra"
                                      actionListener="#{compraMB.finalizarCompra()}"

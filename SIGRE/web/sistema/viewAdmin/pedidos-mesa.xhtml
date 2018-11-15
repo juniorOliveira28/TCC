@@ -95,10 +95,33 @@
                     </h:panelGrid>
                 </div>
                 <p:dialog header="Teste" widgetVar="teste" modal="true" height="auto" width="50%">
-                    <p:dataTable value="#{pedidoMB.listaItensPedidos}" var="ped">
-                        <p:column headerText="Poduto">
-                            <h:outputText value="#{ped.produto.nome}"/>
+                     <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaItensPedidos}" 
+                                 reflow="true" rows="5" paginator="true" var="itens">
+                        <f:facet name="header">
+                            Lista de Pedidos    
+                        </f:facet>
+                        <p:column headerText="Produto" sortBy="#{itens.produto.nome}">
+                            <h:outputText value="#{itens.produto.nome}"/>
                         </p:column>
+                        <p:column headerText="Quantidade" sortBy="#{itens.quantidade}">
+                            <h:outputText value="#{itens.quantidade}" />
+                        </p:column>
+                        <p:column headerText="Valor Unitário" sortBy="#{itens.produto.valorVenda}">
+                            <h:outputText value="#{itens.produto.valorVenda}" />
+                        </p:column>
+                        <p:column headerText="Valor Total" sortBy="#{itens.valorTotal}">
+                            <h:outputText value="#{itens.valorTotal}" />
+                        </p:column>
+                        <p:column headerText="Estoque" sortBy="#{itens.produto.quantidadeEstoque}">
+                            <h:outputText value="#{itens.produto.quantidadeEstoque}" />
+                        </p:column>
+                        <p:column headerText="Ações">
+                            <p:commandButton value="Alterar" oncomplete="PF('dialogPedido').show()"
+                                             update=":formFormularioPedidos">
+                                <f:setPropertyActionListener value="#{itens}" target="#{pedidoMB.pedido}"/>
+                            </p:commandButton>    
+                        </p:column>
+
                     </p:dataTable>
 
                 </p:dialog>
