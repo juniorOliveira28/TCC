@@ -46,7 +46,7 @@
                             <p:menuitem value="Realizar Compra" url="/sistema/viewAdmin/compras/compra-produtos.jsf" />
                         </p:submenu>  
                         <p:submenu label="PEDIDOS MESA">          
-                            <p:menuitem value="Realizar Pedidos" url="/sistema/viewAtendente/pedidos-mesa.jsf" />
+                            <p:menuitem value="Realizar Pedidos" url="/sistema/viewAdmin/pedidos-mesa.jsf" />
                         </p:submenu>   
                         <f:facet name="options">
                             <h:outputLink value="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
@@ -65,7 +65,20 @@
         </div>
 
         <div id="bottom">
-            <ui:insert name="bottom">SIGRE - Sistema Para Gerenciamento de Restaurantes</ui:insert>
+            <ui:insert name="bottom">
+                <!--SIGRE - Sistema Para Gerenciamento de Restaurantes-->
+                <!--<footer class="py-5 bg-black">-->
+                <!--Copyright ©-->
+                    <div id="rodapea">
+                        <div class="container">
+                            <p class="m-0 text-center text-white small">oliveirajunior.cne@gmail.com - 2018
+                            </p>
+                        </div>
+                        
+                        <!-- /.container -->
+                    </div>
+                <!--</footer>-->
+            </ui:insert>
         </div>
 
     </h:body>
