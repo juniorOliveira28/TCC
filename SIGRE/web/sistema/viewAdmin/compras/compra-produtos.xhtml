@@ -16,10 +16,13 @@
                 <!--<p:growl id="mensagem" />-->
 
                 <!-- botao dialog -->
-                <p:commandButton value="Compras"
-                                 onclick="PF('dlgPesquisar').show();" update="tabelaDialog" />
-                <!-- fim botão dialog -->
-                <p:commandButton value="Novo Item" oncomplete="PF('dialogCompra').show()" update=":formCompra"/>
+                <h:form>
+                    <p:commandButton value="Compras"
+                                     onclick="PF('dlgPesquisar').show();" update="tabelaDialog" />
+                    <!-- fim botão dialog -->
+                    <p:commandButton value="Novo Item" oncomplete="PF('dialogCompra').show()" update=":formCompra"/>
+                    <p:commandButton value="Relatório" actionListener="#{compraMB.chamarRelatorio()}" ajax="false"/>
+                </h:form>
 
                 <h:form id="formularioCabecalhoCompra">                  
 
@@ -91,6 +94,7 @@
 
                 <p:dialog header="Histórico de Compras" widgetVar="dlgPesquisar"
                           modal="true" height="auto" width="500" responsive="true"> 
+
                     <p:dataTable id="tabelaDialog" var="com"
                                  value="#{compraMB.listaCompras}">
 
@@ -114,6 +118,18 @@
                             </h:outputText>
                         </p:column>
 
+                        <!--                        <p:panel header="Imprimir">
+                                                    <p:commandButton value="PDF" ajax="false">
+                                                        <p:dataExporter type="pdf" target="tabela" fileName="usuarios"/>
+                                                    </p:commandButton>
+                        
+                                                    <f:facet name="footer">
+                                                        <p:commandButton value="Relatório"/>
+                                                        <p:commandButton process="checkboxDT"
+                                                                         icon="pi pi-search" value="View"
+                                                                         />
+                                                    </f:facet>
+                                                </p:panel>-->
                     </p:dataTable>
 
                 </p:dialog>

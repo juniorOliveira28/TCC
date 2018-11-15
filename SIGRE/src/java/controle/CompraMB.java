@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import modelo.Compra;
 import modelo.ItensCompra;
 import modelo.Produto;
+import util.ChamarRelatorio;
 
 @ManagedBean
 @ViewScoped
@@ -97,6 +98,11 @@ public class CompraMB {
         novaCompra();
         System.out.println("FIM do Método Finalizar Compra");
 
+    }
+    
+     public void chamarRelatorio(){
+        ChamarRelatorio rel = new ChamarRelatorio();
+        rel.imprimeRelatorio("relCompra.jasper", null, "Relatório_Compras");
     }
 
     public void removerItem(ItensCompra itemRemover) {

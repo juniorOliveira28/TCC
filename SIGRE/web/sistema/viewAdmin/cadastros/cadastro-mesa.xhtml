@@ -15,7 +15,7 @@
                     <p:commandButton value="Nova Mesa" update=":formFormularioMesa" oncomplete="PF('dialogMesa').show()"/>
                 </h:form>
                 <h:form id="formTabelaMesa">
-                    <p:dataTable class="center-table" 
+                    <p:dataTable class="center-table" paginatorPosition="bottom"
                                  value="#{mesaMB.listaMesas}" var="mesa" reflow="true" rows="5" paginator="true"
                                  rowStyleClass="#{mesa.status eq 'LIVRE' ? 'green' 
                                                   : mesa.status eq 'OCUPADA' ? 'red': null}"

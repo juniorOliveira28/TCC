@@ -18,7 +18,8 @@
 
                 <h:form id="formTabelaCategoria">
                     <p:dataTable value="#{categoriaMB.listaCategorias}" reflow="true" rows="5" paginator="true"
-                                 var="categoria" class="center-table" emptyMessage="Nenhuma categoria encontrada!">
+                                 var="categoria" class="center-table" emptyMessage="Nenhuma categoria encontrada!"
+                                 paginatorPosition="bottom">
                         <f:facet name="header">
                             Lista de Categorias
                         </f:facet>

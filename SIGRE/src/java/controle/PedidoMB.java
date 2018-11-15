@@ -73,7 +73,7 @@ public class PedidoMB {
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Quantidade Indisponivel no estoque!!", ""));
                 System.out.println("Quantidade indisponivel no estoque");
             }
-        }else{
+        } else {
 //            listaItensPedidos.replaceAll((UnaryOperator<ItensPedido>) itensPedido);
         }
     }
@@ -128,14 +128,20 @@ public class PedidoMB {
     }
 
     public void fecharMesa() {
+//        int temp = 0;
+//        for (ItensPedido it : listaItensPedidos) {
+//            Mesa mesa = it.getPedido().getMesa();
+//            if (it.getPedido().getMesa().getId().equals(mesa.getId())) {
+//                
+//                temp += it.getPedido().getId();
+//                itensPedido.setPedido(pedido);
+//                System.out.println("Mesa");
+//            }
+        preencherListaPedidos();
+    }
 
-        for (ItensPedido it : listaItensPedidos) {
-            Mesa mesa = it.getPedido().getMesa();
-            if (it.getPedido().getMesa().getId().equals(mesa.getId())) {
-                itensPedido.setPedido(pedido);
-                System.out.println("Mesa");
-            }
-        }
+    public void preencherListaPedidos() {
+        daoItensPedido.buscarTodos();
     }
 
     public Pedido getPedido() {

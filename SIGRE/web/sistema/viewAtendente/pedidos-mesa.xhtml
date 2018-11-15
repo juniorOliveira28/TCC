@@ -18,7 +18,7 @@
                                  styleClass="#{mesa.status eq 'LIVRE' ? 'green' : mesa.status eq 'OCUPADA' ? 'red': null}">
                         <p:column>
                             <h:panelGrid columns="1" class="mesa" >
-                                <p:commandLink oncomplete="PF('teste').show()">
+                                <p:commandLink oncomplete="PF('teste').show()" actionListener="#{pedidoMB.fecharMesa()}">
                                     <h:graphicImage name="imagens/mesas2.png" value="#{mesaMB.mesa.id(1)}" />
                                 </p:commandLink>
                             </h:panelGrid>
@@ -67,8 +67,10 @@
                     </h:panelGrid>
                 </div>
                 <p:dialog header="Teste" widgetVar="teste" modal="true" height="auto" width="50%">
-                    <p:dataTable>
-                        <h:outputText value="teste"/>
+                    <p:dataTable value="#{pedidoMB.listaItensPedidos}" var="ped">
+                        <p:column headerText="Poduto">
+                            <h:outputText value="#{ped.produto.nome}"/>
+                        </p:column>
                     </p:dataTable>
 
                 </p:dialog>

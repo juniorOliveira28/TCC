@@ -8,6 +8,28 @@
     background-image: url("#{facesContext.externalContext.request.contextPath}/resources/imagens/teste.png") !important;}
 */
 
+.value{
+        font-weight: bold;
+    }
+     
+    .ui-datatable{
+        margin-bottom: 25px
+    }
+     
+    .ui-datatable .ui-datatable-footer{
+        text-align:left;
+    }
+     
+    .ui-datalist ul{
+        padding: 0 0 0 10px;
+        margin: 5px 0;
+    }
+     
+    .ui-datatable .ui-button-icon-only .ui-button-text{
+        padding: 0;
+        line-height: 1.2;
+    }
+
 /*centralizando tabelas*/
   .ui-datatable .ui-datatable-header {
         text-align: left !important;
