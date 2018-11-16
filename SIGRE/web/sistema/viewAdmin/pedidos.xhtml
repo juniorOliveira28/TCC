@@ -11,14 +11,56 @@
         <ui:composition template="./template-admin.xhtml">
 
             <ui:define name="content">
+                <h:form>
+                    <p:commandButton value="Pesquisar"
+                                     onclick="PF('dlgPesquisar').show();" update=":tabelaDialog" />
 
-                <p:commandButton value="Pesquisar"
-                                 onclick="PF('dlgPesquisar').show();" update="tabelaDialog" />
-
-                <p:commandButton value="Novo Item" oncomplete="PF('dialogItensPedido').show()"/>
+                    <p:commandButton value="Novo Item" oncomplete="PF('dialogItensPedido').show()"/>
+                </h:form>
                 <h:form id="formFormularioPedidos">
-                    <p:dialog header="Novo Pedido" widgetVar="dialogItensPedido" modal="true" responsive="true">
 
+                    <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaItensPedidos}"
+                                 reflow="true" rows="5" paginator="true" var="itens">
+                        <f:facet name="header">
+                            Lista de Pedidos
+                        </f:facet>
+                        <p:column headerText="Produto" sortBy="#{itens.produto.nome}">
+                            <h:outputText value="#{itens.produto.nome}"/>
+                        </p:column>
+                        <p:column headerText="Quantidade" sortBy="#{itens.quantidade}">
+                            <h:outputText value="#{itens.quantidade}" />
+                        </p:column>
+                        <p:column headerText="Valor Unitário" sortBy="#{itens.produto.valorVenda}">
+                            <h:outputText value="#{itens.produto.valorVenda}" />
+                        </p:column>
+                        <p:column headerText="Valor Total" sortBy="#{itens.valorTotal}">
+                            <h:outputText value="#{itens.valorTotal}" />
+                        </p:column>
+                        <p:column headerText="Estoque" sortBy="#{itens.produto.quantidadeEstoque}">
+                            <h:outputText value="#{itens.produto.quantidadeEstoque}" />
+                        </p:column>
+                        <p:column headerText="Ações">
+                            <p:commandButton value="Alterar" oncomplete="PF('dialogPedido').show()"
+                                             update=":formFormularioPedidos">
+                                <f:setPropertyActionListener value="#{itens}" target="#{pedidoMB.pedido}"/>
+                            </p:commandButton>
+                            <p:commandButton value="Excluir" icon="ui-icon-trash" update="@form"
+                                             actionListener="#{pedidoMB.removerItem(itens)}" >
+                                <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                    <p:commandButton value="Finalizar Pedido"
+                                     actionListener="#{pedidoMB.finalizarPedido()}"
+                                     update="@form, :formPedido"/>
+
+                </h:form>
+                <p:dialog header="Novo Pedido" widgetVar="dialogItensPedido" modal="true" responsive="true">
+                    <h:form id="formPedido">
                         <p:panelGrid columns="2">
                             <h:outputText value="Produto" />
                             <p:selectOneMenu value="#{pedidoMB.itensPedido.produto}"
@@ -47,80 +89,36 @@
                                 <f:selectItems value="#{mesaMB.listaMesas}" var="mesa"
                                                itemLabel="#{mesa.numero}" itemValue="#{mesa}" />
                             </p:selectOneMenu>
-                            <p:commandButton value="Adicinar" update="tabelaItensPedido,inputQtd"
+                            <p:commandButton value="Adicinar" update="formFormularioPedidos"
                                              actionListener="#{pedidoMB.adicionarItem()}" oncomplete="PF('dialogItensPedido').hide()"/>
-                        </p:panelGrid>  
-                    </p:dialog>
-
-                    <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaItensPedidos}" 
-                                 reflow="true" rows="5" paginator="true" var="itens">
-                        <f:facet name="header">
-                            Lista de Pedidos    
-                        </f:facet>
-                        <p:column headerText="Produto" sortBy="#{itens.produto.nome}">
-                            <h:outputText value="#{itens.produto.nome}"/>
-                        </p:column>
-                        <p:column headerText="Quantidade" sortBy="#{itens.quantidade}">
-                            <h:outputText value="#{itens.quantidade}" />
-                        </p:column>
-                        <p:column headerText="Valor Unitário" sortBy="#{itens.produto.valorVenda}">
-                            <h:outputText value="#{itens.produto.valorVenda}" />
-                        </p:column>
-                        <p:column headerText="Valor Total" sortBy="#{itens.valorTotal}">
-                            <h:outputText value="#{itens.valorTotal}" />
-                        </p:column>
-                        <p:column headerText="Estoque" sortBy="#{itens.produto.quantidadeEstoque}">
-                            <h:outputText value="#{itens.produto.quantidadeEstoque}" />
-                        </p:column>
-                        <p:column headerText="Ações">
-                            <p:commandButton value="Alterar" oncomplete="PF('dialogPedido').show()"
-                                             update=":formFormularioPedidos">
-                                <f:setPropertyActionListener value="#{itens}" target="#{pedidoMB.pedido}"/>
-                            </p:commandButton>    
-                            <p:commandButton value="Excluir" icon="ui-icon-trash" update="@form"
-                                             actionListener="#{pedidoMB.removerItem(itens)}" >
-                                <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
-                            </p:commandButton>   
-                        </p:column>
-
-                    </p:dataTable>
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                    </p:confirmDialog>
-
-                    <p:commandButton value="Finalizar Pedido"
-                                     actionListener="#{pedidoMB.finalizarPedido()}"
-                                     update="@form"/>
-
-                </h:form>
-
-                <p:dialog header="Histórico de Pedidos" widgetVar="dlgPesquisar"
-                          modal="true" height="auto" width="500" style="text-align: center;">
-                    <p:dataTable id="tabelaDialog" var="com"
-                                 value="#{pedidoMB.listaPedidos}">
-
-                        <p:column headerText="Observação">
-                            <h:outputText value="#{com.observacao}" />
-                        </p:column>
-
-
-                        <p:column headerText="Valor Total Pedido">
-                            <h:outputText value="#{com.valorTotal}">
-                                <f:convertNumber pattern="¤#,##0.00" currencySymbol="R$" />
-                            </h:outputText>
-                        </p:column>
-
-                        <p:column headerText="Data">
-                            <h:outputText value="#{com.data}">
-                                <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
-                            </h:outputText>
-                        </p:column>
-
-                    </p:dataTable>
-
+                        </p:panelGrid>
+                    </h:form>
                 </p:dialog>
 
+                <p:dialog header="Lista de Pedidos" widgetVar="dlgPesquisar"
+                          modal="true" height="auto" width="500" responsive="true"> 
+                    <h:form id="tabelaDialog">
+                        <p:dataTable var="com"
+                                     value="#{pedidoMB.listaPedidos}">
+
+                            <p:column headerText="Observação">
+                                <h:outputText value="#{com.observacao}" />
+                            </p:column>
+
+                            <p:column headerText="Valor Total Pedido">
+                                <h:outputText value="#{com.valorTotal}">
+                                    <f:convertNumber pattern="¤#,##0.00" currencySymbol="R$" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Data">
+                                <h:outputText value="#{com.data}">
+                                    <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:dialog>
             </ui:define>
         </ui:composition>
     </body>

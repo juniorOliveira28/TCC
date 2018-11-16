@@ -79,37 +79,59 @@
                                 </p:commandLink>
                             </h:panelGrid>
                         </p:column>
-<!--                        <p:column>
-                            <h:panelGrid columns="1">
-                                <h:outputText value="Cidade:" />
-                                <p:selectOneMenu 
-                                    id="cidade"  value="" requiredMessage="Escolha uma cidade" required = "true">
-                                    <f:selectItem itemLabel="Selecione"/>
-                                    <f:selectItems value="{cidadeMB.listaCidade}" 
-                                                   var ="cidade"
-                                                   itemLabel="{cidade.nome}"
-                                                   itemValue="{cidade}"/>
-                                </p:selectOneMenu> 
-                            </h:panelGrid> 
-                        </p:column>  -->
+                        <!--                        <p:column>
+                                                    <h:panelGrid columns="1">
+                                                        <h:outputText value="Cidade:" />
+                                                        <p:selectOneMenu 
+                                                            id="cidade"  value="" requiredMessage="Escolha uma cidade" required = "true">
+                                                            <f:selectItem itemLabel="Selecione"/>
+                                                            <f:selectItems value="{cidadeMB.listaCidade}" 
+                                                                           var ="cidade"
+                                                                           itemLabel="{cidade.nome}"
+                                                                           itemValue="{cidade}"/>
+                                                        </p:selectOneMenu> 
+                                                    </h:panelGrid> 
+                                                </p:column>  -->
                     </h:panelGrid>
                 </div>
                 <p:dialog header="Teste" widgetVar="teste" modal="true" height="auto" width="50%">
-                    <p:dataTable id="tabelaItensPedido" value="#{categoriaMB.listaCategorias}" 
-                                 reflow="true" rows="5" paginator="true" var="itens">
-                        <f:facet name="header">
-                            Lista de Pedidos    
-                        </f:facet>
-                        <p:column headerText="Produto" sortBy="#{itens.nome}">
-                            <h:outputText value="#{itens.nome}"/>
-                        </p:column>
-                      
-                        <p:column headerText="Ações">
-                            <p:commandButton value="Alterar"/>
-                        </p:column>
-
-                    </p:dataTable>
-                    <p:commandButton value="aa"/>
+                    <h:form>
+                        <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaItensPedidos}"
+                                     reflow="true" rows="5" paginator="true" var="itens">
+                            <f:facet name="header">
+                                Lista de Pedidos
+                            </f:facet>
+                            <p:column headerText="Produto" sortBy="#{itens.produto.nome}">
+                                <h:outputText value="#{itens.produto.nome}"/>
+                            </p:column>
+                            <p:column headerText="Quantidade" sortBy="#{itens.quantidade}">
+                                <h:outputText value="#{itens.quantidade}" />
+                            </p:column>
+                            <p:column headerText="Valor Unitário" sortBy="#{itens.produto.valorVenda}">
+                                <h:outputText value="#{itens.produto.valorVenda}" />
+                            </p:column>
+                            <p:column headerText="Valor Total" sortBy="#{itens.valorTotal}">
+                                <h:outputText value="#{itens.valorTotal}" />
+                            </p:column>
+                            <p:column headerText="Estoque" sortBy="#{itens.produto.quantidadeEstoque}">
+                                <h:outputText value="#{itens.produto.quantidadeEstoque}" />
+                            </p:column>
+                            <p:column headerText="Ações">
+                                <p:commandButton value="Alterar">
+                                    
+                                </p:commandButton>
+                                <p:commandButton value="Excluir" icon="ui-icon-trash" update="@form"
+                                                 actionListener="#{pedidoMB.removerItem(itens)}" >
+                                    <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                        <p:commandButton value="aa"/>
+                    </h:form>
                 </p:dialog>
             </ui:define>
 

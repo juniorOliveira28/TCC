@@ -32,6 +32,9 @@ public class PedidoMB {
         pedido = new Pedido();
         itensPedido = new ItensPedido();
         listaItensPedidos = new ArrayList<>();
+
+        listaPedidos = daoPedido.buscarTodos();
+//        listaItensPedidos = daoItensPedido.buscarTodos();
     }
 
     public void adicionarItem() {
@@ -82,6 +85,7 @@ public class PedidoMB {
         System.out.println("Dentro do Método Finalizar pedido");
         Double valorFinalPedido = 0.0;
         double qtdItens = 0.0;
+        double caixa = 0.0;
 
         daoPedido.salvar(pedido);
 
