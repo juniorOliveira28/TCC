@@ -1,0 +1,15 @@
+INSERT INTO `Categoria` (`id`, `descricao`, `nome`)
+ VALUES (1, NULL, 'Bebida');
+
+
+INSERT INTO `Fornecedor` (`id`, `email`, `fone`, `nome`, `cnpj`) VALUES
+(1, 'antonio@gmail.com', '(44) 98785-1059', 'Antonio', NULL);
+
+
+INSERT INTO `Produto` (`id`, `descricao`, `nome`, `quantidadeEstoque`, `valorVenda`, `categoria_id`) VALUES
+(1, 'Coca Cola litro', 'Coca Cola 1L', 0, 6, 1),
+(2, 'Cerveja lata', 'Cerveja 250ML', 0, 4, 1);
+
+INSERT INTO `Usuario` (`id`, `email`, `fone`, `nome`, `enable`, `perfil`, `senha`) VALUES
+(1, 'jose@gmail.com', '(44) 98988-8898', 'José', b'1', 'ADMINISTRADOR', '123'),
+(2, 'maria@gmail.com', '(44) 99820-5656', 'Maria', b'1', 'ATENDENTE', '123');

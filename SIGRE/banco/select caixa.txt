@@ -1,0 +1,1 @@
+SELECT (SELECT SUM(pedido.valorTotal) FROM pedido) - (SELECT SUM(compra.valorTotalCompra) FROM compra) as 'Total'

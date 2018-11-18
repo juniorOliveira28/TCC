@@ -22,8 +22,6 @@ public class Compra implements Serializable {
     private Date dataCompra = new Date();
     private String observacao;
     private Double valorTotalCompra;
-    @ManyToOne
-    private Caixa caixa;
     
     public Long getId() {
         return id;
@@ -64,16 +62,6 @@ public class Compra implements Serializable {
     public void setValorTotalCompra(Double valorTotalCompra) {
         this.valorTotalCompra = valorTotalCompra;
     }
-
-    public Caixa getCaixa() {
-        return caixa;
-    }
-
-    public void setCaixa(Caixa caixa) {
-        this.caixa = caixa;
-    }
-
-    
 
     @Override
     public int hashCode() {

@@ -22,37 +22,40 @@
             <div id="menu">
                 <ui:insert name="top"> <br/>
 
-                    <p:menubar id="menu">
-                        <p:submenu label="Usuários">          
-                            <p:menuitem value="Cadastrar Usuários" url="/sistema/viewAdmin/cadastros/cadastro-usuarios.jsf" />
-                        </p:submenu>  
-                        <p:submenu label="Categorias">          
-                            <p:menuitem value="Cadastrar Categorias" url="/sistema/viewAdmin/cadastros/cadastro-categoria.jsf" />
-                        </p:submenu>  
-                        <p:submenu label="Produtos">          
-                            <p:menuitem value="Cadastrar Produtos" url="/sistema/viewAdmin/cadastros/cadastro-produto.jsf" />
-                        </p:submenu>  
-                        <p:submenu label="Fornecedores">          
-                            <p:menuitem value="Cadastrar Fornecedores" url="/sistema/viewAdmin/cadastros/cadastro-fornecedor.jsf" />
-                        </p:submenu>  
-                        <p:submenu label="Mesas">          
-                            <p:menuitem value="Cadastrar Mesas" url="/sistema/viewAdmin/cadastros/cadastro-mesa.jsf" />
-                        </p:submenu>  
-                        <p:submenu label="Compra Produtos">          
-                            <p:menuitem value="Realizar Compra" url="/sistema/viewAdmin/compras/compra-produtos.jsf" />
-                        </p:submenu>  
-                        <p:submenu label="PEDIDOS">          
-                            <p:menuitem value="Realizar Pedidos" url="/sistema/viewAdmin/pedidos.jsf" />
-                        </p:submenu>   
-                        <p:submenu label="PEDIDOS MESA">          
-                            <p:menuitem value="Realizar Pedidos" url="/sistema/viewAdmin/pedidos-mesa.jsf" />
-                        </p:submenu>   
-                        <f:facet name="options">
-                            <h:outputLink value="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
-                                <p:commandButton type="button" value="Sair" icon="ui-icon-extlink" style=" font-weight : bold" />
-                            </h:outputLink>
-                        </f:facet>
-                    </p:menubar>
+                    <h:form>
+                        <p:menubar id="menu">
+                            <p:submenu label="Usuários">          
+                                <p:menuitem value="Cadastrar Usuários" url="/sistema/viewAdmin/cadastros/cadastro-usuarios.jsf" />
+                            </p:submenu>  
+                            <p:submenu label="Categorias">          
+                                <p:menuitem value="Cadastrar Categorias" url="/sistema/viewAdmin/cadastros/cadastro-categoria.jsf" />
+                            </p:submenu>  
+                            <p:submenu label="Produtos">          
+                                <p:menuitem value="Cadastrar Produtos" url="/sistema/viewAdmin/cadastros/cadastro-produto.jsf" />
+                            </p:submenu>  
+                            <p:submenu label="Fornecedores">          
+                                <p:menuitem value="Cadastrar Fornecedores" url="/sistema/viewAdmin/cadastros/cadastro-fornecedor.jsf" />
+                            </p:submenu>  
+                            <p:submenu label="Mesas">          
+                                <p:menuitem value="Cadastrar Mesas" url="/sistema/viewAdmin/cadastros/cadastro-mesa.jsf" />
+                            </p:submenu>  
+                            <p:submenu label="Compra Produtos">          
+                                <p:menuitem value="Realizar Compra" url="/sistema/viewAdmin/compras/compra-produtos.jsf" />
+                            </p:submenu>  
+                            <p:submenu label="PEDIDOS">          
+                                <p:menuitem value="Realizar Pedidos" url="/sistema/viewAdmin/pedidos.jsf" />
+                            </p:submenu>   
+                            <p:submenu label="PEDIDOS MESA">          
+                                <p:menuitem value="Realizar Pedidos" url="/sistema/viewAdmin/pedidos-mesa.jsf" />
+                            </p:submenu>   
+                            
+                            <f:facet name="options">
+                                <h:outputLink value="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
+                                    <p:commandButton type="button" value="Sair" icon="ui-icon-extlink" style=" font-weight : bold" />
+                                </h:outputLink>
+                            </f:facet>
+                        </p:menubar>
+                    </h:form>
                 </ui:insert>
             </div>
         </div>
@@ -68,13 +71,13 @@
                 <!--SIGRE - Sistema Para Gerenciamento de Restaurantes-->
                 <!--<footer class="py-5 bg-black">-->
                 <!--Copyright ©-->
-                    <div id="rodape">
-                        <div class="container">
-                            <p class="m-0 text-center text-white small">oliveirajunior.cne@gmail.com - 2018</p>
-                        </div>
-                        
-                        <!-- /.container -->
+                <div id="rodape">
+                    <div class="container">
+                        <p class="m-0 text-center text-white small">oliveirajunior.cne@gmail.com - 2018</p>
                     </div>
+
+                    <!-- /.container -->
+                </div>
                 <!--</footer>-->
             </ui:insert>
         </div>

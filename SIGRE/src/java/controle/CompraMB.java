@@ -104,6 +104,10 @@ public class CompraMB {
         ChamarRelatorio rel = new ChamarRelatorio();
         rel.imprimeRelatorio("relCompra.jasper", null, "Relatório_Compras");
     }
+      public void chamarRelatorioCaixa() {
+        ChamarRelatorio rel = new ChamarRelatorio();
+        rel.imprimeRelatorio("relCaixa.jasper", null, "Relatório_Caixa");
+    }
 
     public void removerItem(ItensCompra itemRemover) {
         System.out.println("Dentro do metodo remover");

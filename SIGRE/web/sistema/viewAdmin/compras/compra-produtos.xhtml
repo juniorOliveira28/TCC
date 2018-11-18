@@ -141,6 +141,9 @@
                         </p:dataTable>
                         <p:commandButton onclick="PF('dlgPesquisar').hide()" ajax="false"
                                          value="Imprimir" actionListener="#{compraMB.chamarRelatorio()}"/>
+                        <p:commandButton onclick="PF('dlgPesquisar').hide()" ajax="false"
+                                         value="Caixa" actionListener="#{compraMB.chamarRelatorioCaixa()}"/>
+                        
                     </h:form>
                 </p:dialog>
 

@@ -4,6 +4,7 @@ import dao.DAOGenerico;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -22,6 +23,9 @@ public class PedidoMB {
     private List<ItensPedido> listaItensPedidos = new ArrayList<>();
     private List<Pedido> listaPedidos = new ArrayList<>();
     private List<Produto> listaProdutos = new ArrayList<>();
+    private List<Mesa> listaMesas = new ArrayList<>();
+
+    private List<ItensPedido> listaItensPedidosMesa = new ArrayList<>();
 
     private DAOGenerico<Produto> daoProduto = new DAOGenerico<>(Produto.class);
     private DAOGenerico<Pedido> daoPedido = new DAOGenerico<>(Pedido.class);
@@ -85,7 +89,6 @@ public class PedidoMB {
         System.out.println("Dentro do Método Finalizar pedido");
         Double valorFinalPedido = 0.0;
         double qtdItens = 0.0;
-        double caixa = 0.0;
 
         daoPedido.salvar(pedido);
 
@@ -131,18 +134,36 @@ public class PedidoMB {
         itensPedido = new ItensPedido();
     }
 
+//    public void teste() {
+//
+//        ArrayList<ItensPedido> tempMesa = new ArrayList<>(); 
+////                listaItensPedidos.stream()
+////                .filter((ItensPedido p) -> p.getPedido().getMesa().getId())
+////                .collect(Collectors.toList());
+//                System.out.println("Mesa " + tempMesa);
+//
+//    }
+
     public void fecharMesa() {
         System.out.println("Dentro do metodo fechar mesa");
-//        int temp = 0;
-//        for (ItensPedido it : listaItensPedidos) {
-//            Mesa mesa = it.getPedido().getMesa();
-//            if (it.getPedido().getMesa().getId().equals(mesa.getId())) {
-//                
-//                temp += it.getPedido().getId();
-//                itensPedido.setPedido(pedido);
-//                System.out.println("Mesa");
-//            }
-        preencherListaPedidos(pedido.getMesa().getId());
+        for (ItensPedido it : listaItensPedidos) {
+            Mesa mesa = it.getPedido().getMesa();
+            if (it.getPedido().getMesa().getId() == mesa.getId()) {
+                System.out.println("Dentro da Mesa");
+//                listaItensPedidosMesa += it.getPedido().;
+            }
+        }
+////        int temp = 0;
+////        for (ItensPedido it : listaItensPedidos) {
+////            Mesa mesa = it.getPedido().getMesa();
+////            if (it.getPedido().getMesa().getId().equals(mesa.getId())) {
+////                
+////                temp += it.getPedido().getId();
+////                itensPedido.setPedido(pedido);
+////                System.out.println("Mesa");
+////            }
+//            preencherListaPedidos(pedido.getMesa().getId());
+//        }
     }
 
     public void removerItem(ItensPedido itemRemover) {
