@@ -48,7 +48,7 @@
                     <h:form id="formFormularioCategoria">
                         <p:panelGrid columns="2">
                             <h:outputText value="Nome: "/>
-                            <p:inputText value="#{categoriaMB.categoria.nome}"/>
+                            <p:inputText value="#{categoriaMB.categoria.nome}" required="true"/>
                             
                             <p:commandButton value="Inserir" actionListener="#{categoriaMB.inserir()}"
                                              oncomplete="PF('dialogCategoria').hide()"
@@ -57,7 +57,6 @@
                     </h:form>
                 </p:dialog>
             </ui:define>
-
         </ui:composition>
 
     </body>

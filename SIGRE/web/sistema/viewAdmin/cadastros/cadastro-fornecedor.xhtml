@@ -57,14 +57,15 @@
                     <h:form id="formFormularioFornecedor">
                         <p:panelGrid columns="2">
                             <h:outputText value="Nome: "/>
-                            <p:inputText value="#{fornecedorMB.fornecedor.nome}"/>
+                            <p:inputText value="#{fornecedorMB.fornecedor.nome}" required="true"/>
 
                             <p:outputLabel for="phoneWithExt" value="Telefone:" />
-                            <p:inputMask id="phoneWithExt" value="#{fornecedorMB.fornecedor.fone}" mask="(99) 99999-9999?"/>
+                            <p:inputMask id="phoneWithExt" required="true"
+                                         value="#{fornecedorMB.fornecedor.fone}" mask="(99) 99999-9999?"/>
 
 
                             <h:outputText value="Email: "/>
-                            <p:inputText value="#{fornecedorMB.fornecedor.email}"/>
+                            <p:inputText value="#{fornecedorMB.fornecedor.email}" required="true"/>
 
 
                             <p:commandButton value="Inserir" actionListener="#{fornecedorMB.inserir()}"

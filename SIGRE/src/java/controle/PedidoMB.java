@@ -23,9 +23,9 @@ public class PedidoMB {
     private List<ItensPedido> listaItensPedidos = new ArrayList<>();
     private List<Pedido> listaPedidos = new ArrayList<>();
     private List<Produto> listaProdutos = new ArrayList<>();
-    private List<Mesa> listaMesas = new ArrayList<>();
+//    private List<Mesa> listaMesas = new ArrayList<>();
 
-    private List<ItensPedido> listaItensPedidosMesa = new ArrayList<>();
+//    private List<ItensPedido> listaItensPedidosMesa = new ArrayList<>();
 
     private DAOGenerico<Produto> daoProduto = new DAOGenerico<>(Produto.class);
     private DAOGenerico<Pedido> daoPedido = new DAOGenerico<>(Pedido.class);
@@ -144,15 +144,15 @@ public class PedidoMB {
 //
 //    }
 
-    public void fecharMesa() {
-        System.out.println("Dentro do metodo fechar mesa");
-        for (ItensPedido it : listaItensPedidos) {
-            Mesa mesa = it.getPedido().getMesa();
-            if (it.getPedido().getMesa().getId() == mesa.getId()) {
-                System.out.println("Dentro da Mesa");
-//                listaItensPedidosMesa += it.getPedido().;
-            }
-        }
+//    public void fecharMesa() {
+//        System.out.println("Dentro do metodo fechar mesa");
+//        for (ItensPedido it : listaItensPedidos) {
+//            Mesa mesa = it.getPedido().getMesa();
+//            if (it.getPedido().getMesa().getId() == mesa.getId()) {
+//                System.out.println("Dentro da Mesa");
+////                listaItensPedidosMesa += it.getPedido().;
+//            }
+//        }
 ////        int temp = 0;
 ////        for (ItensPedido it : listaItensPedidos) {
 ////            Mesa mesa = it.getPedido().getMesa();
@@ -164,7 +164,7 @@ public class PedidoMB {
 ////            }
 //            preencherListaPedidos(pedido.getMesa().getId());
 //        }
-    }
+//    }
 
     public void removerItem(ItensPedido itemRemover) {
         System.out.println("Dentro do metodo remover");

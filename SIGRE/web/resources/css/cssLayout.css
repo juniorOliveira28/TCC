@@ -17,6 +17,7 @@ html{
 body{
     font-family: 'Lato';
     margin-bottom: 5%;
+    background: #f2f6fc;
 }
 
 #bottom {
@@ -58,12 +59,11 @@ body{
 
 /*centralizando tabelas*/
 .ui-datatable .ui-datatable-header {
-    text-align: left !important;
+    text-align: center !important;
 }
 
 .center-table{
     text-align: center;
-    background-color: red;
 }
 
 .mesa{
@@ -151,7 +151,8 @@ body{
 
 .center_content {
     position: relative;
-    background-color: #dddddd;
+    background-color: #f9f9f9;
+    /*background-color: red;*/
     padding: 5px;
 }
 

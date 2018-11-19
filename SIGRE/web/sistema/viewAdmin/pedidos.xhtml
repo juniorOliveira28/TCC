@@ -40,10 +40,7 @@
                             <h:outputText value="#{itens.produto.quantidadeEstoque}" />
                         </p:column>
                         <p:column headerText="Ações">
-                            <p:commandButton value="Alterar" oncomplete="PF('dialogPedido').show()"
-                                             update=":formFormularioPedidos">
-                                <f:setPropertyActionListener value="#{itens}" target="#{pedidoMB.pedido}"/>
-                            </p:commandButton>
+
                             <p:commandButton value="Excluir" icon="ui-icon-trash" update="@form"
                                              actionListener="#{pedidoMB.removerItem(itens)}" >
                                 <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
@@ -63,7 +60,7 @@
                     <h:form id="formPedido">
                         <p:panelGrid columns="2">
                             <h:outputText value="Produto" />
-                            <p:selectOneMenu value="#{pedidoMB.itensPedido.produto}"
+                            <p:selectOneMenu value="#{pedidoMB.itensPedido.produto}" required="true"
                                              converter="converterProduto" filter="true"
                                              filterMatchMode="startsWith">
                                 <f:selectItem itemLabel="Selecione" itemValue=""/>
@@ -73,16 +70,16 @@
 
 
                             <h:outputText value="Quantidade:" />
-                            <p:inputText id="inputQtd" value="#{pedidoMB.itensPedido.quantidade}"/>
+                            <p:inputText id="inputQtd" value="#{pedidoMB.itensPedido.quantidade}" required="true"/>
                             <h:outputText value="Data:" />
-                            <p:calendar pattern="dd/MM/yyyy" value="#{pedidoMB.pedido.data}" />
+                            <p:calendar pattern="dd/MM/yyyy" value="#{pedidoMB.pedido.data}" required="true" />
 
 
                             <h:outputText value="Observação" />
                             <p:inputText value="#{pedidoMB.pedido.observacao}" />
 
                             <h:outputText value="Mesa:" />
-                            <p:selectOneMenu value="#{pedidoMB.pedido.mesa}"
+                            <p:selectOneMenu value="#{pedidoMB.pedido.mesa}" required="true"
                                              converter="converterMesa" filter="true"
                                              filterMatchMode="startsWith">
                                 <f:selectItem itemLabel="Selecione" itemValue=""/>

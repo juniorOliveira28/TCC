@@ -64,11 +64,11 @@
                     <h:form id="formFormularioProduto">
                         <p:panelGrid columns="2">
                             <h:outputText value="Nome: "/>
-                            <p:inputText value="#{produtoMB.produto.nome}"/>
+                            <p:inputText value="#{produtoMB.produto.nome}" required="true"/>
 
                             <h:outputText value="Categoria:"/>
                             <p:selectOneMenu converter="converterCategoria" value="#{produtoMB.produto.categoria}" requiredMessage="Campo Vazio" required = "true">
-                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItem itemLabel="SELECIONE" itemValue=""/>
                                 <f:selectItems value="#{categoriaMB.listaCategorias}" 
                                                var ="categoria"
                                                itemLabel="#{categoria.nome}"
@@ -76,14 +76,14 @@
                             </p:selectOneMenu>
 
                             <h:outputText value="Valor Venda:"/>
-                            <p:inputText value="#{produtoMB.produto.valorVenda}"/>
+                            <p:inputText value="#{produtoMB.produto.valorVenda}" required="true"/>
 
 
                             <h:outputText value="Descrição:"/>
                             <p:inputText value="#{produtoMB.produto.descricao}"/>
 
                             <h:outputText value="Esoque: "/>
-                            <p:selectOneMenu value="#{produtoMB.produto.estoque}">
+                            <p:selectOneMenu value="#{produtoMB.produto.estoque}" rendered="true">
                                 <f:selectItem itemLabel="Selecione"/>
                                 <f:selectItem itemLabel="SIM" itemValue="SIM" />
                                 <f:selectItem itemLabel="NÃO" itemValue="NÃO"/>

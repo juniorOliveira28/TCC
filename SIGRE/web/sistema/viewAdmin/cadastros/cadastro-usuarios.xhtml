@@ -26,8 +26,8 @@
 
                         <f:facet name="header">
                             <p:outputPanel>
-                                <h:outputText value="Lista de Usuários: " />
-                                <p:inputText id="globalFilter" onkeyup="PF('tbUsuarios').filter()" style="width:150px" placeholder="Pesquisar"/>
+                                <h:outputText value="Lista de Usuários" />
+                                <!--<p:inputText id="globalFilter" onkeyup="PF('tbUsuarios').filter()" style="width:150px" placeholder="Pesquisar"/>-->
                             </p:outputPanel>
                         </f:facet>
                         <p:ajax event="rowSelect" />
@@ -71,21 +71,23 @@
                         <!--<p:messages />-->
                         <p:panelGrid columns="2">
                             <h:outputText value="Nome: "/>
-                            <p:inputText value="#{usuarioMB.usuario.nome}" required="true" requiredMessage="s"/>
+                            <p:inputText value="#{usuarioMB.usuario.nome}" required="true" requiredMessage=""/>
 
                             <p:outputLabel for="phoneWithExt" value="Telefone:" />
-                            <p:inputMask id="phoneWithExt" value="#{usuarioMB.usuario.fone}" mask="(99) 99999-9999?"/>
+                            <p:inputMask id="phoneWithExt" required="true"
+                                         value="#{usuarioMB.usuario.fone}" mask="(99) 99999-9999?"/>
 
                             <h:outputText value="Email: "/>
-                            <p:inputText value="#{usuarioMB.usuario.email}"/>
+                            <p:inputText value="#{usuarioMB.usuario.email}" required="true"/>
 
                             <h:outputText value="Senha: "/>
-                            <p:password value="#{usuarioMB.usuario.senha}" feedback="true" weakLabel=" Senha Fraca" 
+                            <p:password value="#{usuarioMB.usuario.senha}" required="true"
+                                        feedback="true" weakLabel=" Senha Fraca" 
                                         goodLabel="Senha Fraca : Média" strongLabel="Senha Fraca : Forte"/>
 
                             <h:outputText value="Perfil: "/>
-                            <p:selectOneMenu value="#{usuarioMB.usuario.perfil}">
-                                <f:selectItem itemLabel="Selecione"/>
+                            <p:selectOneMenu value="#{usuarioMB.usuario.perfil}" required="true">
+                                <f:selectItem itemLabel="SELECIONE"/>
                                 <f:selectItem itemLabel="ADMINISTRADOR" itemValue="ADMINISTRADOR" />
                                 <f:selectItem itemLabel="ATENDENTE" itemValue="ATENDENTE"/>
                             </p:selectOneMenu>
