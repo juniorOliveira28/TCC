@@ -6,8 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "produto")
 public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -15,7 +17,7 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    private Double valorVenda =0.;
+    private Double valorVenda = 0.;
     private String descricao;
     private Double quantidadeEstoque = 0.;
     @ManyToOne
@@ -55,7 +57,7 @@ public class Produto implements Serializable {
     }
 
     public Double getQuantidadeEstoque() {
-        if(quantidadeEstoque==null){
+        if (quantidadeEstoque == null) {
             quantidadeEstoque = 0.;
         }
         return quantidadeEstoque;
@@ -81,7 +83,6 @@ public class Produto implements Serializable {
         this.estoque = estoque;
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -106,5 +107,5 @@ public class Produto implements Serializable {
     public String toString() {
         return "modelo.Produto[ id=" + id + " ]";
     }
-    
+
 }

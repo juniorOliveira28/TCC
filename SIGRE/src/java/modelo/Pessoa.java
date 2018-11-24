@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 
 @MappedSuperclass
 public class Pessoa implements Serializable {
@@ -56,7 +57,7 @@ public class Pessoa implements Serializable {
 //        hash += (id != null ? id.hashCode() : 0);
 //        return hash;
 //    }
-       @Override
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 89 * hash + Objects.hashCode(this.id);
@@ -75,7 +76,6 @@ public class Pessoa implements Serializable {
 //        }
 //        return true;
 //    }
-    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -98,5 +98,5 @@ public class Pessoa implements Serializable {
     public String toString() {
         return "modelo.Pessoa[ id=" + id + " ]";
     }
-    
+
 }

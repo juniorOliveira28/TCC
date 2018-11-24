@@ -7,9 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity
+@Table(name = "pedido")
 public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -98,8 +100,6 @@ public class Pedido implements Serializable {
         this.mesa = mesa;
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -124,5 +124,5 @@ public class Pedido implements Serializable {
     public String toString() {
         return "modelo.Pedido[ id=" + id + " ]";
     }
-    
+
 }

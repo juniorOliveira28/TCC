@@ -26,7 +26,7 @@ public class PedidoMB {
 //    private List<Mesa> listaMesas = new ArrayList<>();
 
 //    private List<ItensPedido> listaItensPedidosMesa = new ArrayList<>();
-
+    private DAOGenerico<Mesa> daoMesa = new DAOGenerico<>(Mesa.class);
     private DAOGenerico<Produto> daoProduto = new DAOGenerico<>(Produto.class);
     private DAOGenerico<Pedido> daoPedido = new DAOGenerico<>(Pedido.class);
     private DAOGenerico<ItensPedido> daoItensPedido = new DAOGenerico<>(ItensPedido.class);
@@ -91,10 +91,11 @@ public class PedidoMB {
         double qtdItens = 0.0;
 
         daoPedido.salvar(pedido);
-
         for (ItensPedido it : listaItensPedidos) {
             Produto produto = it.getProduto();
+            Mesa mesa = it.getPedido().getMesa();
 
+            it.getPedido().setMesa(mesa);
             it.setPedido(pedido);
             daoItensPedido.salvar(it);
 
@@ -113,10 +114,17 @@ public class PedidoMB {
             } else if (it.getProduto().getEstoque().equals("NÃO")) {
                 it.setPedido(pedido);
                 daoItensPedido.salvar(it);
-                System.out.println("Este produto não possui estoque");
+                System.out.println("Este produto não possui estoque ");
+                System.out.println("Produto: " + it.getProduto().getNome()
+                        + " Quantidade: " + it.getQuantidade());
             }
             valorFinalPedido += it.getValorTotal();
+                mesa.setStatus("OCUPADA");
+                it.getPedido().setMesa(mesa);
+                daoMesa.alterar(mesa);
         }
+        System.out.println("Mesa: " + pedido.getMesa().getNumero());
+
         pedido.setValorTotal(valorFinalPedido);
         daoPedido.alterar(pedido);
         listaPedidos = daoPedido.buscarTodos();
@@ -143,7 +151,6 @@ public class PedidoMB {
 //                System.out.println("Mesa " + tempMesa);
 //
 //    }
-
 //    public void fecharMesa() {
 //        System.out.println("Dentro do metodo fechar mesa");
 //        for (ItensPedido it : listaItensPedidos) {
@@ -165,7 +172,6 @@ public class PedidoMB {
 //            preencherListaPedidos(pedido.getMesa().getId());
 //        }
 //    }
-
     public void removerItem(ItensPedido itemRemover) {
         System.out.println("Dentro do metodo remover");
         listaItensPedidos.remove(itemRemover);

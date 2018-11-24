@@ -2,10 +2,12 @@ package modelo;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
-public class Usuario extends Pessoa implements Serializable{
-    
+//@Table(name = "usuario")
+public class Usuario extends Pessoa implements Serializable {
+
     private String perfil;
     private String senha;
     private Boolean enable = true;

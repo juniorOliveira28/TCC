@@ -16,9 +16,18 @@
                                      onclick="PF('dlgPesquisar').show();" update=":tabelaDialog" />
 
                     <p:commandButton value="Novo Item" oncomplete="PF('dialogItensPedido').show()"/>
-                </h:form>
+                </h:form><br></br>
                 <h:form id="formFormularioPedidos">
-
+                    <p:panelGrid columns="2">
+                            <h:outputText value="Mesa:" />
+                            <p:selectOneMenu value="#{pedidoMB.pedido.mesa}" required="true"
+                                             converter="converterMesa" filter="true"
+                                             filterMatchMode="startsWith">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItems value="#{mesaMB.listaMesas}" var="mesa"
+                                               itemLabel="#{mesa.numero}" itemValue="#{mesa}" />
+                            </p:selectOneMenu>
+                        </p:panelGrid><br></br>
                     <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaItensPedidos}"
                                  reflow="true" rows="5" paginator="true" var="itens">
                         <f:facet name="header">
@@ -78,14 +87,14 @@
                             <h:outputText value="Observação" />
                             <p:inputText value="#{pedidoMB.pedido.observacao}" />
 
-                            <h:outputText value="Mesa:" />
-                            <p:selectOneMenu value="#{pedidoMB.pedido.mesa}" required="true"
+<!--                            <h:outputText value="Mesa:" />
+                            <p:selectOneMenu value="{pedidoMB.pedido.mesa}" required="true"
                                              converter="converterMesa" filter="true"
                                              filterMatchMode="startsWith">
                                 <f:selectItem itemLabel="Selecione" itemValue=""/>
-                                <f:selectItems value="#{mesaMB.listaMesas}" var="mesa"
-                                               itemLabel="#{mesa.numero}" itemValue="#{mesa}" />
-                            </p:selectOneMenu>
+                                <f:selectItems value="{mesaMB.listaMesas}" var="mesa"
+                                               itemLabel="{mesa.numero}" itemValue="{mesa}" />
+                            </p:selectOneMenu>-->
                             <p:commandButton value="Adicinar" update="formFormularioPedidos"
                                              actionListener="#{pedidoMB.adicionarItem()}" oncomplete="PF('dialogItensPedido').hide()"/>
                         </p:panelGrid>

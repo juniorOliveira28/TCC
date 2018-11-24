@@ -6,10 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class ItensPedido implements Serializable{
-    
+@Table(name = "itensPedido")
+public class ItensPedido implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -69,7 +71,7 @@ public class ItensPedido implements Serializable{
         this.valorUnitario = valorUnitario;
     }
 
-           @Override
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -122,8 +124,8 @@ public class ItensPedido implements Serializable{
         }
         return true;
     }
-    
-      @Override
+
+    @Override
     public String toString() {
         return "modelo.ItensPedido[ id=" + id + " ]";
     }

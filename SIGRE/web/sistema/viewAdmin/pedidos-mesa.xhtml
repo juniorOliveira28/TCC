@@ -18,8 +18,8 @@
                                  styleClass="#{mesa.status eq 'LIVRE' ? 'green' : mesa.status eq 'OCUPADA' ? 'red': null}">
                         <p:column>
                             <h:panelGrid columns="1" class="mesa">
-                                <p:commandLink oncomplete="PF('teste').show()">
-                                    <h:graphicImage name="imagens/mesas2.png" value="#{mesaMB.mesa.id(1)}"/>
+                                <p:commandLink actionListener="#{pedidoMB.teste(6)}" oncomplete="PF('teste').show()">
+                                    <h:graphicImage name="imagens/mesas2.png"/>
                                 </p:commandLink>
                             </h:panelGrid>
                         </p:column>
@@ -96,26 +96,15 @@
                 </div>
                 <p:dialog header="Teste" widgetVar="teste" modal="true" height="auto" width="50%">
                     <h:form>
-                        <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaItensPedidos}"
+                        <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaPedidos}"
                                      reflow="true" rows="5" paginator="true" var="itens">
                             <f:facet name="header">
                                 Lista de Pedidos
                             </f:facet>
-                            <p:column headerText="Produto" sortBy="#{itens.produto.nome}">
-                                <h:outputText value="#{itens.produto.nome}"/>
+                            <p:column headerText="Produto" sortBy="#{itens.mesa}">
+                                <h:outputText value="#{itens.mesa.numero}"/>
                             </p:column>
-                            <p:column headerText="Quantidade" sortBy="#{itens.quantidade}">
-                                <h:outputText value="#{itens.quantidade}" />
-                            </p:column>
-                            <p:column headerText="Valor Unitário" sortBy="#{itens.produto.valorVenda}">
-                                <h:outputText value="#{itens.produto.valorVenda}" />
-                            </p:column>
-                            <p:column headerText="Valor Total" sortBy="#{itens.valorTotal}">
-                                <h:outputText value="#{itens.valorTotal}" />
-                            </p:column>
-                            <p:column headerText="Estoque" sortBy="#{itens.produto.quantidadeEstoque}">
-                                <h:outputText value="#{itens.produto.quantidadeEstoque}" />
-                            </p:column>
+                            
                             <p:column headerText="Ações">
                                 <p:commandButton value="Alterar">
                                     

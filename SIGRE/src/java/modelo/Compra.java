@@ -7,9 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity
+@Table(name = "compra")
 public class Compra implements Serializable {
 
     private static final long serialVersionUID = 1L;

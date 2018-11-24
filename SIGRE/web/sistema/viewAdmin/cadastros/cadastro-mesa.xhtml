@@ -17,7 +17,7 @@
                 <h:form id="formTabelaMesa">
                     <p:dataTable class="center-table" paginatorPosition="bottom"
                                  value="#{mesaMB.listaMesas}" var="mesa" reflow="true" rows="5" paginator="true"
-                                
+                                 rowStyleClass="#{mesa.status eq 'LIVRE' ? 'green' : mesa.status eq 'OCUPADA' ? 'red': null}"                                
                                  emptyMessage="Nenhuma mesa encontrada!">
                         <f:facet name="header">
                             Lista de Mesas 
@@ -28,9 +28,9 @@
                         <p:column headerText="Lugares" sortBy="#{mesa.qtdLugaress}">
                             <h:outputText value="#{mesa.qtdLugaress}"/>
                         </p:column>
-<!--                        <p:column headerText="Status">
-                            <h:outputText value="{}"/>
-                        </p:column>-->
+                        <p:column headerText="Status">
+                            <h:outputText value="#{mesa.status}"/>
+                        </p:column>
 
                         <p:column headerText="Ações">
                             <p:commandButton value="Alterar" oncomplete="PF('dialogMesa').show()"
@@ -59,12 +59,12 @@
                             <h:outputText value="Lugares:"/>
                             <h:inputText value="#{mesaMB.mesa.qtdLugaress}" required="true"/>
 
-<!--                            <h:outputText value="Status:"/>
-                            <p:selectOneMenu value="{}" id="status">
+                            <h:outputText value="Status:"/>
+                            <p:selectOneMenu value="#{mesaMB.mesa.status}" id="status">
                                 <f:selectItem itemLabel="SELECIONE" itemValue="SELECIONE"/>
                                 <f:selectItem itemLabel="LIVRE" itemValue="LIVRE"/>
                                 <f:selectItem itemLabel="OCUPADA" itemValue="OCUPADA"/>
-                            </p:selectOneMenu>-->
+                            </p:selectOneMenu>
 
                             <p:commandButton value="Inserir" actionListener="#{mesaMB.inserir()}"
                                              update=":formTabelaMesa" icon="ui-icon-disk"
