@@ -15,10 +15,12 @@
                 <!--<h:graphicImage name="imagens/mesas.png"  value="mesa 1"/>-->
                 <div align="center">
                     <h:panelGrid columns="5" cellspacing="15" 
-                                 styleClass="#{mesa.status eq 'LIVRE' ? 'green' : mesa.status eq 'OCUPADA' ? 'red': null}">
+                                 styleClass="#{mesa.status eq 'LIVRE' ? 'green' 
+                                               : mesa.status eq 'OCUPADA' ? 'red': null}">
                         <p:column>
                             <h:panelGrid columns="1" class="mesa">
-                                <p:commandLink actionListener="#{pedidoMB.teste(6)}" oncomplete="PF('teste').show()">
+                                <p:commandLink oncomplete="PF('teste').show()"
+                                               actionListener="#{pedidoMB.teste(5)}">
                                     <h:graphicImage name="imagens/mesas2.png"/>
                                 </p:commandLink>
                             </h:panelGrid>
@@ -32,7 +34,7 @@
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1" class="mesa">
-                                <p:commandLink>
+                                <p:commandLink actionListener="#{pedidoMB.teste(2)}" oncomplete="PF('teste').show()"    >
                                     <h:graphicImage name="imagens/mesas2.png" />
                                 </p:commandLink>
                             </h:panelGrid>
@@ -97,17 +99,17 @@
                 <p:dialog header="Teste" widgetVar="teste" modal="true" height="auto" width="50%">
                     <h:form>
                         <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaPedidos}"
-                                     reflow="true" rows="5" paginator="true" var="itens">
-                            <f:facet name="header">
-                                Lista de Pedidos
-                            </f:facet>
+                                     reflow="true" rows="5" paginator="true" var="itens" paginatorPosition="bottom">
                             <p:column headerText="Produto" sortBy="#{itens.mesa}">
                                 <h:outputText value="#{itens.mesa.numero}"/>
                             </p:column>
-                            
+                            <p:column headerText="Produto" sortBy="#{itens.mesa}">
+                                <h:outputText value="#{itens.quantidade}"/>
+                            </p:column>
+
                             <p:column headerText="Ações">
                                 <p:commandButton value="Alterar">
-                                    
+
                                 </p:commandButton>
                                 <p:commandButton value="Excluir" icon="ui-icon-trash" update="@form"
                                                  actionListener="#{pedidoMB.removerItem(itens)}" >

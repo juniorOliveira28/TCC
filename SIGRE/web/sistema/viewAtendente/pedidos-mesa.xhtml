@@ -18,8 +18,8 @@
                                  styleClass="#{mesa.status eq 'LIVRE' ? 'green' : mesa.status eq 'OCUPADA' ? 'red': null}">
                         <p:column>
                             <h:panelGrid columns="1" class="mesa" >
-                                <p:commandLink oncomplete="PF('teste').show()" actionListener="#{pedidoMB.fecharMesa()}">
-                                    <h:graphicImage name="imagens/mesas2.png" value="#{mesaMB.mesa.id(1)}" />
+                                <p:commandLink oncomplete="PF('teste').show()" actionListener="#{pedidoMB.teste(3)}">
+                                    <h:graphicImage name="imagens/mesas2.png" />
                                 </p:commandLink>
                             </h:panelGrid>
                         </p:column>

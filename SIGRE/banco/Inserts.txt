@@ -11,18 +11,6 @@ INSERT INTO `fornecedor` (`id`, `email`, `fone`, `nome`, `cnpj`) VALUES
 
 -- --------------------------------------------------------
 
-INSERT INTO `itenscompra` (`id`, `quantidadeItens`, `valorTotalItens`, `valorUnitarioItens`, `compra_id`, `produto_id`) VALUES
-(1, 50, 100, 2, 1, 1),
-(2, 50, 100, 2, 2, 4);
-
--- --------------------------------------------------------
-
-INSERT INTO `itenspedido` (`id`, `quantidade`, `valorTotal`, `valorUnitario`, `pedido_id`, `produto_id`) VALUES
-(1, 1, 5, NULL, 1, 1),
-(2, 1, 10, NULL, 1, 2);
-
--- --------------------------------------------------------
-
 INSERT INTO `mesa` (`id`, `numero`, `qtdLugaress`, `status`) VALUES
 (1, 1, 5, 'OCUPADA'),
 (2, 2, 5, 'LIVRE'),
@@ -32,10 +20,10 @@ INSERT INTO `mesa` (`id`, `numero`, `qtdLugaress`, `status`) VALUES
 -- --------------------------------------------------------
 
 INSERT INTO `produto` (`id`, `descricao`, `estoque`, `nome`, `quantidadeEstoque`, `valorVenda`, `categoria_id`) VALUES
-(1, 'Coca litro', 'SIM', 'Coca Cola 1L', 49, 5, 1),
+(1, 'Coca litro', 'SIM', 'Coca Cola 1L', 0, 5, 1),
 (2, 'Pão, tomate, alface, ovo', 'NÃO', 'X-Salada', 0, 10, 2),
 (3, 'Batata frita', 'NÃO', 'Porção de Batata M', 0, 20, 3),
-(4, 'Cerveja lata', 'SIM', 'Cerveja 250ML', 50, 5, 1);
+(4, 'Cerveja lata', 'SIM', 'Cerveja 250ML', 0, 5, 1);
 
 -- --------------------------------------------------------
 
