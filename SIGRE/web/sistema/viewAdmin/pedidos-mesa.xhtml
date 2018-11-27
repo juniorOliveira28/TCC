@@ -20,7 +20,7 @@
                         <p:column>
                             <h:panelGrid columns="1" class="mesa">
                                 <p:commandLink oncomplete="PF('teste').show()"
-                                               actionListener="#{pedidoMB.teste(5)}">
+                                               actionListener="#{pedidoMB.teste(1)}">
                                     <h:graphicImage name="imagens/mesas2.png"/>
                                 </p:commandLink>
                             </h:panelGrid>
@@ -98,14 +98,12 @@
                 </div>
                 <p:dialog header="Teste" widgetVar="teste" modal="true" height="auto" width="50%">
                     <h:form>
-                        <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaPedidos}"
+                        <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaItensPedidosMesa}"
                                      reflow="true" rows="5" paginator="true" var="itens" paginatorPosition="bottom">
-                            <p:column headerText="Produto" sortBy="#{itens.mesa}">
-                                <h:outputText value="#{itens.mesa.numero}"/>
+                            <p:column headerText="Produto" sortBy="#{itens.produto}">
+                                <h:outputText value="#{itens.produto.nome}"/>
                             </p:column>
-                            <p:column headerText="Produto" sortBy="#{itens.mesa}">
-                                <h:outputText value="#{itens.quantidade}"/>
-                            </p:column>
+                           
 
                             <p:column headerText="Ações">
                                 <p:commandButton value="Alterar">

@@ -84,4 +84,13 @@ public class DAOGenerico<T> {
         return retornando;
     }
 
+    public List<T> buscarItensPedido(Long pedido_id) {
+        Query query = null;
+        try {
+            query = entityManager.createQuery("from Pedido where itensPedido.pedido_id='" + pedido_id + "'");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return query.getResultList();
+    }
 }

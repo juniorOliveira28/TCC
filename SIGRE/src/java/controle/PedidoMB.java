@@ -3,8 +3,6 @@ package controle;
 import dao.DAOGenerico;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.UnaryOperator;
-import java.util.stream.Collectors;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -21,8 +19,9 @@ public class PedidoMB {
     private Pedido pedido = new Pedido();
     private ItensPedido itensPedido = new ItensPedido();
     private List<ItensPedido> listaItensPedidos = new ArrayList<>();
+    private List<ItensPedido> listaItensPedidosMesa = new ArrayList<>();
     private List<Pedido> listaPedidos = new ArrayList<>();
-    private List<Pedido> listaPedidosMesa = new ArrayList<>();
+//    private List<Pedido> listaPedidosMesa = new ArrayList<>();
     private List<Produto> listaProdutos = new ArrayList<>();
 //    private List<Mesa> listaMesas = new ArrayList<>();
 
@@ -37,9 +36,15 @@ public class PedidoMB {
         pedido = new Pedido();
         itensPedido = new ItensPedido();
         listaItensPedidos = new ArrayList<>();
-        listaPedidosMesa = new ArrayList<>();
         listaPedidos = daoPedido.buscarTodos();
+        listaItensPedidosMesa = new ArrayList<>();
+        preencherListaPedidosMesa();
+//        listaPedidosMesa = new ArrayList<>();
 //        listaItensPedidos = daoItensPedido.buscarTodos();
+    }
+    
+    public void preencherListaPedidosMesa(){
+        listaItensPedidosMesa = daoItensPedido.buscarTodos();
     }
 
     public void adicionarItem() {
@@ -73,6 +78,7 @@ public class PedidoMB {
                         + " Quantidade: " + getItensPedido().getQuantidade());
 
                 listaItensPedidos.add(itensPedido);
+                listaItensPedidosMesa.add(itensPedido);
                 itensPedido = new ItensPedido();
 
                 System.out.println("Fim do Método Adicionar Item");
@@ -131,6 +137,7 @@ public class PedidoMB {
 
         pedido.setValorTotal(valorFinalPedido);
         daoPedido.alterar(pedido);
+        listaItensPedidosMesa.add(itensPedido);
         listaPedidos = daoPedido.buscarTodos();
 
         FacesContext.getCurrentInstance().addMessage(null,
@@ -152,19 +159,28 @@ public class PedidoMB {
             if (it.getMesa().getNumero() == num
                     && it.getMesa().getStatus().equals("OCUPADA")
                     && it.getStatus().equals("ABERTO")) {
-                System.out.println("| Mesa: " + num + " | " + "Total: " + " " + it.getValorTotal() + " | " + "Pedido: " + it.getId() + " |");
+                System.out.println("| Mesa: " + num + " | " + "Total: " + " "
+                        + it.getValorTotal() + " | " + "Pedido: " + it.getId() + " |");
                 System.out.println("Observação: " + it.getObservacao());
                 daoPedido.salvar(it);
-                
-//                for (ItensPedido itIt : listaItensPedidos) {
-//                    if (itIt.getPedido().getId() == it.getId()) {
-//                        System.out.println("DEU BOM");
-//                    }
-//                }
-            } 
-//            else {
-//                System.out.println("Não há pedidos para essa mesa no momento");
+
+                listaItensPedidos = daoItensPedido.buscarTodos();
+                for (ItensPedido itens : listaItensPedidos) {
+                    if (itens.getPedido().getId() == it.getId()) {
+
+                        System.out.println("Produto: " + itens.getProduto().getNome());
+                        listaItensPedidosMesa.add(itens);
+                        itens = new ItensPedido();
+                    }
+//            if (itens.getPedido().getId() != null) {
+//                System.out.println("Nenhum item encontrado");
+//            } else {
+//                System.out.println("Deu ruim");
 //            }
+                }
+            } else {
+                System.out.println("Não há pedidos para essa mesa no momento");
+            }
         }
     }
     //    public void teste() {
@@ -245,6 +261,14 @@ public class PedidoMB {
 
     public void setListaProdutos(List<Produto> listaProdutos) {
         this.listaProdutos = listaProdutos;
+    }
+
+    public List<ItensPedido> getListaItensPedidosMesa() {
+        return listaItensPedidosMesa;
+    }
+
+    public void setListaItensPedidosMesa(List<ItensPedido> listaItensPedidosMesa) {
+        this.listaItensPedidosMesa = listaItensPedidosMesa;
     }
 
 }
