@@ -91,6 +91,7 @@ public class DAOGenerico<T> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
         return query.getResultList();
     }
 }

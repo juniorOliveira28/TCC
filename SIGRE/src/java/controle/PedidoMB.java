@@ -42,8 +42,8 @@ public class PedidoMB {
 //        listaPedidosMesa = new ArrayList<>();
 //        listaItensPedidos = daoItensPedido.buscarTodos();
     }
-    
-    public void preencherListaPedidosMesa(){
+
+    public void preencherListaPedidosMesa() {
         listaItensPedidosMesa = daoItensPedido.buscarTodos();
     }
 
@@ -153,7 +153,8 @@ public class PedidoMB {
         itensPedido = new ItensPedido();
     }
 
-    public void teste(Long num) {
+    public void abrirMesa(Long num) {
+        listaItensPedidosMesa = new ArrayList<>();
 //        System.out.println("Mesa: " + num);
         for (Pedido it : listaPedidos) {
             if (it.getMesa().getNumero() == num
@@ -170,7 +171,7 @@ public class PedidoMB {
 
                         System.out.println("Produto: " + itens.getProduto().getNome());
                         listaItensPedidosMesa.add(itens);
-                        itens = new ItensPedido();
+//                        itens = new ItensPedido();
                     }
 //            if (itens.getPedido().getId() != null) {
 //                System.out.println("Nenhum item encontrado");
@@ -178,9 +179,10 @@ public class PedidoMB {
 //                System.out.println("Deu ruim");
 //            }
                 }
-            } else {
-                System.out.println("Não há pedidos para essa mesa no momento");
             }
+//            else {
+//                System.out.println("Não há pedidos para essa mesa no momento");
+//            }
         }
     }
     //    public void teste() {
