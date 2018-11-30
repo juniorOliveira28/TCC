@@ -120,7 +120,7 @@
                             <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                             <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>
-                        <p:commandButton value="aa"/>
+                        <p:commandButton value="Fechar Mesa " actionListener="#{pedidoMB.fecharMesa()}" oncomplete="PF('teste').hide()"/>
                     </h:form>
                 </p:dialog>
             </ui:define>

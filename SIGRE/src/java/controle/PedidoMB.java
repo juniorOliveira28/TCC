@@ -147,6 +147,29 @@ public class PedidoMB {
 
     }
 
+    public void fecharMesa() {
+        System.out.println("Dentro do metodo fechar mesa");
+//        listaItensPedidosMesa = new ArrayList<>();
+
+//        System.out.println("Mesa: " + num);
+        Pedido pedido = new Pedido();
+        for (Pedido it : listaPedidos) {
+            Mesa mesa = it.getMesa();
+            if (it.getMesa().getStatus().equals("OCUPADA")
+                    //                    && it.getMesa().getNumero() ==
+                    && it.getStatus().equals("ABERTO")
+                    && it.getMesa().getId() == mesa.getId()) {
+                System.out.println("Observação: " + it.getObservacao());
+                it.getMesa().setStatus("LIVRE");
+                it.setStatus("CONCLUIDO");
+                daoMesa.alterar(mesa);
+                daoPedido.salvar(it);
+                listaPedidos.remove(it);
+
+            }
+        }
+    }
+
     public void novoPedido() {
         pedido = new Pedido();
         listaItensPedidos = new ArrayList<>();
