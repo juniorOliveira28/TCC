@@ -69,7 +69,31 @@ body{
 .mesa{
     border-radius: 10%;
     border: 1px solid black;
-    background: greenyellow;
+    background-size: 500px 800px;
+    height: 130px;
+     /*background: greenyellow;*/
+}
+
+.num_mesas {
+    /*background-position: top right;*/
+    text-decoration: none;
+    text-shadow: none !important;
+    text-align: center;
+    color: black;
+    bottom: 2px;
+    height: 30px;
+    padding: 1px;
+    font-family: Calibri;
+    font-size: 30px;
+    top: 10%;
+    
+}
+
+#mesa{
+    border-radius: 10%;
+    border: 1px solid black;
+    /*background-size: 500px 800px;*/
+    height: 140px;
 }
 
 /*status mesa*/

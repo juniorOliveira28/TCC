@@ -18,83 +18,105 @@
                                  styleClass="#{mesa.status eq 'LIVRE' ? 'green' 
                                                : mesa.status eq 'OCUPADA' ? 'red': null}">
                         <p:column>
-                            <h:panelGrid columns="1" class="mesa">
+                            <h:panelGrid columns="1">
                                 <p:commandLink oncomplete="PF('teste').show()"
                                                update="dialogFormMostrarPedido"
                                                actionListener="#{pedidoMB.abrirMesa(1)}">
-                                    <h:graphicImage name="imagens/mesas2.png"/>
+                                    <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
                                 </p:commandLink>
+                                <h1 class="num_mesas" >MESA 1</h1>
                             </h:panelGrid>
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink>
-                                    <h:graphicImage name="imagens/mesas2.png" />
+                                <p:commandLink oncomplete="PF('teste').show()"
+                                               update="dialogFormMostrarPedido"
+                                               actionListener="#{pedidoMB.abrirMesa(2)}">
+                                    <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
                                 </p:commandLink>
-                            </h:panelGrid>
-                        </p:column>
-                        <p:column>
-                            <h:panelGrid columns="1" class="mesa">
-                                <p:commandLink actionListener="#{pedidoMB.abrirMesa(2)}" update="dialogFormMostrarPedido" oncomplete="PF('teste').show()"    >
-                                    <h:graphicImage name="imagens/mesas2.png" />
-                                </p:commandLink>
-                            </h:panelGrid>
-                        </p:column>
-                        <p:column>
-                            <h:panelGrid columns="1" class="mesa">
-                                <p:commandLink>
-                                    <h:graphicImage name="imagens/mesas2.png"/>
-                                </p:commandLink>
+                                <h1 class="num_mesas" >MESA 2</h1>
                             </h:panelGrid>
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink>
-                                    <h:graphicImage name="imagens/mesas2.png" />
+                                <p:commandLink oncomplete="PF('teste').show()"
+                                               update="dialogFormMostrarPedido"
+                                               actionListener="#{pedidoMB.abrirMesa(3)}">
+                                    <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
                                 </p:commandLink>
+                                <h1 class="num_mesas" >MESA 3</h1>
                             </h:panelGrid>
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink>
-                                    <h:graphicImage name="imagens/mesas2.png" />
+                                <p:commandLink oncomplete="PF('teste').show()"
+                                               update="dialogFormMostrarPedido"
+                                               actionListener="#{pedidoMB.abrirMesa(4)}">
+                                    <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
                                 </p:commandLink>
+                                <h1 class="num_mesas" >MESA 4</h1>
                             </h:panelGrid>
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink>
-                                    <h:graphicImage name="imagens/mesas2.png" />
+                                <p:commandLink oncomplete="PF('teste').show()"
+                                               update="dialogFormMostrarPedido"
+                                               actionListener="#{pedidoMB.abrirMesa(5)}">
+                                    <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
                                 </p:commandLink>
+                                <h1 class="num_mesas" >MESA 5</h1>
                             </h:panelGrid>
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink>
-                                    <h:graphicImage name="imagens/mesas2.png" />
+                                <p:commandLink oncomplete="PF('teste').show()"
+                                               update="dialogFormMostrarPedido"
+                                               actionListener="#{pedidoMB.abrirMesa(6)}">
+                                    <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
                                 </p:commandLink>
+                                <h1 class="num_mesas" >MESA 6</h1>
                             </h:panelGrid>
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink>
-                                    <h:graphicImage name="imagens/mesas2.png" />
+                                <p:commandLink oncomplete="PF('teste').show()"
+                                               update="dialogFormMostrarPedido"
+                                               actionListener="#{pedidoMB.abrirMesa(7)}">
+                                    <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
                                 </p:commandLink>
+                                <h1 class="num_mesas" >MESA 7</h1>
                             </h:panelGrid>
                         </p:column>
-                        <!--                        <p:column>
-                                                    <h:panelGrid columns="1">
-                                                        <h:outputText value="Cidade:" />
-                                                        <p:selectOneMenu 
-                                                            id="cidade"  value="" requiredMessage="Escolha uma cidade" required = "true">
-                                                            <f:selectItem itemLabel="Selecione"/>
-                                                            <f:selectItems value="{cidadeMB.listaCidade}" 
-                                                                           var ="cidade"
-                                                                           itemLabel="{cidade.nome}"
-                                                                           itemValue="{cidade}"/>
-                                                        </p:selectOneMenu> 
-                                                    </h:panelGrid> 
-                                                </p:column>  -->
+                        <p:column>
+                            <h:panelGrid columns="1">
+                                <p:commandLink oncomplete="PF('teste').show()"
+                                               update="dialogFormMostrarPedido"
+                                               actionListener="#{pedidoMB.abrirMesa(8)}">
+                                    <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
+                                </p:commandLink>
+                                <h1 class="num_mesas" >MESA 8</h1>
+                            </h:panelGrid>
+                        </p:column>
+                        <p:column>
+                            <h:panelGrid columns="1">
+                                <p:commandLink oncomplete="PF('teste').show()"
+                                               update="dialogFormMostrarPedido"
+                                               actionListener="#{pedidoMB.abrirMesa(9)}">
+                                    <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
+                                </p:commandLink>
+                                <h1 class="num_mesas" >MESA 9</h1>
+                            </h:panelGrid>
+                        </p:column>
+                        <p:column>
+                            <h:panelGrid columns="1">
+                                <p:commandLink oncomplete="PF('teste').show()"
+                                               update="dialogFormMostrarPedido"
+                                               actionListener="#{pedidoMB.abrirMesa(10)}">
+                                    <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
+                                </p:commandLink>
+                                <h1 class="num_mesas" >MESA 10</h1>
+                            </h:panelGrid>
+                        </p:column>
                     </h:panelGrid>
                 </div>
                 <p:dialog header="Teste" widgetVar="teste" modal="true" height="auto" width="50%">
@@ -104,7 +126,7 @@
                             <p:column headerText="Produto" sortBy="#{itens.produto}">
                                 <h:outputText value="#{itens.produto.nome}"/>
                             </p:column>
-                           
+
 
                             <p:column headerText="Ações">
                                 <p:commandButton value="Alterar">
@@ -120,7 +142,8 @@
                             <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                             <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>
-                        <p:commandButton value="Fechar Mesa " actionListener="#{pedidoMB.fecharMesa()}" oncomplete="PF('teste').hide()"/>
+                        <p:commandButton value="Fechar Mesa " 
+                                         actionListener="#{pedidoMB.fecharMesa()}" oncomplete="PF('teste').hide()"/>
                     </h:form>
                 </p:dialog>
             </ui:define>

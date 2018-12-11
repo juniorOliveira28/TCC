@@ -12,7 +12,7 @@ INSERT INTO `fornecedor` (`id`, `email`, `fone`, `nome`, `cnpj`) VALUES
 -- --------------------------------------------------------
 
 INSERT INTO `mesa` (`id`, `numero`, `qtdLugaress`, `status`) VALUES
-(1, 1, 5, 'OCUPADA'),
+(1, 1, 5, 'LIVRE'),
 (2, 2, 5, 'LIVRE'),
 (3, 3, 5, 'LIVRE'),
 (4, 4, 5, 'LIVRE');

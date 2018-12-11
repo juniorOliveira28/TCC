@@ -5,7 +5,8 @@
         <group>
             <file>file:/C:/Users/juni0/Documents/TCC/SIGRE/web/sistema/viewAdmin/pedidos-mesa.xhtml</file>
             <file>file:/C:/Users/juni0/Documents/TCC/SIGRE/src/java/controle/PedidoMB.java</file>
-            <file>file:/C:/Users/juni0/Documents/TCC/SIGRE/src/java/dao/DAOGenerico.java</file>
+            <file>file:/C:/Users/juni0/Documents/TCC/SIGRE/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/juni0/Documents/TCC/SIGRE/web/sistema/viewAdmin/template-admin.xhtml</file>
         </group>
     </open-files>
 </project-private>
