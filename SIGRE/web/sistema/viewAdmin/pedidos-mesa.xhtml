@@ -14,12 +14,12 @@
                 <!--<p:commandButton image="mesa" icon="dolar-icon"/>-->
                 <!--<h:graphicImage name="imagens/mesas.png"  value="mesa 1"/>-->
                 <div align="center">
-                    <h:panelGrid columns="5" cellspacing="15" 
+                    <h:panelGrid columns="5" cellspacing="15"  border="101" 
                                  styleClass="#{mesa.status eq 'LIVRE' ? 'green' 
                                                : mesa.status eq 'OCUPADA' ? 'red': null}">
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink oncomplete="PF('teste').show()"
+                                <p:commandLink oncomplete="PF('dialogMesa').show()"
                                                update="dialogFormMostrarPedido"
                                                actionListener="#{pedidoMB.abrirMesa(1)}">
                                     <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
@@ -29,7 +29,7 @@
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink oncomplete="PF('teste').show()"
+                                <p:commandLink oncomplete="PF('dialogMesa').show()"
                                                update="dialogFormMostrarPedido"
                                                actionListener="#{pedidoMB.abrirMesa(2)}">
                                     <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
@@ -39,7 +39,7 @@
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink oncomplete="PF('teste').show()"
+                                <p:commandLink oncomplete="PF('dialogMesa').show()"
                                                update="dialogFormMostrarPedido"
                                                actionListener="#{pedidoMB.abrirMesa(3)}">
                                     <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
@@ -49,7 +49,7 @@
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink oncomplete="PF('teste').show()"
+                                <p:commandLink oncomplete="PF('dialogMesa').show()"
                                                update="dialogFormMostrarPedido"
                                                actionListener="#{pedidoMB.abrirMesa(4)}">
                                     <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
@@ -59,7 +59,7 @@
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink oncomplete="PF('teste').show()"
+                                <p:commandLink oncomplete="PF('dialogMesa').show()"
                                                update="dialogFormMostrarPedido"
                                                actionListener="#{pedidoMB.abrirMesa(5)}">
                                     <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
@@ -69,7 +69,7 @@
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink oncomplete="PF('teste').show()"
+                                <p:commandLink oncomplete="PF('dialogMesa').show()"
                                                update="dialogFormMostrarPedido"
                                                actionListener="#{pedidoMB.abrirMesa(6)}">
                                     <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
@@ -79,7 +79,7 @@
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink oncomplete="PF('teste').show()"
+                                <p:commandLink oncomplete="PF('dialogMesa').show()"
                                                update="dialogFormMostrarPedido"
                                                actionListener="#{pedidoMB.abrirMesa(7)}">
                                     <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
@@ -89,7 +89,7 @@
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink oncomplete="PF('teste').show()"
+                                <p:commandLink oncomplete="PF('dialogMesa').show()"
                                                update="dialogFormMostrarPedido"
                                                actionListener="#{pedidoMB.abrirMesa(8)}">
                                     <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
@@ -99,7 +99,7 @@
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink oncomplete="PF('teste').show()"
+                                <p:commandLink oncomplete="PF('dialogMesa').show()"
                                                update="dialogFormMostrarPedido"
                                                actionListener="#{pedidoMB.abrirMesa(9)}">
                                     <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
@@ -109,7 +109,7 @@
                         </p:column>
                         <p:column>
                             <h:panelGrid columns="1">
-                                <p:commandLink oncomplete="PF('teste').show()"
+                                <p:commandLink oncomplete="PF('dialogMesa').show()"
                                                update="dialogFormMostrarPedido"
                                                actionListener="#{pedidoMB.abrirMesa(10)}">
                                     <h:graphicImage name="imagens/mesas2.png" class="mesa"/>
@@ -119,13 +119,16 @@
                         </p:column>
                     </h:panelGrid>
                 </div>
-                <p:dialog header="Teste" widgetVar="teste" modal="true" height="auto" width="50%">
+                <p:dialog header="Teste" widgetVar="dialogMesa" modal="true" height="auto" width="50%">
                     <h:form id="dialogFormMostrarPedido">
                         <p:dataTable id="tabelaItensPedido" value="#{pedidoMB.listaItensPedidosMesa}"
                                      reflow="true" rows="5" paginator="true" var="itens" paginatorPosition="bottom">
                             <p:column headerText="Produto" sortBy="#{itens.produto}">
                                 <h:outputText value="#{itens.produto.nome}"/>
                             </p:column>
+                            <p:column headerText="Mesa">
+                                    <h:outputText value="#{itens.pedido.mesa.numero}"/>
+                                </p:column>
 
 
                             <p:column headerText="Ações">
@@ -143,7 +146,7 @@
                             <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                         </p:confirmDialog>
                         <p:commandButton value="Fechar Mesa " 
-                                         actionListener="#{pedidoMB.fecharMesa()}" oncomplete="PF('teste').hide()"/>
+                                         actionListener="#{pedidoMB.fecharMesa()}" oncomplete="PF('dialogMesa').hide()"/>
                     </h:form>
                 </p:dialog>
             </ui:define>

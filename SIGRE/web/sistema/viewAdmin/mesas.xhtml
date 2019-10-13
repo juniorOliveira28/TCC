@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./template-admin.xhtml">
+
+            <ui:define name="content">
+
+                <h:form id="a">
+                    <p:dataGrid var="mesa" value="#{mesaMB.listaMesas}" columns="4" layout="grid"
+                                rows="12"  id="mesas">
+
+                        <f:facet name="header">
+                            Pedidos Mesas
+                        </f:facet>
+                        <p:panel header="#{mesa.status}" footer="MESA #{mesa.numero}" 
+                                 style="text-align:center; border: 1000px;"
+                                 styleClass="#{mesa.status eq 'LIVRE' ? 'green' : mesa.status eq 'OCUPADA' ? 'red': null}" >
+
+                            <h:panelGrid columns="1" style="width:100%">
+                                <p:commandLink 
+                                    update="formMostrarPedido"
+                                    actionListener="#{pedidoMB.abrirMesa(mesa.numero)}">
+                                    <h:graphicImage name="imagens/mesas2.png" class="mesa"
+                                                    onclick="PF('dialogMesa').show();"/>
+                                </p:commandLink>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:dataGrid>
+                </h:form>
+
+                <p:dialog header="Status Pedido" widgetVar="dialogMesa" modal="true" height="auto" width="50%">
+                    <h:form id="formMostrarPedido">
+                        <p:dataTable id="tabelaItensPedido"  
+                                     value="#{pedidoMB.listaItensPedidosMesa}"
+                                     reflow="true" rows="5" paginator="true" var="itens" paginatorPosition="bottom">
+                            <p:column headerText="Produto" sortBy="#{itens.produto}">
+                                <h:outputText value="#{itens.produto.nome}"/>
+                            </p:column>
+                            <p:column headerText="Mesa">
+                                <h:outputText value="#{itens.pedido.mesa.numero}"/>
+                            </p:column>
+                            <p:column headerText="Quantidade">
+                                <h:outputText value="#{itens.quantidade}"/>
+                            </p:column>
+                            <p:column headerText="Valor Unitário">
+                                <h:outputText value="#{itens.produto.valorVenda}"/>
+                            </p:column>
+                            <p:column headerText="Valor Total">
+                                <h:outputText value="#{itens.valorTotal}"/>
+                            </p:column>
+
+
+                            <p:column headerText="Ações">
+                                <p:commandButton value="Alterar">
+
+                                </p:commandButton>
+                                <p:commandButton value="Excluir" icon="ui-icon-trash" update="@form"
+                                                 actionListener="#{pedidoMB.removerItem(itens)}" >
+                                    <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                        <p:commandButton value="Fechar Mesa" 
+                                         actionListener="#{pedidoMB.fecharMesa()}" oncomplete="PF('dialogMesa').hide()"
+                                         update=":a"/>
+                    </h:form>
+                </p:dialog>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

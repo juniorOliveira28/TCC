@@ -19,7 +19,7 @@ public class ItensPedido implements Serializable {
     private Pedido pedido;
     @ManyToOne
     private Produto produto;
-    private Double quantidade;
+    private int quantidade;
     private Double valorUnitario;
     private Double valorTotal;
 
@@ -47,11 +47,11 @@ public class ItensPedido implements Serializable {
         this.produto = produto;
     }
 
-    public Double getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(Double quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -76,7 +76,7 @@ public class ItensPedido implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
+//        result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
         result = prime * result + ((valorUnitario == null) ? 0 : valorUnitario.hashCode());
         result = prime * result + ((valorTotal == null) ? 0 : valorTotal.hashCode());
         return result;
@@ -101,13 +101,13 @@ public class ItensPedido implements Serializable {
         } else if (!id.equals(other.id)) {
             return false;
         }
-        if (quantidade == null) {
-            if (other.quantidade != null) {
-                return false;
-            }
-        } else if (!quantidade.equals(other.quantidade)) {
-            return false;
-        }
+//        if (quantidade == null) {
+//            if (other.quantidade != null) {
+//                return false;
+//            }
+//        } else if (!quantidade.equals(other.quantidade)) {
+//            return false;
+//        }
         if (valorUnitario == null) {
             if (other.valorUnitario != null) {
                 return false;

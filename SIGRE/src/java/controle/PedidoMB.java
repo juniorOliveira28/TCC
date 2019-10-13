@@ -1,6 +1,7 @@
 package controle;
 
 import dao.DAOGenerico;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -16,16 +17,23 @@ import modelo.Produto;
 @ViewScoped
 public class PedidoMB {
 
+    private Mesa mesa;
+
+    public Mesa getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
+    }
+
     private Pedido pedido = new Pedido();
     private ItensPedido itensPedido = new ItensPedido();
     private List<ItensPedido> listaItensPedidos = new ArrayList<>();
     private List<ItensPedido> listaItensPedidosMesa = new ArrayList<>();
     private List<Pedido> listaPedidos = new ArrayList<>();
-//    private List<Pedido> listaPedidosMesa = new ArrayList<>();
     private List<Produto> listaProdutos = new ArrayList<>();
-//    private List<Mesa> listaMesas = new ArrayList<>();
 
-//    private List<ItensPedido> listaItensPedidosMesa = new ArrayList<>();
     private DAOGenerico<Mesa> daoMesa = new DAOGenerico<>(Mesa.class);
     private DAOGenerico<Produto> daoProduto = new DAOGenerico<>(Produto.class);
     private DAOGenerico<Pedido> daoPedido = new DAOGenerico<>(Pedido.class);
@@ -39,8 +47,6 @@ public class PedidoMB {
         listaPedidos = daoPedido.buscarTodos();
         listaItensPedidosMesa = new ArrayList<>();
         preencherListaPedidosMesa();
-//        listaPedidosMesa = new ArrayList<>();
-//        listaItensPedidos = daoItensPedido.buscarTodos();
     }
 
     public void preencherListaPedidosMesa() {
@@ -50,45 +56,58 @@ public class PedidoMB {
     public void adicionarItem() {
         System.out.println("Dentro do Método Adicionar Item");
         Produto produto = itensPedido.getProduto();
-        if (itensPedido.getId() == null) {
+        for (Pedido it : listaPedidos) {
+//------------------------------------------------------------------------------
+            if (it.getMesa().getStatus().equals("OCUPADA")
+                    && it.getStatus().equals("ABERTO")
+                    && itensPedido.getId() == null) {
+                System.out.println("MESA OCUPADA, PEDIDO ADICIONADO A LISTA");
 
-            if (itensPedido.getProduto() != null && produto.getQuantidadeEstoque() > 0
-                    && itensPedido.getQuantidade() < produto.getQuantidadeEstoque()) {
-                itensPedido.setProduto(itensPedido.getProduto());
-                itensPedido.setPedido(pedido);
-                itensPedido.setQuantidade(itensPedido.getQuantidade());
-                itensPedido.setValorTotal(itensPedido.getQuantidade() * itensPedido.getProduto().getValorVenda());
-
-//          Mostrando produto + quantidade no console
-                System.out.println("Produto: " + itensPedido.getProduto().getNome()
-                        + " Quantidade: " + getItensPedido().getQuantidade());
-
-                listaItensPedidos.add(itensPedido);
-                itensPedido = new ItensPedido();
-
-                System.out.println("Fim do Método Adicionar Item");
-            } else if (itensPedido.getProduto() != null && itensPedido.getProduto().getEstoque().equals("NÃO")) {
-                itensPedido.setProduto(itensPedido.getProduto());
-                itensPedido.setPedido(pedido);
-                itensPedido.setQuantidade(itensPedido.getQuantidade());
-                itensPedido.setValorTotal(itensPedido.getQuantidade() * itensPedido.getProduto().getValorVenda());
-
-//          Mostrando produto + quantidade no console
-                System.out.println("Produto: " + itensPedido.getProduto().getNome()
-                        + " Quantidade: " + getItensPedido().getQuantidade());
-
-                listaItensPedidos.add(itensPedido);
-                listaItensPedidosMesa.add(itensPedido);
-                itensPedido = new ItensPedido();
-
-                System.out.println("Fim do Método Adicionar Item");
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Quantidade Indisponivel no estoque!!", ""));
-                System.out.println("Quantidade indisponivel no estoque");
             }
-        } else {
+            if (it.getMesa().getStatus().equals("LIVRE")
+                    && it.getStatus().equals("CONCLUIDO")
+                    && itensPedido.getId() == null) {
+                System.out.println("MESA LIVRE, NOVO PEDIDO ABERTO");
+//------------------------------------------------------------------------------
+
+                if (itensPedido.getProduto() != null && produto.getQuantidadeEstoque() > 0
+                        && itensPedido.getQuantidade() < produto.getQuantidadeEstoque()) {
+                    itensPedido.setProduto(itensPedido.getProduto());
+                    itensPedido.setPedido(pedido);
+                    itensPedido.setQuantidade(itensPedido.getQuantidade());
+                    itensPedido.setValorTotal(itensPedido.getQuantidade() * itensPedido.getProduto().getValorVenda());
+
+//          Mostrando produto + quantidade no console
+                    System.out.println("Produto: " + itensPedido.getProduto().getNome()
+                            + " Quantidade: " + getItensPedido().getQuantidade());
+
+                    listaItensPedidos.add(itensPedido);
+                    itensPedido = new ItensPedido();
+
+                    System.out.println("Fim do Método Adicionar Item");
+                } else if (itensPedido.getProduto() != null && itensPedido.getProduto().getEstoque().equals("NÃO")) {
+                    itensPedido.setProduto(itensPedido.getProduto());
+                    itensPedido.setPedido(pedido);
+                    itensPedido.setQuantidade(itensPedido.getQuantidade());
+                    itensPedido.setValorTotal(itensPedido.getQuantidade() * itensPedido.getProduto().getValorVenda());
+
+//          Mostrando produto + quantidade no console
+                    System.out.println("Produto: " + itensPedido.getProduto().getNome()
+                            + " Quantidade: " + getItensPedido().getQuantidade());
+
+                    listaItensPedidos.add(itensPedido);
+                    listaItensPedidosMesa.add(itensPedido);
+                    itensPedido = new ItensPedido();
+
+                    System.out.println("Fim do Método Adicionar Item");
+                } else {
+                    FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO, "Quantidade Indisponivel no estoque!!", ""));
+                    System.out.println("Quantidade indisponivel no estoque");
+                }
+            } else {
 //            listaItensPedidos.replaceAll((UnaryOperator<ItensPedido>) itensPedido);
+            }
         }
     }
 
@@ -177,16 +196,15 @@ public class PedidoMB {
         parNum = num;
         Long a = null;
         a.toString(num);
-        System.out.println("variavel: " + parNum);
         listaItensPedidosMesa = new ArrayList<>();
-//        System.out.println("Mesa: " + num);
         for (Pedido it : listaPedidos) {
             if (it.getMesa().getNumero() == num
                     && it.getMesa().getStatus().equals("OCUPADA")
                     && it.getStatus().equals("ABERTO")) {
-                System.out.println("| Mesa: " + num + " | " + "Total: " + " "
-                        + it.getValorTotal() + " | " + "Pedido: " + it.getId() + " |");
-                System.out.println("Observação: " + it.getObservacao());
+                System.out.println("| Mesa: " + num + " |"
+                        + " " + "Pedido: " + it.getId() + " |"
+                        + " " + "Quantidade: " + it.getValorUnitario() + " |"
+                        + "Status " + it.getMesa().getStatus());
                 daoPedido.alterar(it);
 
                 listaItensPedidos = daoItensPedido.buscarTodos();
@@ -204,9 +222,6 @@ public class PedidoMB {
 //            }
                 }
             }
-//            else {
-//                System.out.println("Não há pedidos para essa mesa no momento");
-//            }
         }
     }
 

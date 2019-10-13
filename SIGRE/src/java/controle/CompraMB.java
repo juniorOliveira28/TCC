@@ -33,8 +33,9 @@ public class CompraMB {
 
     public void adicionarItem() {
         System.out.println("Dentro do Método Adicionar Item");
-        if (itensCompra.getProduto() != null) {
-
+        if (itensCompra.getProduto() != null
+                && itensCompra.getProduto().getEstoque().equals("SIM")) {
+                
             // itensCompra.setProduto(itensCompra.getProduto());
             itensCompra.setCompra(compra);
             //itensCompra.setQuantidadeItens(itensCompra.getQuantidadeItens());
@@ -49,6 +50,8 @@ public class CompraMB {
             itensCompra = new ItensCompra();
 
             System.out.println("Fim do Método Adicionar Item");
+        }else{
+            System.out.println("Este não é um produto a ser comprado.");
         }
     }
 
